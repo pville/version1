@@ -43,7 +43,7 @@ class Registrar implements RegistrarContract {
 	{
 		if($type == "Volunteer") return $this->VolunteerCreate($data);
 		else if($type == "Group") return $this->GroupCreate($data);
-		else if($type == "Organization") return $this->lOrgCreate($data);
+		else if($type == "Organization") return $this->OrgCreate($data);
 	}
 
 
