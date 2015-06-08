@@ -14,11 +14,16 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
        
         <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('css/media.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/flat-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fileinput.min.css') }}">
         <link href="{{ asset('css/animate.css') }}" rel="stylesheet" type="text/css" media="all" />
 		<link href='//fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
         <script src="{{ asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
+        @yield('style')
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -28,7 +33,7 @@
 <div class="container">
     	<div class="row">
         	<div class="col-md-4 col-sm-4">
-            	<h1><a href="#"><img class="logo" src="images/logo.jpg" alt="Pleasent"></a></h1>
+            	<h1><a href="#"><img class="logo" src="{{ asset('images/logo.jpg') }}" alt="Pleasent"></a></h1>
             </div>
             <div class="col-md-8 col-sm-8">
             	<nav class="navbar navbar-inverse" role="navigation">
@@ -44,11 +49,12 @@
 					<ul>
               		@if (Auth::guest())
               		
-                        <li class="signup"><a class="signupbtn" href="{{ url('/register/volunteer') }}">Sign up</a><a class="loginbtn" href="{{ url('/login') }}">Log in</a></li>
+                        <li class="signup"><a class="signupbtn" href="{{ url('/register') }}">Sign up</a><a class="loginbtn" href="{{ url('/login') }}">Log in</a></li>
                    
 						
 					@else
-						<li class="signup"><a class="signupbtn" href="{{ url('/dashboard') }}">{ Auth::user()->email }}</a></li>
+                            <li class="signup"><a class="signupbtn" href="{{ url('/dashboard') }}">{{ Auth::user()->first_name }}</a><a class="loginbtn" href="{{ url('/logout') }}">Logout</a></li>
+
 						
 					@endif
                 	 </ul>
@@ -57,11 +63,27 @@
             </div>
     	</div>
     </div>
-</header>   
+</header>
+        <section class="bannertxt" id="Toast">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+        @if(Session::has('toasts'))
+            @foreach(Session::get('toasts') as $toast)
+                <div class="alert alert-{{ $toast['level'] }}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
-
-
+                    {{ $toast['message'] }}
+                </div>
+            @endforeach
+        @endif
+</section>
+        </div>
+        </div>
+        </div>
 @yield('content')
+
+
 
 <footer>
 	<div class="container">
@@ -128,13 +150,19 @@
             </div>
        </div>
 </div>
- 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
-		<script src="{{ asset('js/animate.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
 
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{{ asset('js/flat-ui.min.js') }}"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="{{ asset('js/Moment.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/fileinput.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/animate.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        @yield('script')
        
     </body>
 </html>

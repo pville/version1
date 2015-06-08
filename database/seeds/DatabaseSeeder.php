@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call('GroupTypeSeeder');
         $this->call('GroupSeeder');
         $this->call('VolunteerTypeSeeder');
+        $this->call('StatesSeeder');
     }
 }

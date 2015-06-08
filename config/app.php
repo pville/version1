@@ -143,6 +143,9 @@ return [
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+        'Grimthorr\LaravelToast\ServiceProvider',
 
     ],
 
@@ -193,6 +196,7 @@ return [
         'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade', 
         'HTML'      => 'Illuminate\Html\HtmlFacade',
+        'Toast'     => 'Grimthorr\LaravelToast\Facade',
 
     ],
 

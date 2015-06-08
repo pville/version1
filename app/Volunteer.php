@@ -1,6 +1,5 @@
 <?php namespace App;
 
-use App\Volunteer;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -20,27 +19,36 @@ class Volunteer extends Model
      *
      * @var array
      */
-    protected $fillable = ['birthdate', 'target_credits', 'current_credits', 'type'];
+    protected $fillable = ['user_id', 'birthdate', 'target_credits', 'current_credits', 'type'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+
     //protected $hidden = ['user_id', 'type'];
-    
+    public function getDates()
+    {
+        return ['created_at', 'updated_at', 'birthdate'];
+    }
 
+    public function volunteer(){
+
+        return $this->belongsTo('App\Volunteer');
+
+    }
 
     public function user() {
 
         return $this->belongsTo('App\User');
     }
-    
-
 
     public function age() {
 
         // TODO: function to calculate age from birthdate field.
-        // 
+
+        return Carbon::createFromDate(1975, 5, 21)->age;
+    }
+
+    public function AgeCheck($minAge){
+
+        if($this->birthdate->age >= $minAge) return true;
+        return false;
     }
 }

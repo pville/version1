@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
 			$table->enum('role', array('volunteer', 'group', 'organization'));
-
+            $table->json('screened');
 			$table->rememberToken();
 			$table->timestamps();
 		});

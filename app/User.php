@@ -4,6 +4,7 @@
 use App\Group;
 use App\Volunteer;
 use App\Organization;
+use App\ScreeningData;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -34,16 +35,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['id', 'password', 'remember_token'];
 
-   /* public function volunteer()
+
+
+    public function volunteer()
     {
-        return $this->hasOne('App\Volunteer');
-    }*/
+        return $this->belongsTo('App\Volunteer', 'id', 'user_id');
+    }
 
+    public function user(){
+
+        return $this->belongsTo('App\User');
+
+    }
     public function IsMember()
     {
          return !is_null($this->group_id);
+    }
+
+    public function IsOrganization(){
+
+        return !is_null($this->organization_id);
     }
 
     public function group()
@@ -56,6 +69,33 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo('App\Organization');
     }
 
+    public function CheckedIn($EventId){
+
+        $checked = Attendance::where('user_id', '=', $this->id)->where('event_id', '=', $EventId)->get();
+
+
+        return $checked->isEmpty();
+
+    }
+
+
+    public function IsVerified() {
+
+        $data = ScreeningData::Where('user_id', '=', $this->id)->get();
+
+        if(!$data->IsEmpty()) {
+
+            $data = $data[0];
+
+
+            if($data->status == "accepted") {
+                 return true;
+            }
+        }
+
+        return false;
+
+    }
 
 
 }

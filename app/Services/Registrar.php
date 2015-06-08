@@ -26,6 +26,7 @@ class Registrar implements RegistrarContract {
 		if($type == "Volunteer") return $this->VolunteerValidator($data);
 		else if($type == "Group") return $this->GroupValidator($data);
 		else if($type == "Organization") return $this->OrgValidator($data);
+
 	}
 	/**
 	 * Create a new user instance after a valid registration.
@@ -46,7 +47,11 @@ class Registrar implements RegistrarContract {
 		else if($type == "Organization") return $this->OrgCreate($data);
 	}
 
-
+    /**
+     * Validate input from Volunteer registration.
+     * @param array $data
+     * @return mixed
+     */
 	public function VolunteerValidator(array $data) {
 
 		return Validator::make($data, [
@@ -137,6 +142,7 @@ class Registrar implements RegistrarContract {
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
 			'phone_number' => 'required|max:20',
+            'org_phone_number' => 'required|max:20',
 			'org_name' => 'required|max:255',
 			'org_email' => 'required|email|max:255',
 			'org_address' => 'required|max:255',
@@ -159,11 +165,17 @@ class Registrar implements RegistrarContract {
 		
 		$NewOrg = Organization::create(
 			[
+                'category' => $data['org_cat'],
 				'name' => $data['org_name'],
-				'phone' => $data['org_phone_number'],
+				'state' => $data['state'],
+                'city' => $data['org_city'],
+                'zipcode' => $data['org_zipcode'],
+                'address' => $data['org_address'],
+                'phone' => $data['org_phone_number'],
 				'description' => $data['org_desc'],
-				'address' => $data['org_address'],
-				'email' => $data['org_email']
+				'email' => $data['org_email'],
+                'url' => $data['url'],
+
 				
 				
 			]);

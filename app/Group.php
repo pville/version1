@@ -5,7 +5,7 @@ use App\Volunteer;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Group extends Model
+class Group extends \Eloquent
 {
     
 
@@ -29,7 +29,13 @@ class Group extends Model
      * @var array
      */
     //protected $hidden = ['user_id', 'type'];
-    
+
+    public function group()
+    {
+        return $this->belongsTo('App/Group');
+    }
+
+
     public function getGroupMembers() {
 
          

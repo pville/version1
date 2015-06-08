@@ -15,7 +15,7 @@ class CreateVolunteerTypesTable extends Migration
         Schema::create('volunteer_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->timestamps();
+
         });
     }
 

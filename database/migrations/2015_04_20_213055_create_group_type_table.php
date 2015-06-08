@@ -15,7 +15,7 @@ class CreateGroupTypeTable extends Migration
         Schema::create('group_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->timestamps();
+
         });
     }
 

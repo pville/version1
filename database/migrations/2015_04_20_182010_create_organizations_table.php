@@ -15,9 +15,14 @@ class CreateOrganizationsTable extends Migration {
 		Schema::create('organizations', function(Blueprint $table)
 		{
 			$table->increments('id');
+            $table->integer('category');
 			$table->string('name', 140);
-			$table->integer('logo');
+            $table->string('slug', 240);
+			$table->string('logo');
 			$table->string('email');
+            $table->string('state');
+            $table->string('city');
+            $table->string('zipcode');
 			$table->string('address');
 			$table->string('phone');
 			$table->json('social');

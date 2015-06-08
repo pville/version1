@@ -1,114 +1,172 @@
 @extends('app')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Organization Register</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+    <section class="bannertxt" id="orgAcc">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/register/organization') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <h1>Volunteer & Serve Your Community.</h1>
+                    <h3>Create Your Account</h3>
+                </div>
+            </div>
+        </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">First Name</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-md-4 control-label">Last Name</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
-							</div>
-						</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div id="formwrap">
+                        <form data-toggle="validator" role="form" method="POST" action="{{ url('/register/organization') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <h2>Account</h2>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6"><input class="mb15" type="text" placeholder="First Name" name="first_name" value="{{ old('first_name') }}" required/> </div>
+                                <div class="col-md-6 col-sm-6"><input type="text" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}" required/> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="text" placeholder="Email Address" name="email" value="{{ old('email') }}" required/> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="text" placeholder="Phone" name="phone_number" value="{{ old('phone_number') }}" required/> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="password" placeholder="Password" name="password" required/> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="password" placeholder="Confirm Password" name="password_confirmation" required/> </div>
+                            </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Phone Number</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}">
-							</div>
-						</div>
+                            <h2>Organization Account</h2>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><a href="#"><img src="{{ asset('images/addlogo.jpg') }}" alt="" /></a></div>
+                            </div>
+                            <div class="row">
+                                <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Name / Title" name="org_name" id="org_name" value="{{ old('org_name') }}" required/> </div>
+                                <div class="col-md-6 col-sm-6 wid100"><div class="select-style"><select class="form-control select select-primary" data-toggle="select" name="org_cat" id="org_cat">
+                                            <option value="0">Choose  </option>
+                                            <option value="1">Spider Man</option>
+                                            <option value="2">Wolverine</option>
+                                            <option value="3">Captain America</option>
+                                            <option value="4" selected>X-Men</option>
+                                            <option value="5">Crocodile</option>
+                                        </select></div></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="text" placeholder="URL" name="url" id="url"/> </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Email" name="org_email" id="org_email" value="{{ old('org_email') }}" required /> </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
+                                <div class="col-md-6 col-sm-6"><input type="text" placeholder="Phone" name="org_phone_number" id="org_phone_number" value="{{ old('org_phone_number') }}" required/> </div>
+                            </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Confirm Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation">
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-md-4 control-label">Organization Name</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="org_name" value="{{ old('org_name') }}">
-							</div>
-						</div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="select-style">
+                                        <select class="form-control select select-primary" data-toggle="select" name="state" id="state" value="{{ old('state') }}">
+                                            <option value="Select State">Select State</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DC">District of Columbia</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="HI">Hawaii</option>
+                                            <option value="IA">Iowa</option>
+                                            <option value="ID">Idaho</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="IN">Indiana</option>
+                                            <option value="KS">Kansas</option>
+                                            <option value="KY">Kentucky</option>
+                                            <option value="LA">Louisiana</option>
+                                            <option value="MA">Massachusetts</option>
+                                            <option value="MD">Maryland</option>
+                                            <option value="ME">Maine</option>
+                                            <option value="MI">Michigan</option>
+                                            <option value="MN">Minnesota</option>
+                                            <option value="MO">Missouri</option>
+                                            <option value="MS">Mississippi</option>
+                                            <option value="MT">Montana</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="ND">North Dakota</option>
+                                            <option value="NE">Nebraska</option>
+                                            <option value="NH">New Hampshire</option>
+                                            <option value="NJ">New Jersey</option>
+                                            <option value="NM">New Mexico</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="NY">New York</option>
+                                            <option value="OH">Ohio</option>
+                                            <option value="OK">Oklahoma</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="PA">Pennsylvania</option>
+                                            <option value="RI">Rhode Island</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="SD">South Dakota</option>
+                                            <option value="TN">Tennessee</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="UT">Utah</option>
+                                            <option value="VA">Virginia</option>
+                                            <option value="VT">Vermont</option>
+                                            <option value="WA">Washington</option>
+                                            <option value="WI">Wisconsin</option>
+                                            <option value="WV">West Virginia</option>
+                                            <option value="WY">Wyoming</option>
+                                        </select>
+                                    </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Organization Email</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="org_email" value="{{ old('org_email') }}">
-							</div>
-						</div>
+                                </div>
+                            </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Organization Phone Number</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="org_phone_number" value="{{ old('org_phone_number') }}">
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-md-4 control-label">Organization Address</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="org_address" value="{{ old('org_address') }}">
-							</div>
-						</div>
+                            <div class="row">
+                                <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="City" name="org_city" id="org_city" value="{{ old('org_city') }}" required /> </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Organization Description</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="org_desc" value="{{ old('org_desc') }}">
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Register
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+                                <div class="col-md-6 col-sm-6"><input type="text" placeholder="Zipcode" name="org_zipcode" id="org_zipcode" value="{{ old('org_zipcode') }}" required/> </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="text" placeholder="Address" name="org_address" id="org_address" value="{{ old('org_address') }}" required /> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><textarea placeholder="Description" name="org_desc" id="org_desc" value="{{ old('org_desc') }}"></textarea> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <ul class="smediaBox">
+                                        <li><a href="#"><img src="{{ asset('images/facebook_icon_folow.jpg') }}" alt="" /></a></li>
+                                        <li><a href="#"><img src="{{ asset('images/twitter_icon.jpg') }}" alt="" /></a></li>
+                                        <li><a href="#"><img src="{{ asset('images/google_icon.jpg') }}" alt="" /></a></li>
+                                        <li><a href="#"><img src="{{ asset('images/youtube_icon.jpg') }}" alt="" /></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12"><input type="submit" value="Create Account" /></div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection

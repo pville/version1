@@ -3,11 +3,12 @@
 use App\User;
 use App\Volunteer;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-
-class Organization extends Model
+class Organization extends Model implements SluggableInterface
 {
-    
+    use SluggableTrait;
 
     /**
      * The database table used by the model.
@@ -21,7 +22,7 @@ class Organization extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo', 'email', 'phone', 'address', 'description'];
+    protected $fillable = ['name','slug', 'logo', 'email', 'state', 'city', 'zipcode', 'social', 'url', 'phone', 'address', 'description'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -29,6 +30,14 @@ class Organization extends Model
      * @var array
      */
     //protected $hidden = ['user_id', 'type'];
-    
-   
+
+    protected $sluggable = array(
+        'build_from' => 'name',
+        'save_to'    => 'slug',
+    );
+
+    public function organization()
+    {
+        return $this->belongsTo('App/Organization');
+    }
 }

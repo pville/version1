@@ -1,5 +1,78 @@
 @extends('app')
 
+@section('script')
+    <script type="text/javascript" charset="utf-8">
+        $("a#account_default").click(function(e){
+
+            $("#group_type").val("0");
+
+            $("#account_student").removeClass('selected');
+            $("#account_default").removeClass('selected');
+            $("#account_court").removeClass('selected');
+            $("#account_default").addClass('selected');
+
+            e.preventDefault();
+        });
+
+
+        $("a#account_student").click(function(e){
+
+
+            $.getJSON("{{ url('/api/v1/group/1') }}", function(result){
+
+                if(result.success) {
+                    var options = '';
+                    console.debug(result.data);
+                    $.each( result.data.data, function(index, value ) {
+                        console.log(value.id);
+                        options += '<option value="' + value.id + '">' + value.name + '</option>';
+                    });
+
+                    $("select#group_id").html(options);
+
+                    $("#group_type").val("1");
+
+                    $("#account_student").removeClass('selected');
+                    $("#account_default").removeClass('selected');
+                    $("#account_court").removeClass('selected');
+                    $("#account_student").addClass('selected');
+                }
+            });
+
+            e.preventDefault();
+        });
+
+
+        $("a#account_court").click(function(e){
+
+
+            $.getJSON("{{ url('/api/v1/group/2') }}", function(result){
+
+                if(result.success) {
+                    var options = '';
+                    console.debug(result.data);
+                    $.each( result.data.data, function(index, value ) {
+                        console.log(value.id);
+                        options += '<option value="' + value.id + '">' + value.name + '</option>';
+                    });
+
+                    $("select#group_id").html(options);
+
+
+                }
+            });
+
+            $("#group_type").val("1");
+
+            $("#account_student").removeClass('selected');
+            $("#account_default").removeClass('selected');
+            $("#account_court").removeClass('selected');
+            $("#account_court").addClass('selected');
+
+            e.preventDefault();
+        });
+      </script>
+@endsection
 @section('content')
 
 <section class="bannertxt" id="VolunteerAcc">
@@ -40,10 +113,10 @@
                             <div class="col-md-12 col-sm-12"><input type="text" placeholder="Phone" name="phone_number" value="{{ old('phone_number') }}"/> </div>
                         </div>
                         <div class="row">
-        					<div class="col-md-12 col-sm-12"><input type="text" placeholder="Password" name="password"/> </div>
+        					<div class="col-md-12 col-sm-12"><input type="password" placeholder="Password" name="password"/> </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-sm-12"><input type="text" placeholder="Confirm Password" name="password_confirmation"/> </div>
+                            <div class="col-md-12 col-sm-12"><input type="password" placeholder="Confirm Password" name="password_confirmation"/> </div>
                         </div>
                         <div class="row">
         					<div class="col-md-4 col-sm-4">
@@ -63,43 +136,60 @@
                             </div>
                         </div>
                         <div class="row">
-                        	<div class="col-md-12 col-sm-12"><h4>Gender</h4></div>
-                            <div class="col-md-12 col-sm-12"><div class="select-style wid100"><select class="form-control select select-primary" data-toggle="select">
-            <option value="0">Female </option>
-            <option value="1">Male</option>
-                    </select></div></div>
+                        	<div class="col-md-12 col-sm-12">
+                                    <h4 class="text-center">Gender</h4>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="col-md-12 col-sm-12 green-btn-outer">
+                                    <div class="col-md-12 col-sm-12">
+                                        <select class="form-control select select-primary" data-toggle="select" id="gender" name="gender" value="{{ old('gender') }}" required/>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                        	<div class="col-md-12 col-sm-12"><h4 class="text-center">Account Type</h4></div>
-                            
-             <div class="col-md-12 col-sm-12">   
-        	 
-           <div class="col-md-12 col-sm-12 green-btn-outer"> 
-           <div class="col-md-4 col-sm-4"> 
-		   <a href="#" class="green-btns">Student</a>
-		   </div>
-		   
-		   <div class="col-md-4 col-sm-4"> 
-		   <a href="#" class="green-btns">Default</a>
-		   </div>
-		   
-		   <div class="col-md-4 col-sm-4"> 
-		   <a href="#" class="green-btns selected">Volunteer</a>
-		   </div>
-		   
-		   
-		   </div>
-		   </div>
-		   </div>
-                            
-                            
-                             
+                        	<div class="col-md-12 col-sm-12">
+                                <h4 class="text-center">Account Type</h4>
+                            </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="col-md-12 col-sm-12 green-btn-outer">
+                                       <div class="col-md-4 col-sm-4">
+                                            <a href="#" id="account_default" class="green-btns selected">Default</a>
+                                       </div>
+                                       <div class="col-md-4 col-sm-4">
+                                            <a href="#" id="account_student" class="green-btns">Student</a>
+                                       </div>
+                                       <div class="col-md-4 col-sm-4">
+                                            <a href="#" id="account_court" class="green-btns">Court Mandated</a>
+                                       </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <input type="hidden" id="group_type" name="group_type" value="0">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <h4 class="text-center">Group</h4>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12">
+                                <div class="col-md-12 col-sm-12 green-btn-outer">
+                                    <div class="col-md-12 col-sm-12">
+                                        <select class="form-control" id="group_id" name="group_id"/>
+
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
                            
                      
                        
                         <div class="row">
-                        	<div class="col-md-12 col-sm-12"><h4>Target Credits</h4></div>
-                            <div class="col-md-12 col-sm-12"><input type="text" placeholder="Confirm Password" /></div>
+                        	<div class="col-md-12 col-sm-12"><h4 class="text-center">Target Credits</h4></div>
+                            <div class="col-md-12 col-sm-12"><input type="text" id="credits" name="credits" placeholder="Credits" value="{{ old('credits') }}" required/></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-sm-12"><input type="submit" value="Create Account" /></div>

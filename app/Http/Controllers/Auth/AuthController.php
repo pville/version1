@@ -46,16 +46,16 @@ class AuthController extends Controller {
 	/**
 	 *	Disable default register request.
 	 */
-	public function getRegister()
+	public function getIndex()
 	{
-		return redirect('/');
+        return view('register.selection');
 	}
 
 	/**
 	 *	Disable default register request.
 	 */
-	public function postRegister(Request $request) {
-		return redirect('/');
+	public function postIndex(Request $request) {
+        return view('register.selection');
 	}
 
 
