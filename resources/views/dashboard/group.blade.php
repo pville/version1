@@ -14,6 +14,7 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="groupsearch">
                                     <input type="text"><input type="submit" value="Filter" />
+                                    <a class="uniEdit" href="{{ url('/dashboard/filter') }}">Blacklist</a>
                                 </div>
                             </div>
                         </div>
@@ -30,13 +31,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($user->group->getGroupMembers() as $member)
+                                    @foreach($Members as $member)
+
                                         <tr>
                                             <td>{{ $member->first_name }} {{ $member->last_name }}</td>
-                                            <td>{{ $member->volunteer->age() }}</td>
-                                            <td>40%</td>
-                                            <td>80%</td>
-                                            <td>100%</td>
+                                            <td>{{ $member->volunteer->getAge() }}</td>
+                                            <td>{{ $member->volunteer->current_credits }}</td>
+                                            <td>{{ $member->Credits()  }}</td>
+                                            <td>{{ $member->TotalCompleted()  }}%</td>
                                         </tr>
                                     @endforeach
 
@@ -51,15 +53,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="pagination">
-                                    <ul>
-                                        <li><a href="#"><img src="{{ asset('images/pagenation_back.jpg') }} " alt="" /></a></li>
-                                        <li><a href="#">01</a></li>
-                                        <li class="active"><a href="#">02</a></li>
-                                        <li><a href="#">03</a></li>
-                                        <li><a href="#">04</a></li>
-                                        <li><a href="#">05</a></li>
-                                        <li><a href="#"><img src="{{ asset('images/pagenation_next.jpg') }} " alt="" /></a></li>
-                                    </ul>
+                                    {!! $Members->render() !!}
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
@@ -78,19 +72,12 @@
                         <div class="univerBox">
                             <h2>{{ $user->group->name  }}</h2>
                             <ul class="uniList">
-                                <li><img src="{{ asset('images/univer_bag_icon.jpg') }} " alt="" />34 Avenue , ludhiana , Punjab</li>
-                                <li><img src="{{ asset('images/univer_phone_icon.jpg') }} " alt="" />(0) 123-456-789-00</li>
-                                <li><img src="{{ asset('images/univer_chart_icon.jpg') }} " alt="" />awesomemail@ourmail.com</li>
-                                <li><img src="{{ asset('images/univer_lock_icon.jpg') }} " alt="" />U.S Permitted University</li>
+                                <li><img src="images/univer_bag_icon.jpg" alt="" />{{ $user->group->address }} , {{ $user->group->city }} , {{$user->group->state}}</li>
+                                <li><img src="images/univer_phone_icon.jpg" alt="" />{{ $user->group->phone }}</li>
+                                <li><img src="images/univer_chart_icon.jpg" alt="" />{{ $user->group->email }}</li>
+                                <li><img src="images/univer_lock_icon.jpg" alt="" />U.S Permitted University</li>
                             </ul>
-                            <ul class="uniSmedia">
-                                <li><a href="#"><img src="{{ asset('images/gplus_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_facebook_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_twitter_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_instragrame_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_blog_icon.jpg') }} " alt="" /></a></li>
-                            </ul>
-                            <a class="uniEdit" href="#">EDIT</a>
+                           <a class="uniEdit" href="#">EDIT</a>
                         </div>
                     </div>
 
@@ -98,12 +85,16 @@
                         <div class="createSubuser">
                             <h2>Create Sub Users</h2>
                             <ul>
-                                <li><input type="text" placeholder="First Name" /></li>
-                                <li><input type="text" placeholder="Last Name" /></li>
-                                <li><input type="text" placeholder="Email Address" /></li>
-                                <li><input type="text" placeholder="Password" /></li>
+                                <form id="adduser" data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/dashboard/adduser') }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <li><input type="text" placeholder="First Name" name="first_name"/></li>
+                                    <li><input type="text" placeholder="Last Name" name="last_name"/></li>
+                                    <li><input type="text" placeholder="Email Address" name="email"/></li>
+
                             </ul>
-                            <a class="uniEdit" href="#">EDIT</a>
+                            <a class="uniEdit" href="javascript:document.forms['adduser'].submit();">Add User</a>
+                            </form>
+
                         </div>
                     </div>
 

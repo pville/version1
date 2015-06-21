@@ -18,28 +18,9 @@
                     @endif
                     <div class="boxradwrap">
                         <div class="orgProfile">
-                            <div class="orgProfileImg"><img src="{{ asset('images/orgthumb.jpg') }}" alt="" /></div>
-                            <a href="#" class="addPhotobtn" data-toggle="modal" data-target="#myModal">Add Photo</a>
+                            <div class="orgProfileImg"><img src="{{ asset('images/organization/' . $user->organization->id . '.jpg') }}" alt="" /></div>
+                            <a href="#" class="addPhotobtn">Add Photo</a>
 
-                            <!-- Modal -->
-                            <div class="modal fade imgupload" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm extra">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Upload Picture</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Drag a picture here</p>
-                                            <p><img src="{{ asset('images/dragdrop.jpg') }}" alt="" /></p>
-                                            <p class="options">or</p>
-                                            <button>Upload picture from your computer</button>
-                                            <button class="greenbtn">Upload picture from your dropbox</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                             <h2>{{ $user->organization->name }}</h2>
 
                             <ul class="uniList">
@@ -47,29 +28,23 @@
                                 <li><img src="{{ asset('images/univer_phone_icon.jpg') }}" alt="" />{{ $user->organization->phone }}</li>
                                 <li><img src="{{ asset('images/univer_chart_icon.jpg') }}" alt="" />{{ $user->organization->email }}</li>
                             </ul>
-                            <ul class="uniSmedia">
-                                <li><a href="#"><img src="{{ asset('images/gplus_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_facebook_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_twitter_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_instragrame_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_blog_icon.jpg') }}" alt="" /></a></li>
-                            </ul>
+                            <a class="uniEdit" href="{{ url('/dashboard/edit') }}" >Edit</a>
                         </div>
-                        <span class="edit">Edit</span>
+
                     </div>
 
                     <div class="boxradwrap">
                         <div class="createSubuser">
                             <h2>Create Sub Users</h2>
                             <ul>
-                                <form data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/dashboard/adduser') }}">
+                                <form id="adduser" data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/dashboard/adduser') }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <li><input type="text" placeholder="First Name" name="first_name"/></li>
                                 <li><input type="text" placeholder="Last Name" name="last_name"/></li>
                                 <li><input type="text" placeholder="Email Address" name="email"/></li>
 
                             </ul>
-                            <div class="col-md-12 col-sm-12"><input type="submit" value="Invite User" /></div>
+                            <a class="uniEdit" href="javascript:document.forms['adduser'].submit();">Add User</a>
                             </form>
                         </div>
                     </div>

@@ -17,7 +17,14 @@ class CreateGroupsTable extends Migration {
 			$table->increments('id');
 			$table->string('name', 255);
 			$table->integer('type');
-			$table->json('rules');
+            $table->string('state');
+            $table->string('city');
+            $table->string('zipcode');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
+			$table->json('org_rules');
+            $table->json('event_rules');
 			$table->integer('target_credits');
 			$table->timestamps();
 		});

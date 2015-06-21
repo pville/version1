@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div id="formwrap">
-                        <form data-toggle="validator" role="form" method="POST" action="{{ url('/register/organization') }}">
+                        <form data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/register/organization') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <h2>Account</h2>
                             <div class="row">
@@ -49,17 +49,20 @@
 
                             <h2>Organization Account</h2>
                             <div class="row">
-                                <div class="col-md-12 col-sm-12"><a href="#"><img src="{{ asset('images/addlogo.jpg') }}" alt="" /></a></div>
+                                <div class="col-md-12 col-sm-12">
+                                    <label>Image</label>
+
+                                    <input type="file" placeholder="Image" class="file" data-show-upload="false" name="image" id="image" accept="image/*"/>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Name / Title" name="org_name" id="org_name" value="{{ old('org_name') }}" required/> </div>
-                                <div class="col-md-6 col-sm-6 wid100"><div class="select-style"><select class="form-control select select-primary" data-toggle="select" name="org_cat" id="org_cat">
-                                            <option value="0">Choose  </option>
-                                            <option value="1">Spider Man</option>
-                                            <option value="2">Wolverine</option>
-                                            <option value="3">Captain America</option>
-                                            <option value="4" selected>X-Men</option>
-                                            <option value="5">Crocodile</option>
+                                <div class="col-md-6 col-sm-6 wid100"><div class="select-style">
+                                        <select  data-toggle="select" id="org_cat" name="org_cat" required>
+                                            <option value="">Select Organization Type</option>
+                                            @foreach($OrgTypes as $org_type)
+                                                <option value="{{$org_type->id}}">{{$org_type->type}}</option>
+                                            @endforeach
                                         </select></div></div>
                             </div>
                             <div class="row">
@@ -147,16 +150,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12"><textarea placeholder="Description" name="org_desc" id="org_desc" value="{{ old('org_desc') }}"></textarea> </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <ul class="smediaBox">
-                                        <li><a href="#"><img src="{{ asset('images/facebook_icon_folow.jpg') }}" alt="" /></a></li>
-                                        <li><a href="#"><img src="{{ asset('images/twitter_icon.jpg') }}" alt="" /></a></li>
-                                        <li><a href="#"><img src="{{ asset('images/google_icon.jpg') }}" alt="" /></a></li>
-                                        <li><a href="#"><img src="{{ asset('images/youtube_icon.jpg') }}" alt="" /></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-12 col-sm-12"><input type="submit" value="Create Account" /></div>
@@ -169,4 +163,18 @@
         </div>
     </section>
 
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(function () {
+
+            $("#image").fileinput({
+                maxFileCount: 1,
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['jpg','png','jpeg']
+            });
+
+        });
+    </script>
 @endsection

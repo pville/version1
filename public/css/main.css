@@ -1941,6 +1941,24 @@ background:#EE9600;
 	margin-top:-1px;
 	line-height:40px;
 }
+
+.orgProfile a.uniEdit {
+
+	font-size:19px;
+	color:#FFF;
+	font-family: 'Calibri-Bold';
+	background:#c9c9c9;
+	display:inline-block;
+	width:100%;
+	text-align:center;
+	padding:8px 0;
+	border-radius:0 0 15px 15px;
+}
+
+a.uniEdit:hover{
+background:#EE9600;
+}
+
 .orgProfile h2
 {
 	margin:8px 0;

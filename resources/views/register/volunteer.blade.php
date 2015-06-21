@@ -6,6 +6,8 @@
 
             $("#group_type").val("0");
 
+            document.getElementById('groupid').style.display = 'none';
+            document.getElementById("credits").readOnly = true;
             $("#account_student").removeClass('selected');
             $("#account_default").removeClass('selected');
             $("#account_court").removeClass('selected');
@@ -23,15 +25,17 @@
                 if(result.success) {
                     var options = '';
                     console.debug(result.data);
+                    options += '<option >Select School</option>';
                     $.each( result.data.data, function(index, value ) {
                         console.log(value.id);
                         options += '<option value="' + value.id + '">' + value.name + '</option>';
                     });
 
                     $("select#group_id").html(options);
-
+                    document.getElementById('groupid').style.display = 'block';
                     $("#group_type").val("1");
-
+                    document.getElementById("credits").value = "0";
+                    document.getElementById("credits").readOnly = true;
                     $("#account_student").removeClass('selected');
                     $("#account_default").removeClass('selected');
                     $("#account_court").removeClass('selected');
@@ -51,19 +55,21 @@
                 if(result.success) {
                     var options = '';
                     console.debug(result.data);
+                    options += '<option >Select Group</option>';
                     $.each( result.data.data, function(index, value ) {
                         console.log(value.id);
                         options += '<option value="' + value.id + '">' + value.name + '</option>';
                     });
 
                     $("select#group_id").html(options);
-
+                    document.getElementById('groupid').style.display = 'block';
 
                 }
             });
 
             $("#group_type").val("1");
 
+            document.getElementById("credits").readOnly = false;
             $("#account_student").removeClass('selected');
             $("#account_default").removeClass('selected');
             $("#account_court").removeClass('selected');
@@ -142,10 +148,13 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="col-md-12 col-sm-12 green-btn-outer">
                                     <div class="col-md-12 col-sm-12">
+                                        <div class="select-style">
                                         <select class="form-control select select-primary" data-toggle="select" id="gender" name="gender" value="{{ old('gender') }}" required/>
+                                            <option>Select Gender</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
                                         </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,20 +179,23 @@
                         </div>
                         <input type="hidden" id="group_type" name="group_type" value="0">
                         <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <h4 class="text-center">Group</h4>
-                            </div>
+                            <div id="groupid" style="display:none;">
+                                <div class="col-md-12 col-sm-12">
+                                    <h4 class="text-center">Group</h4>
+                                </div>
 
-                            <div class="col-md-12 col-sm-12">
-                                <div class="col-md-12 col-sm-12 green-btn-outer">
-                                    <div class="col-md-12 col-sm-12">
-                                        <select class="form-control" id="group_id" name="group_id"/>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="col-md-12 col-sm-12 green-btn-outer">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="select-style">
+                                            <select class="form-control" id="group_id" name="group_id"/>
 
-                                        </select>
+                                            </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                        </div>
-
+                            </div>
                            
                      
                        

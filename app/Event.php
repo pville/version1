@@ -5,6 +5,10 @@ use App\Volunteer;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
+
 class Event extends \Eloquent implements SluggableInterface {
 
     use SluggableTrait;
@@ -12,7 +16,7 @@ class Event extends \Eloquent implements SluggableInterface {
 
     protected $table = "event";
 
-    protected $fillable = ['organization_id', 'name', 'slug', 'start_time', 'end_time', "credits", "description", "screening_required", "age_requirement", "category", "city",
+    protected $fillable = ['organization_id', 'name', 'slug', 'start_time', 'end_time', "credits", "description", "screening_required", "age_requirement", "org_category", "category", "city",
         "state", "address","zipcode", "phone", "email", "max_users", "status"];
 
     protected $sluggable = array(
@@ -44,4 +48,23 @@ class Event extends \Eloquent implements SluggableInterface {
         return sprintf("%d %s %d", $day, $this->getMonth($date), $year);
     }
 
+    public function getEventType() {
+
+        $minutes = Carbon::now()->addMinutes(1);
+
+
+
+        $EventTypes = Cache::remember('event_category', $minutes, function()
+        {
+            return DB::table('event_category')->select('id', 'type')->get();
+            //return DB::table('groups')->select('id', 'name')->get()->skip(1);
+        });
+
+       return $EventTypes[$this->category - 1]->type;
+    }
+
+    public function getAttending() {
+
+        return DB::table('attendance')->where('event_id', '=', $this->id)->count();
+    }
 }

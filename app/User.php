@@ -5,6 +5,8 @@ use App\Group;
 use App\Volunteer;
 use App\Organization;
 use App\ScreeningData;
+use App\Event;
+use App\Attendance;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'group_id', 'organization_id', 'role'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'group_id', 'organization_id', 'role', 'status'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -61,7 +63,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function group()
     {
-        return $this->belongsTo('App\Group');
+        return $this->belongsTo('App\Group', 'group_id', 'id');
     }
 
     public function organization() {
@@ -78,6 +80,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    public function getGroupOrOrgName() {
+
+        if($this->IsMember())
+            return $this->group->name;
+        else if( $this->IsOrganization())
+            return $this->organization->name;
+
+    }
 
     public function IsVerified() {
 
@@ -97,5 +107,72 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    public function Credits() {
 
+        if($this->IsMember()) {
+            return $this->group->target_credits;
+        }
+        else{
+
+            return $this->volunteer->target_credits;
+        }
+    }
+
+    public function TotalCompleted() {
+
+        $Events = Attendance::where('user_id','=', $this->id)->where('checked_in','=',true)->get();
+
+        $credits = 0;
+
+        if(!$Events->IsEmpty()) {
+
+            foreach($Events as $Event) {
+
+                $ent = Event::where('id', '=', $Event->event->id)->get();
+
+                if(!$ent->isEmpty()) {
+                    $ent = $ent[0];
+
+                    if ($ent->status == 1)
+                    {
+                        $credits += $ent->credits;
+                    }
+                }
+
+            }
+
+        }
+
+        if( $credits == 0 ) return 0;
+
+        return ($credits / $this->volunteer->target_credits) * 100;
+    }
+
+    public function TotalEvents() {
+
+        $Events = Attendance::where('user_id','=', $this->id)->where('checked_in','=',true)->get();
+
+        $numEvents = 0;
+
+        if(!$Events->IsEmpty()) {
+
+            foreach($Events as $Event) {
+
+                $ent = Event::where('id', '=', $Event->event->id)->get();
+
+                if(!$ent->isEmpty()) {
+                    $ent = $ent[0];
+
+                    if ($ent->status == 1)
+                    {
+                        $numEvents++;
+                    }
+                }
+
+            }
+
+        }
+
+        return $numEvents;
+    }
 }

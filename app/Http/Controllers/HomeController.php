@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Event;
+use GeoIP;
 
 class HomeController extends Controller {
     /*
@@ -41,18 +42,25 @@ class HomeController extends Controller {
         {
             return DB::table('event')->take(10)->get();
         });*/
-        $Events = Event::Where('status','=',0)->take(3)->get();
+
+        $location = GeoIP::getLocation();
+
+        $Events = Event::Where('status','=','pending')->where('state', '=', $location["state"])->take(3)->get();
+
+        if( $Events->isEmpty() )
+            $Events = Event::Where('status','=','pending')->take(3)->get();
+
 
 
         if(Auth::check()) {
 
             $user = Auth::user();
-            $data = array('user' => $user,'events' => $Events);
 
-            return view('home')->with($data);
+            return view('home')->with(compact('user',$user))->with(compact('Events', $Events))->with(compact('location',$location));
         }
-        $data = array('events' => $Events);
-        return view('home')->with($data);
+
+
+        return view('home')->with(compact('Events', $Events))->with(compact('location',$location));
     }
 
     public function getSettings() {

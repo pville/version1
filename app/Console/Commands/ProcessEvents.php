@@ -5,6 +5,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 use App\Event;
+use App\Attendance;
+use App\Notification;
 use Carbon\Carbon;
 
 class ProcessEvents extends Command
@@ -31,13 +33,36 @@ class ProcessEvents extends Command
      */
     public function fire()
     {
-         $Events = Event::Where('end_time', '>=', Carbon::now())->where('status', '=', 0)->get();
+
+        $Events = Event::Where('start_time', '<', Carbon::now())->where('status', '=', 'pending')->get();
 
         if(!$Events->isEmpty() ) {
 
             foreach($Events as $Event)
             {
-                $Event->status = 1;
+                $Event->status = "started";
+                $Event->save();
+
+                $Users = Attendance::where('event_id', '=', $Event->id)->get();
+
+                foreach($Users as $User) {
+
+                    $Notify = new Notification([
+                       "user_id" => $User->user_id,
+                        "message" => "Event " . $Event->name . " has started."
+                    ]);
+                    $Notify->save();
+                }
+            }
+        }
+
+        $Events = Event::Where('end_time', '<', Carbon::now())->where('status', '=', 'started')->get();
+
+        if(!$Events->isEmpty() ) {
+
+            foreach($Events as $Event)
+            {
+                $Event->status = "ended";
                 $Event->save();
             }
         }

@@ -22,8 +22,9 @@ class CreateEventTable extends Migration
             $table->integer("credits");
             $table->longText("description");
             $table->boolean("screening_required");
-            $table->integer("age_requirement");
-            $table->string("category");
+            $table->boolean("age_requirement");
+            $table->integer("org_category");
+            $table->integer("category");
             $table->string("phone");
             $table->string("email");
             $table->string("state");
@@ -31,7 +32,14 @@ class CreateEventTable extends Migration
             $table->string("address");
             $table->string("zipcode");
             $table->integer("max_users");
-            $table->integer("status");
+            $table->boolean("featured");
+
+            // events start off as pending
+            // when a event starts it's moved to started.
+            // when a event is over it is changed to ended
+            // when the org is ready the set it to processing.
+            // once it's done being processed it is set to completed.
+            $table->enum('status', array('started', 'pending', 'ended', 'processing', 'completed'))->default('pending');
             $table->timestamps();
         });
     }

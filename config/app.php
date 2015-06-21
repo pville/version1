@@ -136,16 +136,20 @@ return [
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
 
+
         /*
          * Application Service Providers...
          */
         'App\Providers\AppServiceProvider',
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
+        'App\Providers\HelperServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
         'Grimthorr\LaravelToast\ServiceProvider',
+        'Torann\GeoIP\GeoIPServiceProvider',
+
 
     ],
 
@@ -197,6 +201,7 @@ return [
         'Form'      => 'Illuminate\Html\FormFacade', 
         'HTML'      => 'Illuminate\Html\HtmlFacade',
         'Toast'     => 'Grimthorr\LaravelToast\Facade',
+        'GeoIP'     => 'Torann\GeoIP\GeoIPFacade',
 
     ],
 

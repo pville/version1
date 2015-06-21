@@ -42,17 +42,15 @@
                             <div class="col-md-12 col-sm-12"><textarea placeholder="Description" id="desc" name="desc" required></textarea> </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-sm-12"><div class="select-style"><select>
-                                        <option>Category</option>
-                                        <option>Animals</option>
-                                        <option>Arts,Culture,Humanities</option>
-                                        <option>Community Development</option>
-                                        <option>Education</option>
-                                        <option>Environment</option>
-                                        <option>Health</option>
-                                        <option>Human+Civil Rights</option>
-
-                                    </select></div></div>
+                            <div class="col-md-12 col-sm-12"><div class="select-style">
+                                <select  data-toggle="select" id="event_type" name="event_type" required>
+                                    <option value="">Select Event Type</option>
+                                    @foreach($EventTypes as $event_type)
+                                        <option value="{{$event_type->id}}">{{$event_type->type}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6"><input type="text" placeholder="Email" class="mb15" id="email" name="email" required/> </div>
@@ -63,7 +61,7 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="select-style">
-                                    <select class="form-control select select-primary" data-toggle="select" name="state" id="state" value="{{ old('state') }}">
+                                    <select data-toggle="select" name="state" id="state" value="{{ old('state') }}">
                                         <option value="Select State">Select State</option>
                                         <option value="AK">Alaska</option>
                                         <option value="AL">Alabama</option>
@@ -164,23 +162,22 @@
                         </div>
 
                         <div class="row extra-padd">
-                            <div class="col-md-4 col-sm-4"><label for="checkbox2" class="checkbox">
-                                    <input type="checkbox" data-toggle="checkbox" id="checkbox2" value="" checked="checked" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>Recurring </label></div>
-                            <div class="col-md-8 col-sm-8"><input type="text" placeholder="Credits" name="credits" id="credits" value="{{ old('credits') }}" required/> </div></div>
-                        <div class="row">
-
-                            <div class="col-md-4 col-sm-4"><label for="checkbox22" class="checkbox"><input type="checkbox" data-toggle="checkbox" id="checkbox22" value="" checked="checked" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>  Screen </label>		</div>
-                            <div class="col-md-8 col-sm-8"><input type="text" placeholder="Age" /> </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="range">
-
-                                    <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                            <div class="col-md-4 col-sm-4">
+                                <label for="checkbox2" class="checkbox">
+                                    <input type="checkbox" data-toggle="checkbox" id="checkbox2" value="0" checked="checked" class="custom-checkbox">
+                                    <span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>Recurring </label></div>
+                            <div class="col-md-8 col-sm-8">
+                                <div class="select-style">
+                                    {!! Form::select('credits', ['Select Credit Amount', 1,2,3,4,5,6,7,8,9,10], ['class' => 'form-control select select-primary']) !!} </div></div>
                                 </div>
-                            </div>
+                        <div class="row">
+                            <input id="ageHidden"  type="hidden" value="0" name="age">
+                            <input id="screeningHidden"  type="hidden" value="0" name="screening">
+                            <div class="col-md-4 col-sm-4"><label for="screening" class="checkbox"><input type="checkbox" data-toggle="checkbox" id="screening" name="screening" value="0" onchange="update_value(this);" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>  Screen </label>		</div>
+                            <div class="col-md-4 col-sm-4"><label for="age" class="checkbox"><input type="checkbox" data-toggle="checkbox" id="age" name="age" value="0" class="custom-checkbox" onchange="update_value(this);"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>  Age ( 18+ ) </label>		</div>
+
                         </div>
+
                         <div class="row">
                             <div class="col-md-12 col-sm-12"><input type="submit" value="Create Event" /></div>
                         </div>
@@ -207,5 +204,17 @@
             });
 
         });
+
+        function update_value(chk_bx) {
+            if (chk_bx.checked) {
+                chk_bx.value = "1";
+                document.getElementById(chk_bx.name + 'Hidden').disabled = true;
+            }
+            else {
+                chk_bx.value = "0";
+                document.getElementById(chk_bx.name + 'Hidden').disabled = false;
+            }
+
+        }
     </script>
 @endsection

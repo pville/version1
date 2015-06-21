@@ -211,12 +211,12 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi orci <br>
                         mauris, volutpat porttitor lobortis et, scelerisque ac mauris. </p>
                     <h2 class="portfolio-heading2"><span class="left_contr">Events Nearby You</span><span class="right_contr">
-<img align="left" alt="arrow" src="{{ asset('images/arrow.jpg') }}">San Francisco</span></h2>
+<img align="left" alt="arrow" src="{{ asset('images/arrow.jpg') }}">{{ $location["city"] }}</span></h2>
                 </div>
             </div>
             <div class="row first">
 
-                @foreach($events as $event)
+                @foreach($Events as $event)
                 <div class="mask-area col-md-4 col-sm-4" data-appear-top-offset="-100" data-animated="fadeInLeft">
                     <a href=""><div class="mask"></div></a>
                     <img src="{{ asset('images/events/' . $event->id. '.jpg') }}" height="147" width="220" alt="" />

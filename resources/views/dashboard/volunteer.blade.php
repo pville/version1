@@ -16,19 +16,12 @@
                             @if($user->IsMember())
                                 <p>Member of {{$user->group->name}}</p>
                             @endif
-
                             <ul class="uniList">
-                                <li><img src="{{ asset('images/org_location_icon.jpg') }} " alt="" />34 Avenue , ludhiana , Punjab</li>
-                                <li><img src="{{ asset('images/univer_phone_icon.jpg') }} " alt="" />(0) 123-456-789-00</li>
-                                <li><img src="{{ asset('images/univer_chart_icon.jpg') }} " alt="" />{{ $user->email }}</li>
+                                <li><img src="{{ asset('images/org_location_icon.jpg') }}" alt="" />{{ $user->group->address }} , {{ $user->group->city }} , {{$user->group->state}}</li>
+                                <li><img src="{{ asset('images/univer_phone_icon.jpg') }}" alt="" />{{ $user->group->phone }}</li>
+                                <li><img src="{{ asset('images/univer_chart_icon.jpg') }}" alt="" />{{ $user->group->email }}</li>
                             </ul>
-                            <ul class="uniSmedia">
-                                <li><a href="#"><img src="{{ asset('images/gplus_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_facebook_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_twitter_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_instragrame_icon.jpg') }} " alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_blog_icon.jpg') }} " alt="" /></a></li>
-                            </ul>
+
                         </div>
                     </div>
                 </div>
@@ -39,17 +32,17 @@
                             <ul>
                                 <li><img src="{{ asset('images/big_process_icon.jpg') }} " alt="" />
                                     <div>
-                                        Total Completed <span>65%</span>
+                                        Total Completed <span>{{ $user->TotalCompleted() }}%</span>
                                     </div>
                                 </li>
                                 <li><img src="{{ asset('images/target_icon.jpg') }} " alt="" />
                                     <div>
-                                        Target Credits <span>65%</span>
+                                        Target Credits <span>{{ $user->Credits() }}</span>
                                     </div>
                                 </li>
                                 <li><img src="{{ asset('images/event_calc_icon.jpg') }} " alt="" />
                                     <div>
-                                        Event Completed<span>65%</span>
+                                        Event Completed<span>{{ $user->TotalEvents() }}</span>
                                     </div>
                                 </li>
                             </ul>
@@ -61,38 +54,12 @@
                         <div class="orgProcess Notifi">
                             <h2><img src="{{ asset('images/org_notifaction_icon.jpg') }} " alt="" /> Notification</h2>
                             <ul>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
+                                @foreach($Notifications as $Notify)
+                                    <li>
+                                        <p>{{ $Notify->message }}<span>{{ $Notify->created_at->diffForHumans() }}</span></p>
+                                    </li>
+                                @endforeach
 
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -302,4 +269,14 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+
+    <script type="text/javascript">
+        jQuery(".Notifi ul").mCustomScrollbar({
+            setHeight:340,
+            theme:"minimal-dark"
+        });
+    </script>
 @endsection

@@ -21,7 +21,7 @@ class Group extends \Eloquent
      *
      * @var array
      */
-    protected $fillable = ['name', 'target_credits', 'type'];
+    protected $fillable = ['name', 'target_credits', 'type', 'org_rules','event_rules', 'email', 'state', 'city', 'zipcode', 'phone', 'address'];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -29,10 +29,19 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
-			$table->enum('role', array('volunteer', 'group', 'organization'));
+			$table->enum('role', array('volunteer', 'group', 'organization', 'admin'));
+
+            $table->enum('status', array('pending', 'approved', 'denied'));
+
+            $table->boolean('banned')->default(false);
+
             $table->json('screened');
 			$table->rememberToken();
 			$table->timestamps();
+
+
+
+
 		});
 	}
 

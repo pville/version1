@@ -12,9 +12,7 @@
         </div>
         <form data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/events/screen/' . $form->id) }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        {!! $html !!}
-            <div class="row">
-                <div class="col-md-12 col-sm-12"><input type="submit" value="Apply" /></div>
-            </div>
+            {!! $html !!}
+
         </form>
 @endsection

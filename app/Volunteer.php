@@ -39,11 +39,21 @@ class Volunteer extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function age() {
+    public function getAge() {
 
         // TODO: function to calculate age from birthdate field.
 
-        return Carbon::createFromDate(1975, 5, 21)->age;
+        return $this->birthdate->age;
+    }
+
+    public function getHoursEearned() {
+
+        return $this->current_credits;
+    }
+
+    public function getTargetCredits() {
+
+        return $this->target_credits;
     }
 
     public function AgeCheck($minAge){

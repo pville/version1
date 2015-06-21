@@ -7,6 +7,7 @@ use App\Organization;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Carbon\Carbon;
+use Request;
 
 class Registrar implements RegistrarContract {
 	/**
@@ -105,6 +106,8 @@ class Registrar implements RegistrarContract {
 			'group_type' => 'required|integer|exists:group_types,id',
 			'group_email' => 'required|email|max:255',
 			'group_credits' => 'required|integer',
+            'group_email' => 'required|email|max:255'
+
 		]);
 	}
 
@@ -123,8 +126,13 @@ class Registrar implements RegistrarContract {
 			[
 				'name' => $data['group_name'],
 				'type' => $data['group_type'],
-				'target_credits' => $data['group_credits']
-				
+				'target_credits' => $data['group_credits'],
+				'state' => $data['state'],
+                'city' => $data['group_city'],
+                'zipcode' => $data['group_zipcode'],
+                'address' => $data['group_address'],
+                'phone' => $data['group_phone_number'],
+                'email' => $data['group_email']
 			]);
 
 		$NewUser->group_id = $NewGroup->id;
@@ -137,11 +145,13 @@ class Registrar implements RegistrarContract {
 	public function OrgValidator(array $data) {
 
 		return Validator::make($data, [
+            'image' => 'required|image|mimes:jpeg,png',
 			'first_name' => 'required|max:255',
 			'last_name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
 			'phone_number' => 'required|max:20',
+            'org_cat' => 'required|integer|exists:organization_category,id',
             'org_phone_number' => 'required|max:20',
 			'org_name' => 'required|max:255',
 			'org_email' => 'required|email|max:255',
@@ -162,7 +172,10 @@ class Registrar implements RegistrarContract {
 			'password' => bcrypt($data['password']),
 			'role' => 'organization',
 		]);
-		
+
+
+
+
 		$NewOrg = Organization::create(
 			[
                 'category' => $data['org_cat'],
@@ -183,6 +196,13 @@ class Registrar implements RegistrarContract {
 		$NewUser->organization_id = $NewOrg->id;
 		$NewUser->save();
 
+        $image = Request::input('image');
+
+        $imageName = $NewOrg->id . '.jpg';
+
+        Request::file('image')->move(
+            base_path() . '/public/images/organization/', $imageName
+        );
 		return $NewUser;
 	}
 }

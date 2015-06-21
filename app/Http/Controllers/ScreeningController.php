@@ -16,6 +16,8 @@ use Redirect;
 use Illuminate\Support\Facades\DB;
 use Form;
 use Response;
+use Toast;
+
 class ScreeningController extends Controller {
 
     protected $redirectPath = "/events/create";
@@ -92,11 +94,16 @@ class ScreeningController extends Controller {
                     ));
 
                     $data->save();
+
+                    Toast::success('Your application has been sent!', 'Success!');
+
+                    return redirect(url("/dashboard"));
                 }
 
             }
         }
 
+        return redirect(url("/"));
     }
     public function getScreenFormForOrg($id) {
 

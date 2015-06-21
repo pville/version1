@@ -23,7 +23,7 @@ class AuthController extends Controller {
 	*/
 	use AuthenticatesAndRegistersUsers;
 
-
+    private $redirectPath = '/dashboard';
 	private $loginPath = '/login';
 
 
@@ -120,7 +120,17 @@ class AuthController extends Controller {
 	 */
 	public function getOrganization()			
 	{
-		return view('register.organization');
+        $minutes = Carbon::now()->addMinutes(1);
+
+
+
+        $OrgTypes = Cache::remember('organization_category', $minutes, function()
+        {
+            return DB::table('organization_category')->select('id', 'type')->get();
+            //return DB::table('groups')->select('id', 'name')->get()->skip(1);
+        });
+
+		return view('register.organization')->with(compact("OrgTypes",$OrgTypes));
 		
 	}
 
@@ -139,11 +149,13 @@ class AuthController extends Controller {
 			$this->throwValidationException(
 				$request, $validator
 			);
+
+            return redirect($this->redirectPath());
 		}
 
 		$this->auth->login($this->registrar->getCreate($type, $request->all()));
 
-		return redirect($this->redirectPath());
+        return redirect(url('/dashboard'));
 	}
 
 	
