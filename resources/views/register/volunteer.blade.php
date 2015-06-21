@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    Register Volunteer - Pleasantville.co
+@endsection
+
 @section('script')
     <script type="text/javascript" charset="utf-8">
         $("a#account_default").click(function(e){

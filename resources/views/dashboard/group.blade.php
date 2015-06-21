@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+    Dashboard - Pleasantville.co
+@endsection
 @section('content')
     <section id="listofgroup">
         <div class="container">

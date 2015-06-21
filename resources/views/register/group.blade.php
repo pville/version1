@@ -1,6 +1,8 @@
 @extends('app')
 
-
+@section('title')
+    Register Group - Pleasantville.co
+@endsection
 
 @section('content')
     <section class="bannertxt" id="GroupAcc">

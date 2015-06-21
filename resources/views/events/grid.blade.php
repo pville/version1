@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    Events - Pleasantville.co
+@endsection
+
 @section('content')
     <section id="eventsBanner">
         <div class="container">

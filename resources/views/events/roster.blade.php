@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    Event Roster - Pleasantville.co
+@endsection
+
 @section('content')
     <section id="listofgroup">
         <div class="container">

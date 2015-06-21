@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    Register Organization - Pleasantville.co
+@endsection
+
 @section('content')
     <section class="bannertxt" id="orgAcc">
         <div class="container">

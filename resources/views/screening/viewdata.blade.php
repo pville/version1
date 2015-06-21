@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+    Screening Form - Pleasantville.co
+@endsection
 @section('content')
     <section class="bannertxt" id="jointEvent">
         <div class="container">

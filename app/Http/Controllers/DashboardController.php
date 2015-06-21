@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Toast;
+use Mail;
 
 class DashboardController extends Controller {
     /*
@@ -455,6 +456,10 @@ class DashboardController extends Controller {
 
         Toast::success('Invite sent to ' . $data["email"], 'Success!');
 
+        Mail::send('emails.invite', ['invite' => $invite], function ($m) use ($invite) {
+            $m->from("noreply@pleasantville","PleasantVville.co");
+            $m->to($invite->email, $invite->first_name)->subject('Invite for PleasantVille.co!');
+        });
 
         return redirect(url('/dashboard'));
 

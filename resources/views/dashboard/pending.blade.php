@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    Pleasantville.co - Account Pending
+     Account Pending - Pleasantville.co
 @endsection
 
 
