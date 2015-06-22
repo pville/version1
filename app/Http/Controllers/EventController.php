@@ -48,10 +48,16 @@ class EventController extends Controller {
 
         $Events = null;
 
-        $Events = $this->getRuleFilter($Events);
+        if(Auth::check()) {
+            $Events = $this->getRuleFilter($Events);
 
-        $Events = $Events->paginate(6);
+            $Events = $Events->paginate(6);
+        }
+        else {
 
+            $Events = Event::paginate(6);
+        }
+        
         $Events->setPath('/events');
 
         $location = GeoIP::getLocation();
@@ -181,7 +187,7 @@ class EventController extends Controller {
             }
 
         }
-        $Query = Event::paginate(6);
+
 
 
         return $Query;
