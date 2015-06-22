@@ -40,12 +40,9 @@
                             <div class="row">
                                 <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Name / Title" name="org_name" id="org_name" value="{{ $org->name }}" required/> </div>
                                 <div class="col-md-6 col-sm-6 wid100"><div class="select-style"><select class="form-control select select-primary" data-toggle="select" name="org_cat" id="org_cat">
-                                            <option value="0">Choose  </option>
-                                            <option value="1">Spider Man</option>
-                                            <option value="2">Wolverine</option>
-                                            <option value="3">Captain America</option>
-                                            <option value="4" selected>X-Men</option>
-                                            <option value="5">Crocodile</option>
+                                            @foreach($OrgTypes as $org_type)
+                                                <option value="{{$org_type->id}}">{{$org_type->type}}</option>
+                                            @endforeach
                                         </select></div></div>
                             </div>
                             <div class="row">
