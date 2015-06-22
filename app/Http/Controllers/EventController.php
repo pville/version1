@@ -49,15 +49,25 @@ class EventController extends Controller {
         $Events = null;
 
         if(Auth::check()) {
-            $Events = $this->getRuleFilter($Events);
 
-            $Events = $Events->paginate(6);
+            $user = Auth::user();
+
+            if($user->IsMember()) {
+
+                $Events = $this->getRuleFilter($Events);
+    
+                $Events = $Events->paginate(6);
+            }
+            else
+            {
+                $Events = Event::paginate(6);
+            }
         }
         else {
 
             $Events = Event::paginate(6);
         }
-        
+
         $Events->setPath('/events');
 
         $location = GeoIP::getLocation();
@@ -163,6 +173,7 @@ class EventController extends Controller {
     public function getRuleFilter($Query) {
 
         if(Auth::check()) {
+
             $user = Auth::user();
 
             if($user->IsMember()) {
