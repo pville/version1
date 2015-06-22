@@ -181,6 +181,8 @@ class EventController extends Controller {
             }
 
         }
+        $Query = Event::paginate(6);
+
 
         return $Query;
 
