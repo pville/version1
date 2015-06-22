@@ -14,10 +14,10 @@
 
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
-                                <div class="groupsearch">
+                                <!--<div class="groupsearch">
                                     <input type="text"><input type="submit" value="Filter" />
-                                    <a class="uniEdit" href="{{ url('/dashboard/filter') }}">Blacklist</a>
-                                </div>
+                                </div>-->
+                                <a class="uniEdit" href="{{ url('/dashboard/filter') }}">Blacklist</a>
                             </div>
                         </div>
                         <div class="row">
@@ -58,13 +58,13 @@
                                     {!! $Members->render() !!}
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
+                            <!--<div class="col-md-6 col-sm-6">
                                 <ul class="pagenationList">
                                     <li> View <select><option>09</option></select></li>
                                     <li>FOUND TOTAL 20 RECORDS</li>
                                 </ul>
 
-                            </div>
+                            </div>-->
                         </div>
                     </div>
 
