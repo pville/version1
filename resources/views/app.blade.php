@@ -91,53 +91,11 @@
 
 <footer>
 	<div class="container">
-    	<div class="row">
-        	<div class="col-md-12 col-sm-12">  
-            	<ul>
-                	<li><h2>COMPANY</h2></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Meet the team</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-                <ul>
-                	<li><h2>ACCOUNT</h2></li>
-                    <li><a href="#">Payments</a></li>
-                    <li><a href="#">Subscription</a></li>
-                    <li><a href="#">Gift Card</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <ul>
-                	<li><h2>HELP</h2></li>
-                     <li><a href="#">Payments</a></li>
-                    <li><a href="#">Subscription</a></li>
-                    <li><a href="#">Gift Card</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <ul>
-                	<li><h2>LEGAL</h2></li>
-                     <li><a href="#">Payments</a></li>
-                    <li><a href="#">Subscription</a></li>
-                    <li><a href="#">Gift Card</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <ul>
-                	<li><h2>FOLLOW US</h2></li>
-                     <li class="smedia">
-                     	<a class="gplus">Gplus</a>
-                        <a class="faceicon">Facebook</a>
-                        <a class="twitter">twitter</a>                     
-                     </li>
-                    
-                </ul>
-            </div>
-       </div>
-       
        	<div class="row copyright">
         	<div class="col-md-7 col-sm-7">  
             	<ul>
-                	<li><img src="images/phone_icon.png" alt="" />(0) 123-456-789-00</li><li>|</li>
-                    <li><img src="images/chart_icon.png" alt="" />awesomemail@ourmail.com</li>
+                <li><img src="images/phone_icon.png" alt="" />(631)-742-4625</li><li>|</li>
+                    <li><img src="images/chart_icon.png" alt="" />hello@pleasantville.co</li>
                 </ul>
             </div>
             <div class="col-md-5 col-sm-5 text-right">  
