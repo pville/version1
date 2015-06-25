@@ -175,12 +175,12 @@
                 </div>
                 <div class="col-md-4 col-sm-4" data-appear-top-offset="-200" data-animated="fadeIn">
                     <img src="{{ asset('images/event3.jpg') }}" alt="" />
-                    <h2>Care</h2>
+                    <h2>Organizations</h2>
                     <p>Grow your volunteer base by creating and promoting community service events.</p>
                 </div>
                 <div class="col-md-4 col-sm-4" data-appear-top-offset="-300" data-animated="fadeIn">
                     <img src="{{ asset('images/earn.jpg') }}" alt="" />
-                    <h2>Earn</h2>
+                    <h2>Institutions</h2>
                     <p>Track the progress and completion of community service hours.</p>
                 </div>
             </div>
