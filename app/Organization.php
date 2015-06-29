@@ -22,7 +22,7 @@ class Organization extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $fillable = ['name','slug', 'logo', 'email', 'state', 'city', 'zipcode', 'social', 'url', 'phone', 'address', 'description'];
+    protected $fillable = ['name','slug', 'logo', 'email', 'state', 'city', 'zipcode', 'social', 'url', 'category', 'phone', 'address', 'description'];
 
     /**
      * The attributes excluded from the model's JSON form.

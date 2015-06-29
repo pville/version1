@@ -57,7 +57,7 @@
                         <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Name / Title"  name="group_name" value="{{ old('group_name') }}" required/> </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="select-style">
-                            <select id="group_type" id="group_type" name="group_type" required>
+                            <select id="group_type" name="group_type" required>
                                 <option>Select Group Type</option>
                                 @foreach($group_types as $group)
                                     <option value="{{$group->id}}">{{$group->type}}</option>
