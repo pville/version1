@@ -153,7 +153,7 @@
 
 
                 setSelected('org_cat', '{{ $org->category }}');
-                setSelected('state', '{{ $org->state }});
+                setSelected('state', '{{ $org->state }}');
 
             });
 
