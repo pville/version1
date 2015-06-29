@@ -40,7 +40,7 @@
                                 <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Name / Title"  name="group_name" value="{{ $user->group->name }}" required/> </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="select-style">
-                                        <select id="group_type" name="group_type" value="{{ $user->group->state }}" required>
+                                        <select id="group_type" name="group_type" value="{{ $user->group->type }}" required>
                                             <option>Select Group Type</option>
                                             @foreach($group_types as $group)
                                                 <option value="{{$group->id}}">{{$group->type}}</option>
@@ -141,4 +141,35 @@
             </div>
         </div>
     </section>
+
+@section('script')
+    <script type="text/javascript">
+        $(function () {
+
+            $(document).ready(function() {
+
+
+                setSelected('group_type', '{{ $user->group->type }}');
+                setSelected('state', '{{ $user->group->state }}');
+
+            });
+
+            function setSelected(elm, val) {
+                var dl = document.getElementById(elm);
+
+                var index =0;
+                for (var i=0; i<dl.options.length; i++){
+                    if (dl.options[i].value == val){
+                        index=i;
+                        break;
+                    }
+                }
+                dl.selectedIndex = index;
+
+            }
+
+
+        });
+    </script>
+@endsection
 @endsection
