@@ -152,8 +152,8 @@
             $(document).ready(function() {
 
 
-                setSelected('org_cat', {{ $org->category }});
-                setSelected('state', {{ $org->state }});
+                setSelected('org_cat', '{{ $org->category }}');
+                setSelected('state', '{{ $org->state }});
 
             });
 
