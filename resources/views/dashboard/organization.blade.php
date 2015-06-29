@@ -63,18 +63,11 @@
                         <div class="orgProcess Notifi">
                             <h2><img src="{{ asset('images/org_notifaction_icon.jpg') }}" alt="" /> Notification</h2>
                             <ul>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse <span>By 2:00 am</span></p>
-                                </li>
+                                @foreach($Notifications as $Notify)
+                                    <li>
+                                        <p>{{ $Notify->message }}<span>{{ $Notify->created_at->diffForHumans() }}</span></p>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

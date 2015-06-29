@@ -166,9 +166,10 @@
 
                         <div class="row extra-padd">
                             <div class="col-md-4 col-sm-4">
-                                <label for="checkbox2" class="checkbox">
+                               <!-- <label for="checkbox2" class="checkbox">
                                     <input type="checkbox" data-toggle="checkbox" id="checkbox2" value="0" checked="checked" class="custom-checkbox">
-                                    <span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>Recurring </label></div>
+                                    <span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>Recurring </label> -->
+                                    </div>
                             <div class="col-md-8 col-sm-8">
                                 <div class="select-style">
                                     {!! Form::select('credits', ['Select Credit Amount', 1,2,3,4,5,6,7,8,9,10], ['class' => 'form-control select select-primary']) !!} </div></div>
