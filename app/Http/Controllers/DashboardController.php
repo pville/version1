@@ -311,12 +311,12 @@ class DashboardController extends Controller {
                 $minutes = Carbon::now()->addMinutes(1);
 
 
-                $OrgTypes = Cache::remember('organization_category', $minutes, function () {
+                $OrgTypes = Cache::remember('organization_category_filter', $minutes, function () {
                     return DB::table('organization_category')->select('id', 'type','checked')->get();
                     //return DB::table('groups')->select('id', 'name')->get()->skip(1);
                 });
 
-                $EventTypes = Cache::remember('event_category', $minutes, function () {
+                $EventTypes = Cache::remember('event_category_filter', $minutes, function () {
                     return DB::table('event_category')->select('id', 'type', 'checked')->get();
                     //return DB::table('groups')->select('id', 'name')->get()->skip(1);
                 });
