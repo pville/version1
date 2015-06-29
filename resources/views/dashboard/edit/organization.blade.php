@@ -149,6 +149,28 @@
     <script type="text/javascript">
         $(function () {
 
+            $(document).ready(function() {
+
+
+                setSelected('org_cat', {{ $org->category }});
+                setSelected('state', {{ $org->state }});
+
+            });
+
+            function setSelected(elm, val) {
+                var dl = document.getElementById(elm);
+
+                var index =0;
+                for (var i=0; i<dl.options.length; i++){
+                    if (dl.options[i].value == val){
+                        index=i;
+                        break;
+                    }
+                }
+                dl.selectedIndex = index;
+
+            }
+
             $("#image").fileinput({
                 maxFileCount: 1,
                 allowedFileTypes: ['image'],
