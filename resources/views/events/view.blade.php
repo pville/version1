@@ -74,6 +74,7 @@
                             <li><span>End</span>{{$event->FriendlyDate($event->end_time) }}</li>
                             <li><span>Timing</span>{{ $event->start_time->hour }}:{{ $event->start_time->minute }} - {{ $event->end_time->hour }}:{{ $event->end_time->minute }}</li>
                             <li><span>Event Category</span>{{ $event->getEventType() }}</li>
+                            <!--<li><span>Event Tags</span>Family</li>-->
                             <li><span>Website</span><a href="{{ $event->organization->url }}" target="_blank">{{ $event->organization->url }}</a></li>
                         </ul>
                         @if(Auth::check())
@@ -121,7 +122,7 @@
                     @if($user->role == "volunteer")
                         <div class="profile">
                             <h3> My Profile</h3>
-                            <img src="{{ asset('images/man-profile.png') }} " alt="">
+                            <!--<img src="{{ asset('images/man-profile.png') }} " alt="">-->
                             <p>{{$user->first_name}} {{$user->last_name}}</p>
 
                             @if($user->IsMember())

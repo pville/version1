@@ -10,8 +10,8 @@
                 <div class="col-md-4 col-sm-4">
                     <div class="boxradwrap extra">
                         <div class="orgProfile">
-                            <div class="orgProfileImg"><img src="{{ asset('images/orgthumb.jpg') }}" alt="" /></div>
-                            <a class="addPhotobtn" >Add Photo</a>
+                            <!--<div class="orgProfileImg"><img src="{{ asset('images/orgthumb.jpg') }}" alt="" /></div>
+                            <a class="addPhotobtn" >Add Photo</a>-->
 
                             <h2>{{$user->first_name}} {{$user->last_name}}</h2>
 
