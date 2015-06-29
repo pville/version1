@@ -94,7 +94,7 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="upcomingEvents">
+                                <div role="tabpanel" class="tab-pane active" id="upcoming">
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
@@ -133,7 +133,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="compcoming">
+                                <div role="tabpanel" class="tab-pane" id="completed">
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
