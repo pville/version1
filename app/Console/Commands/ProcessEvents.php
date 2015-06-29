@@ -66,6 +66,28 @@ class ProcessEvents extends Command
                 $Event->save();
             }
         }
+
+
+        // Process the event.
+        $Events = Event::Where('status', '=', 'processing')->get();
+
+        if(!$Events->isEmpty() ) {
+
+            foreach($Events as $Event)
+            {
+                $Event->status = "completed";
+                $Event->save();
+
+                $Users = Attendance::where('event_id', '=', $Event->id)->where('checked_in', '=', true)->get();
+
+                foreach($Users as $User) {
+
+                    $User->volunteer->current_credits = $User->volunteer->current_credits + $Event->credits;
+                    $User->save();
+
+                }
+            }
+        }
     }
 
 
