@@ -30,7 +30,11 @@
                                                 <li>
                                                     <img src="{{ asset('images/icons/organization/' . $OType->id . '.jpg') }}" alt="" />
                                                     <span>{{ $OType->type }}</span>
-                                                    <input id="{{ $OType->id }}" name="{{ $OType->id }}" type="checkbox" value="{{ $OType->id }}">
+                                                    <input id="{{ $OType->id }}" name="{{ $OType->id }}" type="checkbox" value="{{ $OType->id }}"
+                                                            @if($OType->checked)
+                                                           checked
+                                                            @endif
+                                                            >
                                                     <label class="checkbox" for="{{ $OType->type }}">&nbsp;</label>
                                                 </li>
 
@@ -48,7 +52,11 @@
                                                 <li>
                                                     <img src="{{ asset('images/icons/events/' . $EType->id . '.jpg') }}" alt="" />
                                                     <span>{{ $EType->type }}</span>
-                                                    <input id="{{ $EType->id }}" name="{{ $EType->id }}" type="checkbox" value="{{ $EType->id }}">
+                                                    <input id="{{ $EType->id }}" name="{{ $EType->id }}" type="checkbox" value="{{ $EType->id }}"
+                                                    @if($EType->checked)
+                                                           checked
+                                                            @endif
+                                                            >
                                                     <label class="checkbox" for="{{ $EType->type }}">&nbsp;</label>
                                                 </li>
                                                 @endforeach
@@ -110,4 +118,6 @@
         </div>
     </section>
 
+
 @endsection
+

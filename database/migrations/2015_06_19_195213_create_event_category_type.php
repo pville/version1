@@ -15,6 +15,7 @@ class CreateEventCategoryType extends Migration
         Schema::create('event_category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
+            $table->boolean('checked')->default(false);
         });
     }
 

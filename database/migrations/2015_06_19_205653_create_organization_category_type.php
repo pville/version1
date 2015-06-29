@@ -15,6 +15,7 @@ class CreateOrganizationCategoryType extends Migration
         Schema::create('organization_category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
+            $table->boolean('checked')->default(false);
         });
     }
 

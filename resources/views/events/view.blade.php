@@ -74,7 +74,6 @@
                             <li><span>End</span>{{$event->FriendlyDate($event->end_time) }}</li>
                             <li><span>Timing</span>{{ $event->start_time->hour }}:{{ $event->start_time->minute }} - {{ $event->end_time->hour }}:{{ $event->end_time->minute }}</li>
                             <li><span>Event Category</span>{{ $event->getEventType() }}</li>
-                            <li><span>Event Tags</span>Family</li>
                             <li><span>Website</span><a href="{{ $event->organization->url }}" target="_blank">{{ $event->organization->url }}</a></li>
                         </ul>
                         @if(Auth::check())
@@ -84,6 +83,14 @@
                                 @elseif($event->status == "pending" || $event->status == "started")
                                     <a class="edit-event" href="{{ url( Request::url() . '/edit') }}">Edit Event</a>
                                     <a class="edit-event" href="{{ url(Request::url() . '/roster') }}" >Event Roster</a>
+                                @endif
+                            @endif
+
+                            @if($user->role == "admin" )
+                                @if($event->featured == false)
+                                        <a class="edit-event" href="{{ url(Request::url() . '/featured') }}" >Make Featured Event</a>
+                                @else
+                                        <a class="edit-event" href="{{ url(Request::url() . '/featured') }}" >Remove Featured Event</a>
                                 @endif
                             @endif
                         @endif
@@ -147,9 +154,9 @@
                                     @foreach($upcoming as $nextEvent)
                                     <li>
                                         <span>
-                                            <img src="{{ asset('images/up-events-1.png') }} ">
+                                            <img src="{{ asset('images/events/' . $nextEvent->id. '.jpg')  }} ">
                                         </span>
-                                        <p><a href="{{ url('/' . $event->organization->slug . '/events/' . $nextEvent->slug) }} ">}{{ $nextEvent->name }}</a><span>{{ $nextEvent->start_time }}</span></p>
+                                        <p><a href="{{ url('/' . $event->organization->slug . '/events/' . $nextEvent->slug) }} ">{{ $nextEvent->name }}</a><span>{{ $nextEvent->start_time }}</span></p>
                                      </li>
                                     @endforeach
                                 </ul>

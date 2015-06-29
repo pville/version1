@@ -3,9 +3,11 @@
 use Auth;
 use App\ScreeningData;
 use App\User;
+use App\Event;
 use App\Organization;
 use App\Group;
 use App\Notification;
+use App\Attendance;
 use Illuminate\Http\Request;
 use Redirect;
 use Validator;
@@ -49,9 +51,90 @@ class DashboardController extends Controller {
 
             $Notifications =  Notification::where('user_id','=', $user->id)->select('id','message','created_at')->get();
 
-            if($user->role == "volunteer")
-                return view('dashboard.volunteer')->with(compact('user', $user))->with(compact('Notifications', $Notifications));
+            if($user->role == "volunteer") {
+                // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
+                $Upcoming =  DB::table('event')
+                    ->join('attendance', function($join)
+                    {
+                        $user = Auth::user();
+                        $join->on('event.id', '=', 'attendance.event_id')
+                            ->where('attendance.user_id', '=', $user->id)
+                            ->where('attendance.checked_in', '=', false)
+                            ->where('event.status', '=', 'pending');
+                    })
+                    ->orderBy('start_time','desc')
+                    ->get();
 
+
+
+                $UpcomingEvents = null;
+
+                if(count($Upcoming) > 0) {
+
+                    $index = 0;
+                    foreach($Upcoming as $next) {
+
+                        if($index == 0) {
+                            $UpcomingEvents = Event::Where('id', '=', $next->id);
+                            $index++;
+                        }
+                        else {
+                            $UpcomingEvents->orWhere('id','=',$next->id);
+                        }
+
+                    }
+                }
+
+                if(!is_null($UpcomingEvents)) {
+                    $UpcomingEvents = $UpcomingEvents->get();
+
+                }
+
+                // Completed
+
+
+                $Completed =  DB::table('event')
+                    ->join('attendance', function($join)
+                    {
+                        $user = Auth::user();
+                        $join->on('event.id', '=', 'attendance.event_id')
+                            ->where('attendance.user_id', '=', $user->id)
+                            ->where('attendance.checked_in', '=', true)
+                            ->where('event.status', '=', 'completed');
+                    })
+                    ->orderBy('start_time','desc')
+                    ->get();
+
+
+
+                $CompletedEvents = null;
+
+                if(count($Completed) > 0) {
+
+                    $index = 0;
+                    foreach($Completed as $next) {
+
+                        if($index == 0) {
+                            $CompletedEvents = Event::Where('id', '=', $next->id);
+                            $index++;
+                        }
+                        else {
+                            $CompletedEvents->orWhere('id','=',$next->id);
+                        }
+
+                    }
+                }
+
+                if(!is_null($CompletedEvents)) {
+                    $CompletedEvents = $CompletedEvents->get();
+
+                }
+                return view('dashboard.volunteer')
+                    ->with(compact('user', $user))
+                    ->with(compact('UpcomingEvents', $UpcomingEvents))
+                    ->with(compact('CompletedEvents', $CompletedEvents))
+                    ->with(compact('Notifications', $Notifications));
+            }
             else if ($user->role == "group") {
 
                 if($user->status == "pending")
@@ -61,9 +144,15 @@ class DashboardController extends Controller {
                     return redirect(url("/logout"));
 
 
+
+
                 $Members = User::where('group_id', '=', $user->group_id)->where('role','=','volunteer')->paginate(15);
 
                 $Members->setPath('/dashboard');
+
+                $Notifications =  Notification::where('user_id','=', $user->id)->select('id','message','created_at')->get();
+
+                // Attendance::Where('user_id','=', $user->id)->Where('checked_in', '=', false)->get();
 
 
 
@@ -77,7 +166,25 @@ class DashboardController extends Controller {
                 if($user->status == "denied")
                     return redirect(url("/logout"));
 
-                return view('dashboard.organization', compact('user', $user));
+                $Notifications =  Notification::where('user_id','=', $user->id)->select('id','message','created_at')->get();
+                $UpcomingEvents =  Event::Where('organization_id', '=', $user->organization->id)
+                    ->where('status', '=', 'pending')
+                    ->orderBy('start_time','desc')
+                    ->get();
+
+                $CompletedEvents = Event::Where('organization_id', '=', $user->organization->id)
+                    ->where('status', '=', 'completed')
+                    ->orderBy('start_time','desc')
+                    ->get();
+
+
+
+                return view('dashboard.organization')
+                    ->with(compact('user', $user))
+                    ->with(compact('UpcomingEvents', $UpcomingEvents))
+                    ->with(compact('CompletedEvents', $CompletedEvents))
+                    ->with(compact('Notifications', $Notifications));
+
             }
             else if($user->role == "admin") {
                 $Members = User::whereRaw("users.status = 'pending' AND ( users.role = 'organization' OR users.role = 'group' )")->paginate(15);
@@ -122,6 +229,15 @@ class DashboardController extends Controller {
 
     }
 
+    public function getRules() {
+
+        if(Auth::check()) {
+            $user = Auth::user();
+
+
+        }
+
+    }
     public function postFilterEvents(Request $request) {
 
         if(Auth::check()) {
@@ -190,26 +306,55 @@ class DashboardController extends Controller {
         if(Auth::check()) {
             $user = Auth::user();
 
-            if($user->role == "group"){
+            if($user->role == "group") {
 
                 $minutes = Carbon::now()->addMinutes(1);
 
 
-
-                $OrgTypes = Cache::remember('organization_category', $minutes, function()
-                {
-                    return DB::table('organization_category')->select('id', 'type')->get();
+                $OrgTypes = Cache::remember('organization_category', $minutes, function () {
+                    return DB::table('organization_category')->select('id', 'type','checked')->get();
                     //return DB::table('groups')->select('id', 'name')->get()->skip(1);
                 });
 
-                $EventTypes = Cache::remember('event_category', $minutes, function()
-                {
-                    return DB::table('event_category')->select('id', 'type')->get();
+                $EventTypes = Cache::remember('event_category', $minutes, function () {
+                    return DB::table('event_category')->select('id', 'type', 'checked')->get();
                     //return DB::table('groups')->select('id', 'name')->get()->skip(1);
                 });
 
+                if($user->group->org_rules != '') {
+                    foreach (json_decode($user->group->org_rules) as $Org) {
+
+                        foreach($OrgTypes as $OrgObj)
+                        {
 
 
+                            if($OrgObj->id == intval($Org))
+                              $OrgObj->checked = true;
+
+                        }
+
+                    }
+
+
+                }
+
+
+                if($user->group->event_rules != '') {
+                    foreach (json_decode($user->group->event_rules) as $Ev) {
+
+                        foreach($EventTypes as $EvObj)
+                        {
+
+
+                            if($EvObj->id == intval($Ev))
+                                $EvObj->checked = true;
+
+                        }
+
+                    }
+
+
+                }
                 return view("dashboard.settings.rules")->with(compact('user', $user))->with(compact("OrgTypes",$OrgTypes))->with(compact("EventTypes",$EventTypes));
             }
         }
@@ -255,18 +400,15 @@ class DashboardController extends Controller {
     public function getUpdate($type, array $data)
     {
         if($type == "Volunteer") return false;
-        //else if($type == "group") return $this->GroupUpdate($data);
+        else if($type == "group") return $this->GroupUpdate($data);
         else if($type == "organization") return $this->OrgUpdate($data);
     }
 
     public function GroupValidator(array $data) {
 
         return Validator::make($data, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-            'phone_number' => 'required|max:20',
+
+            'group_phone_number' => 'required|max:20',
             'group_name' => 'required|max:255',
             'group_type' => 'required|integer|exists:group_types,id',
             'group_email' => 'required|email|max:255',
@@ -292,6 +434,34 @@ class DashboardController extends Controller {
         ]);
     }
 
+    public function GroupUpdate(array $data) {
+
+        $user = Auth::user();
+
+
+
+        $Group = Group::find($user->group->id);
+        $Group->name = $data['group_name'];
+        $Group->type = $data['group_type'];
+        $Group->target_credits = $data['group_credits'];
+        $Group->state = $data['state'];
+        $Group->city = $data['group_city'];
+        $Group->zipcode = $data['group_zipcode'];
+        $Group->address = $data['group_address'];
+        $Group->phone = $data['group_phone_number'];
+        $Group->email = $data['group_email'];
+
+
+
+
+
+        $Group->save();
+
+
+
+
+        return $Group;
+    }
 
     public function OrgUpdate(array $data) {
 
@@ -329,11 +499,21 @@ class DashboardController extends Controller {
                 return view('dashboard.volunteer', compact('user', $user));
 
             else if ($user->role == "group") {
-                $Members = User::where('group_id', '=', $user->group->id)->where('role','=','volunteer')->paginate(15);
+                //$Members = User::where('group_id', '=', $user->group->id)->where('role','=','volunteer')->paginate(15);
 
-                $Members->setPath('/dashboard');
+                //$Members->setPath('/dashboard');
 
-                return view('dashboard.group')->with(compact('user', $user))->with(compact('Members', $Members));
+                $minutes = Carbon::now()->addMinutes(30);
+
+
+                // use a cache to reduce mysql queries
+                $group_types = Cache::remember('group_types', $minutes, function()
+                {
+                    return DB::table('group_types')->select('id', 'type')->get();
+                });
+
+
+                return view('dashboard.edit.group')->with(compact('user', $user))->with(compact('group_types',$group_types));//->with(compact('Members', $Members));
             }
 
             else if ($user->role == "organization") {

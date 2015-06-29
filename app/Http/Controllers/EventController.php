@@ -8,6 +8,7 @@ use Input;
 use Validator;
 use App\Organization;
 use App\Attendance;
+
 use App\Notification;
 use App\Volunteer;
 use Redirect;
@@ -46,7 +47,8 @@ class EventController extends Controller {
 
     public function getEvents() {
 
-        $Events = null;
+        $Events = Event::Where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
+        $Featured = null;
 
         if(Auth::check()) {
 
@@ -55,8 +57,25 @@ class EventController extends Controller {
             if($user->IsMember()) {
 
                 $Events = $this->getRuleFilter($Events);
-    
-                $Events = $Events->paginate(6);
+
+                if(!is_null($Events))
+                    $Events = $Events->paginate(6);
+                else
+                    $Events = Event::paginate(6);
+
+
+                $Featured = Event::Where('featured','=', true);
+
+                //$Featured = $this->getRuleFilter($Featured);
+                $Featured = $Featured->get();
+
+                // limit this to one for now.
+                if(!$Featured->IsEmpty() ) {
+
+                    $Featured =  $Featured[0];
+                }
+
+
             }
             else
             {
@@ -92,7 +111,8 @@ class EventController extends Controller {
 
 
 
-        return view("events.grid")->with(compact('Events', $Events))->with(compact("EventTypes", $EventTypes))->with(compact("OrgTypes",$OrgTypes))->with(compact('location', $location));
+
+        return view("events.grid")->with(compact('Events', $Events))->with(compact("Featured", $Featured))->with(compact("EventTypes", $EventTypes))->with(compact("OrgTypes",$OrgTypes))->with(compact('location', $location));
     }
 
     public function postFilterEvents(Request $request) {
@@ -178,23 +198,29 @@ class EventController extends Controller {
 
             if($user->IsMember()) {
 
-                $org_rules = json_decode($user->group->org_rules);
 
-                foreach($org_rules as $rule) {
-                   if(is_null($Query)) {
-                       $Query = Event::Where('org_category', '!=', $rule);
-                   }
-                   else
-                        $Query->where('org_category', '!=', $rule);
+
+                if($user->group->org_rules !== '') {
+
+                    $org_rules = json_decode($user->group->org_rules);
+
+                    foreach ($org_rules as $rule) {
+                        if (is_null($Query)) {
+                            $Query = Event::Where('org_category', '!=', $rule);
+                        } else
+                            $Query->where('org_category', '!=', $rule);
+                    }
                 }
 
-                $event_rules = json_decode($user->group->event_rules);
+                if($user->group->event_rules !== '') {
+                    $event_rules = json_decode($user->group->event_rules);
 
-                foreach($event_rules as $rule)
-                    $Query->where('category', '!=', $rule);
+                    foreach ($event_rules as $rule)
+                        $Query->where('category', '!=', $rule);
 
 
-                return $Query;
+                    return $Query;
+                }
             }
 
         }
@@ -204,6 +230,45 @@ class EventController extends Controller {
         return $Query;
 
     }
+
+    public function toggleFeatured( $OrganizationSlug, $EventSlug )
+    {
+
+        $org = Organization::findBySlug($OrganizationSlug);
+
+        if (!is_null($org)) {
+            $event = Event::findBySlug($EventSlug);
+
+
+            if (!is_null($event)) {
+
+
+                if (Auth::check()) {
+                    $user = Auth::user();
+
+                    if($user->role == "admin") {
+
+                        if($event->featured == false) {
+                            $event->featured = true;
+                            $event->save();
+                        }
+                        else {
+                            $event->featured = false;
+                            $event->save();
+                        }
+
+                        Toast::success('Event featured has been toggled.', 'Success!');
+
+                        return redirect(url(Request::url()));
+                    }
+                }
+            }
+
+        }
+
+        return redirect(url("/"));
+    }
+
     public function getRoster($OrganizationSlug, $EventSlug) {
 
 

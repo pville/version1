@@ -49,6 +49,7 @@ Route::post('{OrganizationSlug}/events/{EventSlug}/roster', ['uses' => 'EventCon
 
 Route::get('{OrganizationSlug}/events/{EventSlug}/complete', ['uses' => 'EventController@getComplete']);
 
+Route::get('{OrganizationSlug}/events/{EventSlug}/featured', ['uses' => 'EventController@toggleFeatured']);
 
 Route::get('/events/create', 'EventController@getCreateEvent');
 Route::post('/events/create', 'EventController@postCreateEvent');

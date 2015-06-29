@@ -12,6 +12,8 @@
 
             document.getElementById('groupid').style.display = 'none';
             document.getElementById("credits").readOnly = true;
+            document.getElementById('group_idHidden').disabled = false;
+            document.getElementById('group_id').disabled = true;
             $("#account_student").removeClass('selected');
             $("#account_default").removeClass('selected');
             $("#account_court").removeClass('selected');
@@ -40,6 +42,10 @@
                     $("#group_type").val("1");
                     document.getElementById("credits").value = "0";
                     document.getElementById("credits").readOnly = true;
+
+                    document.getElementById('group_idHidden').disabled = true;
+                    document.getElementById('group_id').disabled = false;
+
                     $("#account_student").removeClass('selected');
                     $("#account_default").removeClass('selected');
                     $("#account_court").removeClass('selected');
@@ -74,6 +80,9 @@
             $("#group_type").val("1");
 
             document.getElementById("credits").readOnly = false;
+
+            document.getElementById('group_idHidden').disabled = true;
+            document.getElementById('group_id').disabled = false;
             $("#account_student").removeClass('selected');
             $("#account_default").removeClass('selected');
             $("#account_court").removeClass('selected');
@@ -192,6 +201,7 @@
                                     <div class="col-md-12 col-sm-12 green-btn-outer">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="select-style">
+                                            <input id="group_idHidden"  type="hidden" value="1" name="group_id">
                                             <select class="form-control" id="group_id" name="group_id"/>
 
                                             </select>

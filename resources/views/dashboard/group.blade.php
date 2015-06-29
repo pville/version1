@@ -79,7 +79,7 @@
                                 <li><img src="images/univer_chart_icon.jpg" alt="" />{{ $user->group->email }}</li>
                                 <li><img src="images/univer_lock_icon.jpg" alt="" />U.S Permitted University</li>
                             </ul>
-                           <a class="uniEdit" href="#">EDIT</a>
+                           <a class="uniEdit" href="{{ url("/dashboard/edit") }}">EDIT</a>
                         </div>
                     </div>
 
