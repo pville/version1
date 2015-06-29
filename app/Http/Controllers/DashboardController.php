@@ -517,8 +517,25 @@ class DashboardController extends Controller {
             }
 
             else if ($user->role == "organization") {
+
                 $org = $user->organization;
-                return view('dashboard.edit.organization')->with(compact('user', $user))->with(compact('org',$org));
+
+                $minutes = Carbon::now()->addMinutes(1);
+
+
+
+                $OrgTypes = Cache::remember('organization_category', $minutes, function()
+                {
+                    return DB::table('organization_category')->select('id', 'type')->get();
+                    //return DB::table('groups')->select('id', 'name')->get()->skip(1);
+                });
+
+
+
+                return view('dashboard.edit.organization')
+                    ->with(compact('user', $user))
+                    ->with(compact('org',$org))
+                    ->with(compact("OrgTypes",$OrgTypes));
             }
         }
 
