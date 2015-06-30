@@ -51,32 +51,16 @@ class EventController extends Controller {
         $Events->setPath('/events');
         $Featured = null;
 
-        if(Auth::check()) {
+        $Featured = Event::Where('featured', '=', true);
 
-            $user = Auth::user();
+        //$Featured = $this->getRuleFilter($Featured);
+        $Featured = $Featured->get();
 
-            if ($user->IsMember()) {
+        // limit this to one for now.
+        if (!$Featured->IsEmpty()) {
 
-
-                //$Events = $Events->Where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
-
-
-                $Featured = Event::Where('featured', '=', true);
-
-                //$Featured = $this->getRuleFilter($Featured);
-                $Featured = $Featured->get();
-
-                // limit this to one for now.
-                if (!$Featured->IsEmpty()) {
-
-                    $Featured = $Featured[0];
-                }
-
-
-            }
+            $Featured = $Featured[0];
         }
-
-
 
         $location = GeoIP::getLocation();
 
@@ -101,7 +85,12 @@ class EventController extends Controller {
 
 
 
-        return view("events.grid")->with(compact('Events', $Events))->with(compact("Featured", $Featured))->with(compact("EventTypes", $EventTypes))->with(compact("OrgTypes",$OrgTypes))->with(compact('location', $location));
+        return view("events.grid")
+            ->with(compact('Events', $Events))
+            ->with(compact("Featured", $Featured))
+            ->with(compact("EventTypes", $EventTypes))
+            ->with(compact("OrgTypes",$OrgTypes))
+            ->with(compact('location', $location));
     }
 
     public function postFilterEvents(Request $request) {
@@ -145,7 +134,16 @@ class EventController extends Controller {
 
         $minutes = Carbon::now()->addMinutes(1);
 
+        $Featured = Event::Where('featured', '=', true);
 
+        //$Featured = $this->getRuleFilter($Featured);
+        $Featured = $Featured->get();
+
+        // limit this to one for now.
+        if (!$Featured->IsEmpty()) {
+
+            $Featured = $Featured[0];
+        }
 
         $EventTypes = Cache::remember('event_category', $minutes, function()
         {
@@ -159,12 +157,17 @@ class EventController extends Controller {
             //return DB::table('groups')->select('id', 'name')->get()->skip(1);
         });
 
-        return view("events.grid")->with(compact('Events', $Events))->with(compact("EventTypes", $EventTypes))->with(compact("OrgTypes",$OrgTypes))->with(compact('location', $location));
+        return view("events.grid")
+            ->with(compact('Events', $Events))
+            ->with(compact("Featured", $Featured))
+            ->with(compact("EventTypes", $EventTypes))
+            ->with(compact("OrgTypes",$OrgTypes))
+            ->with(compact('location', $location));
     }
 
     public function getRuleFilter() {
 
-        $Events = Event::Where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
+        $Events = Event::Where('status', '!=', 'ended')->Where('status','!=', 'completed');
 
         if(Auth::check()) {
 
@@ -173,25 +176,30 @@ class EventController extends Controller {
             if($user->IsMember()) {
 
 
-
                 if($user->group->org_rules !== '') {
+
 
                     $org_rules = json_decode($user->group->org_rules);
 
                     foreach ($org_rules as $rule) {
-                         $Events->where('org_category', '!=', $rule);
+                        $Events->Where('org_category', '!=', $rule);
                     }
+
+
                 }
 
                 if($user->group->event_rules !== '') {
                     $event_rules = json_decode($user->group->event_rules);
 
                     foreach ($event_rules as $rule)
-                        $Events->where('category', '!=', $rule);
-
-
-                    return $Events;
+                        $Events->Where('category', '!=', $rule);
                 }
+
+
+
+
+                return $Events;
+
             }
 
         }
