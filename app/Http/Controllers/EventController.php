@@ -47,49 +47,36 @@ class EventController extends Controller {
 
     public function getEvents() {
 
-        $Events = null;
+        $Events = $this->getRuleFilter()->paginate(6);
+        $Events->setPath('/events');
         $Featured = null;
 
         if(Auth::check()) {
 
             $user = Auth::user();
 
-            if($user->IsMember()) {
-
-                $Events = $this->getRuleFilter($Events);
-
-                $Events = $Events->where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
-
-                if(!is_null($Events))
-                    $Events = $Events->paginate(6);
-                else
-                    $Events = Event::paginate(6);
+            if ($user->IsMember()) {
 
 
-                $Featured = Event::Where('featured','=', true);
+                //$Events = $Events->Where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
+
+
+                $Featured = Event::Where('featured', '=', true);
 
                 //$Featured = $this->getRuleFilter($Featured);
                 $Featured = $Featured->get();
 
                 // limit this to one for now.
-                if(!$Featured->IsEmpty() ) {
+                if (!$Featured->IsEmpty()) {
 
-                    $Featured =  $Featured[0];
+                    $Featured = $Featured[0];
                 }
 
 
             }
-            else
-            {
-                $Events = Event::paginate(6);
-            }
-        }
-        else {
-
-            $Events = Event::paginate(6);
         }
 
-        $Events->setPath('/events');
+
 
         $location = GeoIP::getLocation();
 
@@ -121,7 +108,7 @@ class EventController extends Controller {
 
         $data = $request->all();
 
-        $Events = null;
+        $Events = $this->getRuleFilter();
 
         $credits = intval($data["credits"]);
         $event = intval($data["event"]);
@@ -131,42 +118,25 @@ class EventController extends Controller {
 
         if( $credits > 0 )
         {
-            $Events = Event::Where("credits", "=", $credits);
+            $Events->where("credits", "=", $credits);
 
         }
 
         if( $event > 0 ) {
 
-            if (is_null($Events))
-            {
-                $Events = Event::Where("category", "=", $event);
-            }
-            else{
-
-                $Events->where("category", "=", $event);
-            }
+            $Events->where("category", "=", $event);
 
         }
 
         if( $org > 0 ) {
 
-            if (is_null($Events))
-            {
-                $Events = Event::Where("org_category", "=", $org);
-            }
-            else{
 
                 $Events->where("org_category", "=", $org);
-            }
 
         }
 
-        $this->getRuleFilter($Events);
+        $Events = $Events->paginate(6);
 
-        if (is_null($Events))
-            $Events = Event::paginate(6);
-        else
-            $Events = $Events->paginate(6);
 
 
         //$Events->setPath('/events');
@@ -192,7 +162,9 @@ class EventController extends Controller {
         return view("events.grid")->with(compact('Events', $Events))->with(compact("EventTypes", $EventTypes))->with(compact("OrgTypes",$OrgTypes))->with(compact('location', $location));
     }
 
-    public function getRuleFilter($Query) {
+    public function getRuleFilter() {
+
+        $Events = Event::Where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
 
         if(Auth::check()) {
 
@@ -207,10 +179,7 @@ class EventController extends Controller {
                     $org_rules = json_decode($user->group->org_rules);
 
                     foreach ($org_rules as $rule) {
-                        if (is_null($Query)) {
-                            $Query = Event::Where('org_category', '!=', $rule);
-                        } else
-                            $Query->where('org_category', '!=', $rule);
+                         $Events->where('org_category', '!=', $rule);
                     }
                 }
 
@@ -218,10 +187,10 @@ class EventController extends Controller {
                     $event_rules = json_decode($user->group->event_rules);
 
                     foreach ($event_rules as $rule)
-                        $Query->where('category', '!=', $rule);
+                        $Events->where('category', '!=', $rule);
 
 
-                    return $Query;
+                    return $Events;
                 }
             }
 
@@ -229,7 +198,7 @@ class EventController extends Controller {
 
 
 
-        return $Query;
+        return $Events;
 
     }
 
