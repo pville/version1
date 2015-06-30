@@ -58,7 +58,7 @@ class EventController extends Controller {
 
                 $Events = $this->getRuleFilter($Events);
 
-                $Events->where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
+                
 
                 if(!is_null($Events))
                     $Events = $Events->paginate(6);
