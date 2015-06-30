@@ -47,7 +47,7 @@ class EventController extends Controller {
 
     public function getEvents() {
 
-        $Events = Event::Where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
+        $Events = null;
         $Featured = null;
 
         if(Auth::check()) {
@@ -57,6 +57,8 @@ class EventController extends Controller {
             if($user->IsMember()) {
 
                 $Events = $this->getRuleFilter($Events);
+
+                $Events->where('status', '!=', 'ended')->orWhere('status','!=', 'completed');
 
                 if(!is_null($Events))
                     $Events = $Events->paginate(6);
