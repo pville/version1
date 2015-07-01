@@ -6,6 +6,10 @@
 
 @section('meta')
     <meta name="category" content="{{ $event->getEventType() }}">
+    <meta property="og:title" content="{{ $event->name }} - {{ $event->organization->name }}" />
+    <meta property="og:site_name" content="PleasantVille.co"/>
+    <meta property="og:description" content="{{ $event->description }}" />
+    <meta property="og:image" content="{{ asset('images/events/'. $event->id . '.jpg') }}" />
 @endsection
 
 @section('content')
