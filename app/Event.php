@@ -143,7 +143,7 @@ class Event extends \Eloquent implements SluggableInterface {
     }
 
     public function getGoogleMapURL() {
-         $Key = "AIzaSyAvDAy4bnVXZOU-nD_nvNfrgw2-yTLyYXk";
+         $Key = "AIzaSyAWeUYWoKit3C3NPy6HeUyMKIhgcO0PrA8";
 
          $Query = str_replace(' ', '+', $this->address) . "," . str_replace(' ', '+', $this->city) . "," . $this->state;
          $URL = "https://www.google.com/maps/embed/v1/place?key=" . $Key . "&q=" . $Query;
