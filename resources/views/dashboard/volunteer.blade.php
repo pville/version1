@@ -100,7 +100,7 @@
                                             @if($UpcomingEvents)
                                                 @foreach($UpcomingEvents as $NextEvent)
 
-                                                    <div class="item">
+                                                    <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
                                                             <img src="{{ asset('images/events/' . $NextEvent->id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
@@ -119,9 +119,9 @@
                                                 @endforeach
                                             @endif
 
-
                                         </div>
-                                                    <!-- Controls -->
+
+                                        <!-- Controls -->
                                         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                                             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                             <span class="sr-only">Previous</span>
@@ -136,11 +136,10 @@
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
-                                            <div class="item active">
-                                                @if( $CompletedEvents )
+                                            @if( $CompletedEvents )
                                                 @foreach($CompletedEvents as $CNextEvent)
 
-                                                    <div class="item">
+                                                    <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
                                                             <img src="{{ asset('images/events/' . $CNextEvent->id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
@@ -157,8 +156,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                @endif
-                                            </div>
+                                            @endif
                                         </div>
 
                                         <!-- Controls -->
