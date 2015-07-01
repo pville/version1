@@ -458,6 +458,60 @@ class EventController extends Controller {
         return Redirect::to('/login ');
     }
 
+
+    public function postEditEvent($OrganizationSlug, $EventSlug, Request $request) {
+
+        $org = Organization::findBySlug($OrganizationSlug);
+
+        if(!is_null($org)) {
+            $event = Event::findBySlug($EventSlug);
+            if (!is_null($event)) {
+
+                if (Auth::check()) {
+                    $user = Auth::user();
+                    if ($user->role == "organization") {
+
+                        if ($user->organization->id == $event->organization_id) {
+
+                            $validator = $this->EditValidator($request->all());
+                            if ($validator->fails()) {
+                                $this->throwValidationException(
+                                    $request, $validator
+                                );
+                            }
+
+                            return $this->Edit($event, $request);
+                        }
+                    }
+                }
+            }
+        }
+
+        return redirect(url("/"));
+    }
+
+    public function EditValidator(array $data) {
+
+        return Validator::make($data, [
+            'image' => 'image|mimes:jpeg,png',
+            'title' => 'required|max:255',
+            'desc' => 'required|max:1000',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|max:20',
+            'start' => 'required|date_format:m/d/Y H:i A',
+            'end' => 'required|date_format:m/d/Y H:i A',
+            'event_type' => 'required|exists:event_category,id',
+            'state' => 'required|exists:states,abbreviation',
+            'city' => 'required|string|max:50',
+            'zipcode' => 'required|string|max:25',
+            'address' => 'required|string|max:255',
+            'credits' => 'required|integer',
+            'age' => 'required|integer|min:0|max:1',
+
+        ]);
+
+    }
+
     public function postCreateEvent(Request $request) {
 
         $validator = $this->validator($request->all());
@@ -473,6 +527,40 @@ class EventController extends Controller {
         //return redirect($this->redirectPath);
     }
 
+    public function Edit(Event $Event, Request $request)
+    {
+        $data = $request->all();
+        // get the timezone based on the state
+        $tz = $this->getTimeZoneFromState($data['state']);
+
+        // convert this to server time.
+        $start = $this->ConvertTimeToUTC($data['start'], $tz);
+        $end = $this->ConvertTimeToUTC($data['end'], $tz);
+
+        $user = Auth::user();
+
+        $Event->name = $data['title'];
+        $Event->start_time = $start;
+        $Event->end_time = $end;
+        $Event->credits = $data["credits"];
+        $Event->description = $data['desc'];
+        $Event->age_requirement = $data['age'];
+        $Event->city = $data['city'];
+        $Event->state = $data['state'];
+        $Event->zipcode = $data['zipcode'];
+        $Event->address = $data['address'];
+        $Event->org_category = $user->organization->category;
+        $Event->category = $data["event_type"];
+        $Event->phone = $data['phone'];
+        $Event->email = $data['email'];
+
+        $Event->resluggify();
+        $Event->save();
+
+
+
+        return redirect(url('/' .$Event->organization->slug . '/events/'. $Event->slug));
+    }
 
     public function validator(array $data) {
 

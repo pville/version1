@@ -50,6 +50,11 @@ Route::post('{OrganizationSlug}/events/{EventSlug}/roster', ['uses' => 'EventCon
 
 Route::get('{OrganizationSlug}/events/{EventSlug}/edit', ['uses' => 'EventController@getEditEvent']);
 
+Route::post('{OrganizationSlug}/events/{EventSlug}/edit', function($OrganizationSlug, $EventSlug,  Illuminate\Http\Request $request) {
+    $app = app();
+    $controller = $app->make('App\Http\Controllers\EventController');
+    return $controller->callAction('postEditEvent', $parameters = array($OrganizationSlug, $EventSlug, $request));
+});
 
 
 Route::get('{OrganizationSlug}/events/{EventSlug}/complete', ['uses' => 'EventController@getComplete']);
