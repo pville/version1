@@ -323,6 +323,51 @@ class EventController extends Controller {
 
     }
 
+    public function getEditEvent($OrganizationSlug, $EventSlug) {
+
+        $org = Organization::findBySlug($OrganizationSlug);
+
+        if(!is_null($org))
+        {
+            $event = Event::findBySlug($EventSlug);
+            $upcoming  =  Event::Where('organization_id', '=', $org->id)->orderBy('start_time')->take(4)->get();
+
+            if(!is_null($event)){
+
+                if(Auth::check()) {
+                    $user = Auth::user();
+                    if($user->role == "organization") {
+
+                        if($user->organization->id == $event->organization_id) {
+
+                            $minutes = Carbon::now()->addMinutes(1);
+
+
+
+                            $EventTypes = Cache::remember('event_category', $minutes, function()
+                            {
+                                return DB::table('event_category')->select('id', 'type')->get();
+                                //return DB::table('groups')->select('id', 'name')->get()->skip(1);
+                            });
+
+
+
+                            return view('events.edit')
+                                ->with(compact('user', $user))
+                                ->with(compact('event', $event))
+                                ->with(compact("EventTypes",$EventTypes));
+
+                        }
+                    }
+
+                }
+
+
+            }
+        }
+        return redirect($this->redirectPath);
+    }
+
     public function getEvent($OrganizationSlug, $EventSlug) {
 
         $org = Organization::findBySlug($OrganizationSlug);
@@ -345,6 +390,8 @@ class EventController extends Controller {
         }
         return redirect($this->redirectPath);
     }
+
+
 
     public function postCheckIn($OrganizationSlug, $EventSlug, Request $request) {
 

@@ -67,4 +67,78 @@ class Event extends \Eloquent implements SluggableInterface {
 
         return DB::table('attendance')->where('event_id', '=', $this->id)->count();
     }
+
+    public function getStartDate() {
+        $dt = Carbon::createFromTimestamp( $this->start_date->timestamp );
+        $dt->timezone = $this->getTimeZoneFromState($this->state);
+
+    }
+
+
+    public function ConvertTimeToUTC($time, $timezone){
+        $localTime = Carbon::createFromFormat('m/d/Y H:i A', $time, $timezone);
+        return Carbon::createFromTimestamp($localTime->timestamp, config('app.timezone'));
+    }
+
+    public function ConvertTimeToLocal($time, $timezone) {
+
+        return Carbon::createFromTimestamp($time->timestamp, $timezone);
+    }
+    public function getTimeZoneFromState($state){
+
+        $TimeZones = array(
+            'ME' => 'US/Eastern',
+            'NH' => 'US/Eastern',
+            'MA' => 'US/Eastern',
+            'VT' => 'US/Eastern',
+            'RI' => 'US/Eastern',
+            'NY' => 'US/Eastern',
+            'CT' => 'US/Eastern',
+            'NJ' => 'US/Eastern',
+            'DE' => 'US/Eastern',
+            'MD' => 'US/Eastern',
+            'PA' => 'US/Eastern',
+            'WV' => 'US/Eastern',
+            'VA' => 'US/Eastern',
+            'NC' => 'US/Eastern',
+            'SC' => 'US/Eastern',
+            'GA' => 'US/Eastern',
+            'FL' => 'US/Eastern',
+            'OH' => 'US/Eastern',
+            'MI' => 'US/Eastern',
+            'IN' => 'US/Eastern',
+            'KY' => 'US/Eastern',
+            'WI' => 'US/Central',
+            'IL' => 'US/Central',
+            'TN' => 'US/Central',
+            'AL' => 'US/Central',
+            'MN' => 'US/Central',
+            'IA' => 'US/Central',
+            'MO' => 'US/Central',
+            'AR' => 'US/Central',
+            'MS' => 'US/Central',
+            'LA' => 'US/Central',
+            'ND' => 'US/Central',
+            'SD' => 'US/Central',
+            'NE' => 'US/Central',
+            'KS' => 'US/Central',
+            'OK' => 'US/Central',
+            'TX' => 'US/Central',
+            'MT' => 'US/Mountain',
+            'WY' => 'US/Mountain',
+            'CO' => 'US/Mountain',
+            'NM' => 'US/Mountain',
+            'ID' => 'US/Mountain',
+            'UT' => 'US/Mountain',
+            'AZ' => 'US/Mountain',
+            'WA' => 'America/Los_Angeles',
+            'OR' => 'America/Los_Angeles',
+            'NV' => 'America/Los_Angeles',
+            'CA' => 'America/Los_Angeles',
+            'AK' => 'US/Alaska',
+            'HI' => 'Pacific/Honolulu',
+        );
+
+        return $TimeZones[$state];
+    }
 }
