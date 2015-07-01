@@ -141,4 +141,13 @@ class Event extends \Eloquent implements SluggableInterface {
 
         return $TimeZones[$state];
     }
+
+    public function getGoogleMapURL() {
+         $Key = "AIzaSyAvDAy4bnVXZOU-nD_nvNfrgw2-yTLyYXk";
+
+         $Query = str_replace(' ', '+', $this->address) . "," . str_replace(' ', '+', $this->city) . "," . $this->state;
+         $URL = "https://www.google.com/maps/embed/v1/place?key=" . $Key . "&q=" . $Query;
+
+        return $URL;
+    }
 }

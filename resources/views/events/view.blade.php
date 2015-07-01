@@ -102,7 +102,9 @@
                         <span class="map-pin">{{ $event->city }}</span>
                         <span class="medical">{{ $event->address }}, {{$event->state }} {{$event->zipcode }} </span>
                         <span class="gp">+Google Map</span>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6307.674476944136!2d-122.41907853603836!3d37.77041442111432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1430304737780" width="300" height="250" frameborder="0" style="border:0"></iframe>
+
+
+                        <iframe src=" {{ $event->getGoogleMapURL() }}" width="300" height="250" frameborder="0" style="border:0"></iframe>
                     </div>
                     <div class="col-xs-12 col-sm-8 family">
                         <img src="{{ asset('images/events/'. $event->id . '.jpg') }}" height="219" width="326" alt="logo">
