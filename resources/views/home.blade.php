@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+
     <div id="slider_container">
 
         <!-- REVOLUTION SLIDER 3.0.2 fullwidth mode -->
@@ -285,4 +286,81 @@
         </div>
         </div>
     </section>
+
+@endsection
+
+@section('script')
+
+    <script type='text/javascript' src=" {{ asset('js/jquery.themepunch.revolution.min.js') }} "></script>
+    <script type="text/javascript">
+
+        var tpj=jQuery;
+
+
+        var revapi2;
+
+        tpj(document).ready(function() {
+
+            if (tpj.fn.cssOriginal != undefined)
+                tpj.fn.css = tpj.fn.cssOriginal;
+
+            if(tpj('#rev_slider_2_1').revolution == undefined)
+                revslider_showDoubleJqueryError('#rev_slider_2_1');
+            else
+                revapi2 = tpj('#rev_slider_2_1').show().revolution(
+                        {
+                            delay:9000,
+                            startwidth:1010,
+                            startheight:550,
+                            hideThumbs:200,
+
+                            thumbWidth:100,
+                            thumbHeight:50,
+                            thumbAmount:4,
+
+                            navigationType:"none",
+                            navigationArrows:"solo",
+                            navigationStyle:"round",
+
+                            touchenabled:"on",
+                            onHoverStop:"on",
+
+                            navigationHAlign:"center",
+                            navigationVAlign:"bottom",
+                            navigationHOffset:0,
+                            navigationVOffset:20,
+
+                            soloArrowLeftHalign:"left",
+                            soloArrowLeftValign:"center",
+                            soloArrowLeftHOffset:0,
+                            soloArrowLeftVOffset:0,
+
+                            soloArrowRightHalign:"right",
+                            soloArrowRightValign:"center",
+                            soloArrowRightHOffset:0,
+                            soloArrowRightVOffset:0,
+
+                            shadow:0,
+                            fullWidth:"on",
+                            fullScreen:"off",
+
+                            stopLoop:"off",
+                            stopAfterLoops:-1,
+                            stopAtSlide:-1,
+
+                            shuffle:"off",
+
+                            hideSliderAtLimit:0,
+                            hideCaptionAtLimit:0,
+                            hideAllCaptionAtLilmit:0,
+                            startWithSlide:0,
+                            videoJsPath:"http://designarethemes.com/themes/zapwp/wp-content/plugins/revslider/rs-plugin/videojs/",
+                            fullScreenOffsetContainer: ""
+                        });
+
+        });	//ready
+
+    </script>
+    <!-- END: REVOLUTION SLIDER -->
+
 @endsection

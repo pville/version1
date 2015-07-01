@@ -15,6 +15,10 @@
        
         <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+
+        <link rel='stylesheet' href=" {{ asset('css/settings.css') }} " type='text/css' media='all' />
+        <link rel='stylesheet'  href=" {{ asset('css/captions.css') }} " type='text/css' media='all' />
+
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('css/media.css') }}">
         <link rel="stylesheet" href="{{ asset('css/flat-ui.css') }}">
