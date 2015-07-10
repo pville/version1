@@ -52,9 +52,24 @@
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul>
-                                    <li><a class="w-nav-link menu-li" href="/#aboutus">What We Do</a></li>
-                                    <li><a class="w-nav-link menu-li" href="/events">Events</a></li>
-                                    <li><a class="w-nav-link menu-li" href="/#contactus">Contact Us</a></li>
+                                    @if(Auth::check())
+                                        @if(Auth::user()->role == "volunteer")
+
+                                            <li><a class="w-nav-link menu-li" href="{{ url('/events') }}">Search for Events</a></li>
+                                            <li><a class="w-nav-link menu-li" href="{{ url('/#contactus') }}">Contact Us</a></li>
+
+                                        @elseif(Auth::user()->role == "group")
+                                            <li><a class="w-nav-link menu-li" href="{{ url('/') }}">Home</a></li>
+                                            <li><a class="w-nav-link menu-li" href="{{ url('/#contactus') }}">Contact Us</a></li>
+                                        @elseif(Auth::user()->role == "organization")
+                                            <li><a class="w-nav-link menu-li" href="{{ url('/') }}">Home</a></li>
+                                            <li><a class="w-nav-link menu-li" href="{{ url('/#contactus') }}">Contact Us</a></li>
+                                        @endif
+                                    @else
+                                        <li><a class="w-nav-link menu-li" href="/#aboutus">What We Do</a></li>
+                                        <li><a class="w-nav-link menu-li" href="/events">Events</a></li>
+                                        <li><a class="w-nav-link menu-li" href="/#contactus">Contact Us</a></li>
+                                    @endif
               		@if (Auth::guest())
               		
                         <li class="signup"><a class="signupbtn" href="{{ url('/register') }}">Sign up</a><a class="loginbtn" href="{{ url('/login') }}">Log in</a></li>

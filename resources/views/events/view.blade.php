@@ -78,7 +78,7 @@
                             <li><span>End</span>{{$event->FriendlyDate($event->end_time) }}</li>
                             <li><span>Timing</span>{{ $event->start_time->hour }}:{{ $event->start_time->minute }} - {{ $event->end_time->hour }}:{{ $event->end_time->minute }}</li>
                             <li><span>Event Category</span>{{ $event->getEventType() }}</li>
-                            <!--<li><span>Event Tags</span>Family</li>-->
+                            <li><span>Profile</span><a href="{{ url('/profile/' . $event->organization->slug ) }}">{{ $event->organization->name }}</a></li>
                             <li><span>Website</span><a href="{{ $event->organization->url }}" target="_blank">{{ $event->organization->url }}</a></li>
                         </ul>
                         @if(Auth::check())

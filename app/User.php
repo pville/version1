@@ -53,7 +53,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
     public function IsMember()
     {
-         return !is_null($this->group_id);
+        $member = !is_null($this->group_id);
+
+        if ($member)
+        {
+            if($this->group_id == 0)
+                return false;
+
+            return true;
+        }
+
+        return false;
     }
 
     public function IsOrganization(){

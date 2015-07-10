@@ -98,39 +98,42 @@
             </div>
 
             <?php $index = 0; ?>
-            @foreach (array_chunk($Events->all(), 3) as $TEvents)
-                @if($index == 0)
-                    <div class="row first">
-                @else
-                    <div class="row">
-                @endif
-                 <?php $index++; ?>
-                @foreach($TEvents as $event)
-                <div class="col-md-4 col-sm-4"   data-appear-top-offset="-100" data-animated="fadeInLeft">
-                    <img src="{{ asset('images/events/' . $event->id. '.jpg') }}" alt="" />
-                    <div class="portfoliotxt">
-                        <h3>{{ $event->name }}</h3>
-                        <p>{{ $event->description }} </p>
-                        <ul>
-                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $event->getEventType() }}</li>
-                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $event->getAttending() }} persons going</li>
-                            <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $event->address  }}, {{ $event->city }}, {{ $event->state }}</li>
-                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $event->FriendlyDate($event->start_time) }}</li>
-                            <li><a href="{{ url( $event->organization->slug . '/events/' . $event->slug) }}">Read More</a></li>
-                        </ul>
+            @if($Events)
+                @foreach (array_chunk($Events->all(), 3) as $TEvents)
+                    @if($index == 0)
+                        <div class="row first">
+                    @else
+                        <div class="row">
+                    @endif
+                     <?php $index++; ?>
+                    @foreach($TEvents as $event)
+                    <div class="col-md-4 col-sm-4"   data-appear-top-offset="-100" data-animated="fadeInLeft">
+                        <img src="{{ asset('images/events/' . $event->id. '.jpg') }}" alt="" />
+                        <div class="portfoliotxt">
+                            <h3>{{ $event->name }}</h3>
+                            <p>{{ $event->description }} </p>
+                            <ul>
+                                <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $event->getEventType() }}</li>
+                                <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $event->getAttending() }} persons going</li>
+                                <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $event->address  }}, {{ $event->city }}, {{ $event->state }}</li>
+                                <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $event->FriendlyDate($event->start_time) }}</li>
+                                <li><a href="{{ url( $event->organization->slug . '/events/' . $event->slug) }}">Read More</a></li>
+                            </ul>
+                        </div>
+
                     </div>
+                            @endforeach
+                        </div>
+                    @endforeach
 
-                </div>
-                        @endforeach
-                    </div>
-                @endforeach
-
-
+            @endif
 
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="pagination">
-                        {!! $Events->render() !!}
+                        @if($Events)
+                            {!! $Events->render() !!}
+                        @endif
                     </div>
 
                 </div>

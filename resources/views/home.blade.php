@@ -42,7 +42,7 @@
                              data-speed="1300"
                              data-start="2000"
                              data-easing="easeInOutBack">
-                            <button class="btn01">SIGN UP NOW</button>			 								</div>
+                            <button onclick="window.location.href='{{ url('/register') }}'" class="btn01">SIGN UP NOW</button>			 								</div>
 
                         <!-- CAPTION #04 -->
                         <div class="tp-caption sfb"
@@ -51,7 +51,7 @@
                              data-speed="1300"
                              data-start="2000"
                              data-easing="easeInOutBack">
-                            <button class="btn02">Browse Events</button>			 					 			</div>
+                            <button onclick="window.location.href='{{ url('/events') }}'" class="btn02">Browse Events</button>			 					 			</div>
 
 
                     </li>
@@ -88,7 +88,7 @@
                              data-speed="1300"
                              data-start="2000"
                              data-easing="easeInOutBack">
-                            <button class="btn01">SIGN UP NOW</button>			 								</div>
+                            <button onclick="window.location.href='{{ url('/register') }}'" class="btn01">SIGN UP NOW</button>			 								</div>
 
                         <!-- CAPTION #04 -->
                         <div class="tp-caption sfb"
@@ -97,7 +97,7 @@
                              data-speed="1300"
                              data-start="2000"
                              data-easing="easeInOutBack">
-                            <button class="btn02">Browse Events</button>			 					 			</div>
+                            <button onclick="window.location.href='{{ url('/events') }}'" class="btn02">Browse Events</button>			 					 			</div>
 
 
                     </li>
@@ -134,7 +134,7 @@
                              data-speed="1300"
                              data-start="2000"
                              data-easing="easeInOutBack">
-                            <button class="btn01">SIGN UP NOW</button>			 								</div>
+                            <button onclick="window.location.href='{{ url('/register') }}'" class="btn01">SIGN UP NOW</button>			 								</div>
 
                         <!-- CAPTION #04 -->
                         <div class="tp-caption sfb"
@@ -143,7 +143,7 @@
                              data-speed="1300"
                              data-start="2000"
                              data-easing="easeInOutBack">
-                            <button class="btn02">Browse Events</button>			 					 			</div>
+                            <button onclick="window.location.href='{{ url('/events') }}'" class="btn02">Browse Events</button>			 					 			</div>
 
 
                     </li>
@@ -218,13 +218,13 @@
                 @foreach($Events as $event)
                     <div class="mask-area col-md-4 col-sm-4" data-appear-top-offset="-100" data-animated="fadeInLeft">
                         <a href=""><div class="mask"></div></a>
-                        <img src="{{ asset('images/events/' . $event->id. '.jpg') }}" height="147" width="220" alt="" />
+                        <img src="{{ asset('images/events/' . $event->id. '.jpg') }}" alt="" />
                         <div class="portfoliotxt">
                             <h3>{{ $event->name }}</h3>
                             <p>{{ $event->description }} </p>
                             <ul>
-                                <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
+                                <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $event->getEventType() }}</li>
+                                <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $event->getAttending() }} persons going</li>
                                 <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $event->address  }}, {{ $event->city }}, {{ $event->state }}</li>
                                 <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $event->FriendlyDate($event->start_time) }}</li>
                                 <li><a href="{{ url( $event->organization->slug . '/events/' . $event->slug) }}">Read More</a></li>
@@ -248,13 +248,13 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="serv_links">
-                        <a class="serv rokl" href="#"><div><img src="{{ asset('images/rot1.png') }}"><br><span>Animals</span></div></a>
-                        <a class="serv rokl" href="#"><div><img src="{{ asset('images/rot2.png') }}"><br><span>Soup Kitchen</span></div></a>
-                        <a class="serv rokl" href="#"><div><img src="{{ asset('images/rot7.png') }}"><br><span>Enviroment</span></div></a>
-                        <a class="serv rokl" href="#"><div><img src="{{ asset('images/rot4.png') }}"><br><span>Event Setup</span></div></a>
-                        <a class="serv rokl" href="#"><div><img src="{{ asset('images/rot1.png') }}"><br><span>Animals</span></div></a>
-                        <a class="serv rmn rokl" href="#"><div><img src="{{ asset('images/rot6.png') }}"><br><span>Outreach</span></div></a>
-                        <a class="serv rmn rokl" href="#"><div><img src="{{ asset('images/rot7.png') }}"><br><span>Parks & Rec</span></div></a>
+                        <a class="serv rokl" href="{{ url("/events?category=Animals") }}"><div><img src="{{ asset('images/rot1.png') }}"><br><span>Animals</span></div></a>
+                        <a class="serv rokl" href="{{ url("/events?category=Soup Kitchen") }}"><div><img src="{{ asset('images/rot2.png') }}"><br><span>Soup Kitchen</span></div></a>
+                        <a class="serv rokl" href="{{ url("/events?category=Environment") }}"><div><img src="{{ asset('images/rot7.png') }}"><br><span>Environment</span></div></a>
+                        <a class="serv rokl" href="{{ url("/events?category=Event Setup") }}"><div><img src="{{ asset('images/rot4.png') }}"><br><span>Event Setup</span></div></a>
+                        <a class="serv rokl" href="{{ url("/events?category=Animals") }}"><div><img src="{{ asset('images/rot1.png') }}"><br><span>Animals</span></div></a>
+                        <a class="serv rmn rokl" href="{{ url("/events?category=Outreach") }}"><div><img src="{{ asset('images/rot6.png') }}"><br><span>Outreach</span></div></a>
+                        <a class="serv rmn rokl" href="{{ url("/events?category=Parks & Rec") }}"><div><img src="{{ asset('images/rot7.png') }}"><br><span>Parks & Rec</span></div></a>
                     </div>
                 </div>
             </div>

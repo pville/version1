@@ -13,12 +13,13 @@ use Illuminate\Http\Request;
 use Hash;
 use Carbon\Carbon;
 use Toast;
+use App\Event;
 
 class OrganizationController extends Controller {
 
     public function __construct()
     {
-        $this->middleware('auth');
+       // $this->middleware('auth');
     }
 
 
@@ -32,7 +33,22 @@ class OrganizationController extends Controller {
 
         if(!is_null($org))
         {
-            return view('profile')->with(compact('org', $org));
+            $UpcomingEvents =  Event::Where('organization_id', '=', $org->id)
+                ->where('status', '=', 'pending')
+                ->orderBy('start_time','desc')
+                ->get();
+
+            $CompletedEvents = Event::Where('organization_id', '=', $org->id)
+                ->where('status', '=', 'completed')
+                ->orderBy('start_time','desc')
+                ->get();
+
+
+
+            return view('profile')
+                ->with(compact('org', $org))
+                ->with(compact('UpcomingEvents', $UpcomingEvents))
+                ->with(compact('CompletedEvents', $CompletedEvents));
         }
 
         return redirect(url('/'));

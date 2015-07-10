@@ -12,10 +12,12 @@ use App\Attendance;
 use App\Notification;
 use App\Volunteer;
 use Redirect;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use GeoIP;
 use Toast;
+use HTML;
 
 class EventController extends Controller {
 
@@ -45,10 +47,46 @@ class EventController extends Controller {
         }
     }
 
-    public function getEvents() {
+    public function getEvents(Request $request) {
 
-        $Events = $this->getRuleFilter()->paginate(6);
-        $Events->setPath('/events');
+        $Events = $this->getRuleFilter();
+
+
+
+
+        if($request->has('category')) {
+
+            $cat = HTML::decode(strtolower($request->input('category')));
+
+
+            $minutes = Carbon::now()->addMinutes(1);
+
+            $OrgTypes = Cache::remember('organization_category', $minutes, function()
+            {
+                return DB::table('organization_category')->select('id', 'type')->get();
+                //return DB::table('groups')->select('id', 'name')->get()->skip(1);
+            });
+
+            $catId = 0;
+
+            foreach($OrgTypes as $Type) {
+
+                if(strtolower($Type->type) == $cat) {
+
+
+                    $catId = $Type->id;
+                    break;
+                }
+            }
+
+            $Events = $Events->where('org_category','=', $catId);
+
+
+        }
+        $Events = $Events->paginate(6);
+
+
+
         $Featured = null;
 
         $Featured = Event::Where('featured', '=', true);
@@ -168,6 +206,8 @@ class EventController extends Controller {
     public function getRuleFilter() {
 
         $Events = Event::Where('status', '!=', 'ended')->Where('status','!=', 'completed');
+
+
 
         if(Auth::check()) {
 
@@ -439,7 +479,11 @@ class EventController extends Controller {
                             $join = new Attendance( array('event_id' => $event->id, 'user_id' => $user->id, "checked_in" => false));
                             $join->save();
 
-
+                            $Notify = new Notification([
+                                "user_id" => $user->user_id,
+                                "message" => "You Joined Event for " . $event->name
+                            ]);
+                            $Notify->save();
 
                         }
 
@@ -558,6 +602,16 @@ class EventController extends Controller {
         $Event->save();
 
 
+        $Users = Attendance::where('event_id', '=', $Event->id)->get();
+
+        foreach($Users as $User) {
+
+            $Notify = new Notification([
+                "user_id" => $User->user_id,
+                "message" => "Event " . $Event->name . " has been updated."
+            ]);
+            $Notify->save();
+        }
 
         return redirect(url('/' .$Event->organization->slug . '/events/'. $Event->slug));
     }

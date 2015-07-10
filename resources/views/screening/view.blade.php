@@ -19,4 +19,5 @@
             {!! $html !!}
 
         </form>
+    </section>
 @endsection

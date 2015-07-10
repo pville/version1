@@ -19,7 +19,7 @@ class Volunteer extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'birthdate', 'target_credits', 'current_credits', 'type'];
+    protected $fillable = ['user_id', 'birthdate', 'phone', 'target_credits', 'current_credits', 'type'];
 
 
     //protected $hidden = ['user_id', 'type'];

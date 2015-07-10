@@ -9,27 +9,8 @@
                     <div class="boxradwrap bg-none">
                         <div class="orgProfile arts">
                             <div class="orgProfileImg"><img src="{{ asset('images/organization/' . $org->id . '.jpg') }}" alt="" /></div>
-                            <a href="#" class="addPhotobtn"  data-toggle="modal" data-target="#myModal">Add Photo</a>
 
-                            <!-- Modal -->
-                            <div class="modal fade imgupload" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm extra">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Upload Picture</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Drag a picture here</p>
-                                            <p><img src="{{ asset('images/dragdrop.jpg') }}" alt="" /></p>
-                                            <p class="options">or</p>
-                                            <button>Upload picture from your computer</button>
-                                            <button class="greenbtn">Upload picture from your dropbox</button>
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </div>
                             <h2>{{ $org->name }}</h2>
                         </div>
                         <div class="boxradwrap orgProfile  extra-box">
@@ -38,15 +19,9 @@
                                 <li><img src="{{ asset('images/univer_phone_icon.jpg') }}" alt="" />{{ $org->phone }}</li>
                                 <li><img src="{{ asset('images/univer_chart_icon.jpg') }}" alt="" />{{ $org->email  }}</li>
                             </ul>
-                            <ul class="uniSmedia">
-                                <li><a href="#"><img src="{{ asset('images/gplus_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_facebook_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_twitter_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_instragrame_icon.jpg') }}" alt="" /></a></li>
-                                <li><a href="#"><img src="{{ asset('images/uni_blog_icon.jpg') }}" alt="" /></a></li>
-                            </ul>
+
                         </div>
-                        <span class="edit">Donate</span>
+
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-8">
@@ -71,110 +46,32 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="upcomingEvents">
+                                <div role="tabpanel" class="tab-pane active" id="upcoming">
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
-                                            <div class="item active">
+                                            @if($UpcomingEvents)
+                                                @foreach($UpcomingEvents as $NextEvent)
 
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event1.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
+                                                    <div class="item active">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <img src="{{ asset('images/events/' . $NextEvent->id. '.jpg') }}" alt="" />
+                                                            <div class="portfoliotxt">
+                                                                <h3>{{ $NextEvent->name }}</h3>
+                                                                <p>{{ $NextEvent->description }} </p>
+                                                                <ul>
+                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $NextEvent->getEventType() }}</li>
+                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $NextEvent->getAttending() }} persons going</li>
+                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $NextEvent->address  }}, {{ $NextEvent->city }}, {{ $NextEvent->state }}</li>
+                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $NextEvent->FriendlyDate($NextEvent->start_time) }}</li>
+                                                                    <li><a href="{{ url( $NextEvent->organization->slug . '/events/' . $NextEvent->slug) }}">Read More</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                @endforeach
+                                            @endif
 
-
-
-
-                                            </div>
-
-                                            <div class="item">
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event1.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <!-- Controls -->
@@ -188,107 +85,31 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="compcoming">
-                                    <div id="carousel-example-genericc" class="carousel slide" data-ride="carousel">
+                                <div role="tabpanel" class="tab-pane" id="completed">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
-                                            <div class="item active">
+                                            @if( $CompletedEvents )
+                                                @foreach($CompletedEvents as $CNextEvent)
 
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event1.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
+                                                    <div class="item active">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <img src="{{ asset('images/events/' . $CNextEvent->id. '.jpg') }}" alt="" />
+                                                            <div class="portfoliotxt">
+                                                                <h3>{{ $CNextEvent->name }}</h3>
+                                                                <p>{{ $CNextEvent->description }} </p>
+                                                                <ul>
+                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
+                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
+                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
+                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $NextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
+                                                                    <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="item">
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event1.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="mb15 col-md-4 col-sm-4">
-                                                    <img src="{{ asset('images/event2.jpg') }}" alt="" />
-                                                    <div class="portfoliotxt">
-                                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                            Morbi orci mauris, volutpat porttitor. </p>
-                                                        <ul>
-                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />Playing children</li>
-                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> 126 persons going</li>
-                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />100 Medical Center Way, San Francisco, CA</li>
-                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />Apr 5, 2015  9:30PM</li>
-                                                            <li><a href="#">Read More</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                @endforeach
+                                            @endif
                                         </div>
 
                                         <!-- Controls -->

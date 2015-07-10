@@ -18,6 +18,7 @@ class CreateVolunteersTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			//$table->foreign('user_id')->references('id')->on('users');
 			$table->date('birthdate');
+            $table->string('phone');
 			$table->integer('target_credits');
 			$table->integer('current_credits');
 			$table->integer('type');

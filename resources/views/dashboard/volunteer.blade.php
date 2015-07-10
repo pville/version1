@@ -17,12 +17,19 @@
 
                             @if($user->IsMember())
                                 <p>Member of {{$user->group->name}}</p>
+                                <ul class="uniList">
+                                    <li><img src="{{ asset('images/org_location_icon.jpg') }}" alt="" />{{ $user->group->address }} , {{ $user->group->city }} , {{$user->group->state}}</li>
+                                    <li><img src="{{ asset('images/univer_phone_icon.jpg') }}" alt="" />{{ $user->group->phone }}</li>
+                                    <li><img src="{{ asset('images/univer_chart_icon.jpg') }}" alt="" />{{ $user->group->email }}</li>
+                                </ul>
+                            @else
+                                <ul class="uniList">
+                                    <li><img src="{{ asset('images/univer_chart_icon.jpg') }}" alt="" />{{ $user->email }}</li>
+                                    <li><img src="{{ asset('images/univer_phone_icon.jpg') }}" alt="" />{{ $user->volunteer->phone }}</li>
+
+                                </ul>
                             @endif
-                            <ul class="uniList">
-                                <li><img src="{{ asset('images/org_location_icon.jpg') }}" alt="" />{{ $user->group->address }} , {{ $user->group->city }} , {{$user->group->state}}</li>
-                                <li><img src="{{ asset('images/univer_phone_icon.jpg') }}" alt="" />{{ $user->group->phone }}</li>
-                                <li><img src="{{ asset('images/univer_chart_icon.jpg') }}" alt="" />{{ $user->group->email }}</li>
-                            </ul>
+
 
                         </div>
                     </div>

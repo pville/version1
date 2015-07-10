@@ -4,10 +4,12 @@ use App\User;
 use App\Volunteer;
 use App\Group;
 use App\Organization;
+use App\Screening;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Carbon\Carbon;
 use Request;
+use Illuminate\Support\Facades\DB;
 
 class Registrar implements RegistrarContract {
 	/**
@@ -86,7 +88,9 @@ class Registrar implements RegistrarContract {
 		$NewVolunteer = Volunteer::create(
 			[
 				'user_id' => $NewUser->id,
-				'birthdate' => Carbon::createFromDate($data['year'], $data['month'], $data['day'])
+				'birthdate' => Carbon::createFromDate($data['year'], $data['month'], $data['day']),
+                'phone' => $data['phone_number'],
+                'target_credits' => $data['credits']
 			]);
 
 		return $NewUser;
@@ -195,6 +199,26 @@ class Registrar implements RegistrarContract {
 
 		$NewUser->organization_id = $NewOrg->id;
 		$NewUser->save();
+
+
+        $form = DB::Table("screenform")->select("form")->take(1)->get();
+
+        if(!is_null($form)) {
+
+
+            $form = $form[0];
+
+            $screen = Screening::create([
+
+                'organization_id' => $NewOrg->id,
+                'form' => $form->form,
+                'status' => 'completed'
+            ]);
+
+            $screen->save();
+        }
+
+
 
         $image = Request::input('image');
 
