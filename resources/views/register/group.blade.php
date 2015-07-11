@@ -21,7 +21,7 @@
                         </div>
                     @endif
 
-                    <h1>Volunteer & Serve Your Community.</h1>
+                    <h1>Create a Profile for your Institution Now!</h1>
                     <h3>Create Your Account</h3>
                 </div>
             </div>
@@ -51,14 +51,14 @@
                                 <div class="col-md-12 col-sm-12"><input type="password" placeholder="Confirm Password" name="password_confirmation" required/> </div>
                             </div>
 
-                    <h2>Group</h2>
+                    <h2>Institution</h2>
 
                     <div class="row">
                         <div class="mb15 col-md-6 col-sm-6"><input type="text" placeholder="Name / Title"  name="group_name" value="{{ old('group_name') }}" required/> </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="select-style">
                             <select id="group_type" name="group_type" required>
-                                <option>Select Group Type</option>
+                                <option>Select Institution Type</option>
                                 @foreach($group_types as $group)
                                     <option value="{{$group->id}}">{{$group->type}}</option>
                                 @endforeach
