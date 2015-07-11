@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    Create Event - Pleasantville.co
+    Edit Event - Pleasantville.co
 @endsection
 
 @section('content')
