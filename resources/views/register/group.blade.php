@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    Register Group - Pleasantville.co
+    Register Institution - Pleasantville.co
 @endsection
 
 @section('content')
