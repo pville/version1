@@ -42,8 +42,8 @@
 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs extra" role="tablist">
-                                <li role="presentation" class="active"><a href="#upcoming" aria-controls="home" role="tab" data-toggle="tab">Upcoming Events</a></li>
-                                <li role="presentation"><a href="#compcoming" aria-controls="profile" role="tab" data-toggle="tab">Completed Events</a></li>
+                                <li role="presentation" class="active"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Upcoming Events</a></li>
+                                <li role="presentation"><a href="#completed" aria-controls="completed" role="tab" data-toggle="tab">Completed Events</a></li>
                             </ul>
 
                             <!-- Tab panes -->
