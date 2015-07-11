@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+    Register an Account - Pleasantville.co
+@endsection
 @section('content')
     <section class="bannertxt" id="signup01">
         <div class="container">
