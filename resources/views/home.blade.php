@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+    Pleasantville.co - Giving Back Should Be Easy, Now It Is!
+@endsection
 @section('content')
 
     <div id="slider_container">
