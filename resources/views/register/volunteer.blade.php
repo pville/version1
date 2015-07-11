@@ -108,7 +108,7 @@
 		@endif
     	<div class="row">
         	<div class="col-md-12 col-sm-12"> 
-        	<h1>Volunteer & Serve Your Community.</h1>
+        	<h1>Start Finding Community Service Opportunities Near You</h1>
             <h3>Create Your Account</h3>
             </div>
         </div>
