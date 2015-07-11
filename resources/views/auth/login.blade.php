@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+    Login - Pleasantville.co
+@endsection
 @section('content')
     <section id="LoginWrap">
         <div class="container">
