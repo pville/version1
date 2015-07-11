@@ -1,5 +1,7 @@
 @extends('app')
-
+@section('title')
+    {{ $org->name }} Profile - Pleasantville.co
+@endsection
 @section('content')
     <section id="listofgroup">
         <div class="container">
