@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call('StatesSeeder');
         $this->call('EventCategorySeeder');
         $this->call('OrganizationCategorySeeder');
+        $this->call('ScreenFormSeeder');
     }
 }
 
