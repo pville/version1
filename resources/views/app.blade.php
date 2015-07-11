@@ -113,8 +113,8 @@
        	<div class="row copyright">
         	<div class="col-md-7 col-sm-7">  
             	<ul>
-                <li><img src="images/phone_icon.png" alt="" />(631)-742-4625</li><li>|</li>
-                    <li><img src="images/chart_icon.png" alt="" />hello@pleasantville.co</li>
+                <li><img src="{{ asset('images/phone_icon.png') }}" alt="" />(631)-742-4625</li><li>|</li>
+                    <li><img src="{{ asset('images/chart_icon.png') }}" alt="" />hello@pleasantville.co</li>
                 </ul>
             </div>
             <div class="col-md-5 col-sm-5 text-right">  
