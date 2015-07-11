@@ -9,7 +9,6 @@
             <div id="rev_slider_2_1" class="rev_slider fullwidthabanner" style="display:none;max-height:550px;height:450;">
                 <ul>
 
-
                     <!-- BEGIN: SLIDE #02 -->
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
 
@@ -22,7 +21,7 @@
                              data-y="190"
                              data-speed="1800"
                              data-start="500"
-                             data-easing="easeOutExpo"> <h1><span>Volunteer.</span> Serve Your Community.</h1>
+                             data-easing="easeOutExpo"> <h1>Giving Back Should Be Easy, <span>Now It Is!</span></h1>
                         </div>
 
                         <!-- CAPTION #02 -->
@@ -32,7 +31,7 @@
                              data-speed="1400"
                              data-start="1200"
                              data-easing="easeOutExpo">
-                            <p>Join Today And Earn Your Community Service Hours.</p>
+                            <p>Join Today And Start Helping Your Community.</p>
                         </div>
 
                         <!-- CAPTION #03 -->
@@ -55,7 +54,6 @@
 
 
                     </li>
-
 
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
 
@@ -68,7 +66,7 @@
                              data-y="190"
                              data-speed="1800"
                              data-start="500"
-                             data-easing="easeOutExpo"> <h1><span>Volunteer.</span> Serve Your Community.</h1>
+                             data-easing="easeOutExpo"> <h1>Giving Back Should Be Easy, <span>Now It Is!</span></h1>
                         </div>
 
                         <!-- CAPTION #02 -->
@@ -78,7 +76,7 @@
                              data-speed="1400"
                              data-start="1200"
                              data-easing="easeOutExpo">
-                            <p>Join Today And Earn Your Community Service Hours.</p>
+                            <p>Join Today And Start Helping Your Community.</p>
                         </div>
 
                         <!-- CAPTION #03 -->
@@ -101,8 +99,7 @@
 
 
                     </li>
-
-
+                    
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
 
                         <!-- BACKGROUND IMAGE -->
@@ -114,7 +111,7 @@
                              data-y="190"
                              data-speed="1800"
                              data-start="500"
-                             data-easing="easeOutExpo"> <h1><span>Volunteer.</span> Serve Your Community.</h1>
+                             data-easing="easeOutExpo"> <h1>Giving Back Should Be Easy, <span>Now It Is!</span></h1>
                         </div>
 
                         <!-- CAPTION #02 -->
@@ -124,7 +121,7 @@
                              data-speed="1400"
                              data-start="1200"
                              data-easing="easeOutExpo">
-                            <p>Join Today And Earn Your Community Service Hours.</p>
+                            <p>Join Today And Start Helping Your Community.</p>
                         </div>
 
                         <!-- CAPTION #03 -->
@@ -147,7 +144,6 @@
 
 
                     </li>
-
 
                 </ul>
                 <!-- END: SLIDE #04 -->
