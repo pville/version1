@@ -150,7 +150,7 @@
                 @endif
 
                 <div class="up-events">
-                    <h2>Upcoming Events</h2>
+                    <h2>Sign up for our Events</h2>
                     <div id="carousel-example-generic" class="carousel slide single-slider" data-ride="carousel">
 
                         <!-- Wrapper for slides -->
