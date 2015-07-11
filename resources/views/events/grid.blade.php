@@ -8,7 +8,7 @@
     <section id="eventsBanner">
         <div class="container">
             <div class="row">
-                <h1><strong>Volunteer.</strong> Serve Your Community.</h1>
+                <h1>Here’s How You Can <strong>Help</strong>…</h1>
                 <div class="eventFilter">
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
