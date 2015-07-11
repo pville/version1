@@ -32,7 +32,7 @@
                 <div class="mb15 col-md-4 col-sm-4">
                     <div class="signuptype three">
                         <div class="imgthumb"><img src="{{ asset('images/signuptype_03hover.png') }}" alt="" /><img class="top" src="{{ asset('images/signuptype_03.jpg') }}" alt="" /></div>
-                        <p>Group</p>
+                        <p>Institution</p>
                         <a href="{{ url('/register/group') }}">Create Account</a>
                     </div>
                 </div>
