@@ -20,7 +20,7 @@
                         </div>
                     @endif
 
-                    <h1>Volunteer & Serve Your Community.</h1>
+                    <h1>Start Getting More Volunteers Today!</h1>
                     <h3>Create Your Account</h3>
                 </div>
             </div>
