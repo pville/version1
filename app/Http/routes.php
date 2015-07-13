@@ -47,6 +47,8 @@ Route::post('{OrganizationSlug}/events/{EventSlug}/join', ['uses' => 'EventContr
 Route::get('{OrganizationSlug}/events/{EventSlug}/roster', ['uses' => 'EventController@getRoster']);
 Route::post('{OrganizationSlug}/events/{EventSlug}/roster', ['uses' => 'EventController@postCheckIn']);
 
+Route::get('{OrganizationSlug}/events/{EventSlug}/cancel', ['uses' => 'EventController@getCancel']);
+
 
 Route::get('{OrganizationSlug}/events/{EventSlug}/edit', ['uses' => 'EventController@getEditEvent']);
 

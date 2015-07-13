@@ -42,7 +42,7 @@
                                 @if($user->CheckedIn($event->id) == true)
                                     @if($user->role == "volunteer")
                                         @if($event->screening_required == true && $user->IsVerified() == false)
-                                            
+
                                             <a href="{{ url('/events/screen/' . $event->organization_id ) }}">Apply</a>
                                         @else
                                             @if($event->age_requirement)
@@ -76,7 +76,7 @@
                         <ul>
                             <li><span>Start</span>{{ $event->FriendlyDate($event->start_time) }}</li>
                             <li><span>End</span>{{$event->FriendlyDate($event->end_time) }}</li>
-                            <li><span>Timing</span>{{ $event->start_time->hour }}:{{ $event->start_time->minute }} - {{ $event->end_time->hour }}:{{ $event->end_time->minute }}</li>
+                            <li><span>Timing</span>{{ $event->ConvertStartTime()->hour }}:{{ $event->ConvertStartTime()->minute }} - {{ $event->end_time->hour }}:{{ $event->end_time->minute }}</li>
                             <li><span>Event Category</span>{{ $event->getEventType() }}</li>
                             <li><span>Profile</span><a href="{{ url('/profile/' . $event->organization->slug ) }}">{{ $event->organization->name }}</a></li>
                             <li><span>Website</span><a href="{{ $event->organization->url }}" target="_blank">{{ $event->organization->url }}</a></li>
@@ -88,6 +88,7 @@
                                 @elseif($event->status == "pending" || $event->status == "started")
                                     <a class="edit-event" href="{{ url( Request::url() . '/edit') }}">Edit Event</a>
                                     <a class="edit-event" href="{{ url(Request::url() . '/roster') }}" >Event Roster</a>
+                                    <a class="edit-event" href="{{ url(Request::url() . '/cancel') }}" >Cancel Event</a>
                                 @endif
                             @endif
 

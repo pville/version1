@@ -433,6 +433,37 @@ class EventController extends Controller {
     }
 
 
+    public function getCancel($OrganizationSlug, $EventSlug) {
+
+        $org = Organization::findBySlug($OrganizationSlug);
+
+        if(!is_null($org))
+        {
+            $event = Event::findBySlug($EventSlug);
+            $upcoming  =  Event::Where('organization_id', '=', $org->id)->orderBy('start_time')->take(4)->get();
+
+            if(!is_null($event)){
+
+                if(Auth::check()) {
+                    $user = Auth::user();
+
+                    if($user->role == "organization" && $event->organization_id == $user->organization->id) {
+
+                        $event->status = 'canceled';
+                        $event->save();
+
+                        return redirect(url(('/dashboard')));
+                    }
+                    return redirect(url(('/dashboard')));
+
+                }
+
+                return redirect(url(('/dashboard')));
+            }
+        }
+        return redirect( url('/'));
+    }
+
 
     public function postCheckIn($OrganizationSlug, $EventSlug, Request $request) {
 
