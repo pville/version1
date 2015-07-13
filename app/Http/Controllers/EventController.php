@@ -15,6 +15,7 @@ use Redirect;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use GeoIP;
 use Toast;
 use HTML;
@@ -675,6 +676,15 @@ class EventController extends Controller {
         $event->save();
 
         $imageName = $event->id . '.jpg';
+
+
+        $imagePath = base_path() . '/public/images/events/' . $imageName;
+
+        if (Storage::exists( $imagePath ))
+        {
+            Storage::delete($imagePath);
+        }
+
         $request->file('image')->move(
             base_path() . '/public/images/events/', $imageName
         );

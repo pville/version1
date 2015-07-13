@@ -9,6 +9,7 @@ use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Carbon\Carbon;
 use Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class Registrar implements RegistrarContract {
@@ -224,9 +225,15 @@ class Registrar implements RegistrarContract {
 
         $imageName = $NewOrg->id . '.jpg';
 
-        Request::file('image')->move(
-            base_path() . '/public/images/organization/', $imageName
-        );
+        $imagePath = base_path() . '/public/images/organization/' . $imageName;
+
+        if (Storage::exists( $imagePath ))
+        {
+            Storage::delete($imagePath);
+        }
+
+        Request::file('image')->move(  base_path() . '/public/images/organization/', $imageName      );
+
 		return $NewUser;
 	}
 }

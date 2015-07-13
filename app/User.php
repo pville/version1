@@ -57,7 +57,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if ($member)
         {
-            if($this->group_id == 0)
+            if($this->group_id == 1)
                 return false;
 
             return true;

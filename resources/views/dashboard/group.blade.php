@@ -77,7 +77,7 @@
                                 <li><img src="images/univer_bag_icon.jpg" alt="" />{{ $user->group->address }} , {{ $user->group->city }} , {{$user->group->state}}</li>
                                 <li><img src="images/univer_phone_icon.jpg" alt="" />{{ $user->group->phone }}</li>
                                 <li><img src="images/univer_chart_icon.jpg" alt="" />{{ $user->group->email }}</li>
-                                <li><img src="images/univer_lock_icon.jpg" alt="" />U.S Permitted University</li>
+
                             </ul>
                            <a class="uniEdit" href="{{ url("/dashboard/edit") }}">EDIT</a>
                         </div>
