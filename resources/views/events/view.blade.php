@@ -42,7 +42,7 @@
                                 @if($user->CheckedIn($event->id) == true)
                                     @if($user->role == "volunteer")
                                         @if($event->screening_required == true && $user->IsVerified() == false)
-
+                                            
                                             <a href="{{ url('/events/screen/' . $event->organization_id ) }}">Apply</a>
                                         @else
                                             @if($event->age_requirement)

@@ -634,6 +634,7 @@ class EventController extends Controller {
             'address' => 'required|string|max:255',
             'credits' => 'required|integer',
             'age' => 'required|integer|min:0|max:1',
+            'screening' => 'required|integer|min:0|max:1'
 
         ]);
 
@@ -657,7 +658,7 @@ class EventController extends Controller {
                     'end_time' => $end,
                     'credits' => $data["credits"],
                     'description' => $data['desc'],
-                    'screening_required' => false,
+                    'screening_required' => $data['screening'],
                     'age_requirement' => $data['age'],
                     'city' => $data['city'],
                     'state' => $data['state'],
