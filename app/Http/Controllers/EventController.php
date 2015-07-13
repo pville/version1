@@ -481,7 +481,7 @@ class EventController extends Controller {
                             $join->save();
 
                             $Notify = new Notification([
-                                "user_id" => $user->user_id,
+                                "user_id" => $user->id,
                                 "message" => "You Joined Event for " . $event->name
                             ]);
                             $Notify->save();
