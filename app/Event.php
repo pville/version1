@@ -76,7 +76,7 @@ class Event extends \Eloquent implements SluggableInterface {
 
     public function ConvertStartTime(){
         $timezone = $this->getTimeZoneFromState($this->state);
-        $this->start_time->timezone = new DateTimeZone($timezone);
+        $this->start_time->timezone = $timezone;
 
         return $this->start_time;
     }
