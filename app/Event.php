@@ -76,8 +76,9 @@ class Event extends \Eloquent implements SluggableInterface {
 
     public function ConvertStartTime(){
         $timezone = $this->getTimeZoneFromState($this->state);
-        $localTime = Carbon::createFromFormat('m/d/Y H:i A', $this->start_time, config('app.timezone'));
-        return Carbon::createFromTimestamp($localTime->timestamp, $timezone );
+        $this->start_time->timezone = new DateTimeZone($timezone);
+
+        return $this->start_time;
     }
 
     public function ConvertTimeToUTC($time, $timezone){
