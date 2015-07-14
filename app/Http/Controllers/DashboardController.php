@@ -7,6 +7,7 @@ use App\Event;
 use App\Organization;
 use App\Group;
 use App\Notification;
+use App\Invite;
 use App\Attendance;
 use Illuminate\Http\Request;
 use Redirect;
