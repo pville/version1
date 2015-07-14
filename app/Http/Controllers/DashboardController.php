@@ -11,6 +11,7 @@ use App\Invite;
 use App\Attendance;
 use Illuminate\Http\Request;
 use Redirect;
+use Hash;
 use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
