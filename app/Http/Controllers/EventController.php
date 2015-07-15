@@ -206,7 +206,7 @@ class EventController extends Controller {
 
     public function getRuleFilter() {
 
-        $Events = Event::Where('status', '!=', 'ended')->Where('status','!=', 'completed');
+        $Events = Event::Where('status', '!=', 'ended')->Where('status','!=', 'completed')->Where('status','!=', 'canceled');
 
 
 

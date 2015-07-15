@@ -150,7 +150,7 @@ class AuthController extends Controller {
 				$request, $validator
 			);
 
-            return redirect($this->redirectPath());
+            return redirect(url("/"));
 		}
 
 		$this->auth->login($this->registrar->getCreate($type, $request->all()));

@@ -200,7 +200,7 @@ class DashboardController extends Controller {
         }
 
 
-        return view('/');
+        return redirect(url("/"));
     }
 
     public function postFilterOrganization(Request $request) {
@@ -542,7 +542,7 @@ class DashboardController extends Controller {
             }
         }
 
-        return view('/');
+        return redirect(url("/"));
     }
     public function postInviteUser(Request $request)
     {
@@ -585,9 +585,7 @@ class DashboardController extends Controller {
 
             if ($user->role == "organization") {
                 $screening = ScreeningData::Where('organization_id', '=', $user->organization->id)->Where('status', '=', 'pending')->paginate(15);
-                if(!$screening->IsEmpty()) {
-                    return view('dashboard.screening', compact('screening', $screening));
-                }
+                return view('dashboard.screening', compact('screening', $screening));
 
             }
         }
@@ -657,7 +655,7 @@ class DashboardController extends Controller {
         Toast::success('Invite sent to ' . $data["email"], 'Success!');
 
         Mail::send('emails.invite', ['invite' => $invite], function ($m) use ($invite) {
-            $m->from("noreply@pleasantville","PleasantVville.co");
+            $m->from("noreply@pleasantville.co","PleasantVille.co");
             $m->to($invite->email, $invite->first_name)->subject('Invite for PleasantVille.co!');
         });
 
