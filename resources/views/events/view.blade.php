@@ -76,7 +76,7 @@
                         <ul>
                             <li><span>Start</span>{{ $event->FriendlyDate($event->start_time) }}</li>
                             <li><span>End</span>{{$event->FriendlyDate($event->end_time) }}</li>
-                            <li><span>Timing</span>{{ $event->ConvertStartTime()->hour }}:{{ $event->ConvertStartTime()->minute }} - {{ $event->end_time->hour }}:{{ $event->end_time->minute }}</li>
+                            <li><span>Timing</span>{{ $event->getStartTime() }} - {{ $event->getEndTime() }}</li>
                             <li><span>Event Category</span>{{ $event->getEventType() }}</li>
                             <li><span>Profile</span><a href="{{ url('/profile/' . $event->organization->slug ) }}">{{ $event->organization->name }}</a></li>
                             <li><span>Website</span><a href="{{ $event->organization->url }}" target="_blank">{{ $event->organization->url }}</a></li>

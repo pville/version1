@@ -227,6 +227,7 @@ class Registrar implements RegistrarContract {
 
         $imagePath = base_path() . '/public/images/organization/' . $imageName;
 
+
         if (Storage::exists( $imagePath ))
         {
             Storage::delete($imagePath);
