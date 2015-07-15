@@ -192,12 +192,12 @@
                     <h2>If everyone demanded peace instead of another<br>
                         television set, then there’d be peace.</h2>
                     <p><span><img src="{{ asset('images/quotes.png') }}"></span>JOHN LENNON</p>
-                    <ul>
+                    <!--<ul>
                         <li><img src="{{ asset('images/half_s_icon.png') }}" alt="" /></li>
                         <li><img src="{{ asset('images/jupiter_icon.png') }}" alt="" /></li>
                         <li><img src="{{ asset('images/rocket_cion.png') }}" alt="" /></li>
                         <li><img src="{{ asset('images/moonpic_icon.png') }}" alt="" /></li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
         </div>

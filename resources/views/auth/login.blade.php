@@ -25,7 +25,7 @@
                         <ul>
                             <li><input type="text" class="username" name="email" placeholder="E-Mail Address" value="{{ old('email') }}"/></li>
                             <li><input type="password" class="userpass" name="password" placeholder="password" /></li>
-                            <li><input type="checkbox" name="remember">Remeber Me <a href="{{ url('/password/email') }}">Forget your Password?</a></li>
+                            <li><input type="checkbox" name="remember">Remember Me <a href="{{ url('/password/email') }}">Forget your Password?</a></li>
                             <li><input type="submit" value="Login" /></li>
                         </ul>
                         </form>
