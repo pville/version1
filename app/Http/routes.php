@@ -87,6 +87,13 @@ Route::get('/profile/{OrganizationSlug}', ['uses' => 'OrganizationController@get
 
 
 Route::get('invite/{InviteCode}', ['uses' => 'InviteController@getInvite']);
+Route::post('invite/{InviteCode}', function($InviteCode, Illuminate\Http\Request $request) {
+    $app = app();
+    $controller = $app->make('App\Http\Controllers\InviteController');
+    return $controller->callAction('postInvite', $parameters = array($InviteCode, $request));
+});
+
+
 
 Route::get('screening/{id}', ['uses' => 'ScreeningController@getScreenForm']);
 
