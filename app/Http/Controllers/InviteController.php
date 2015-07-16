@@ -30,11 +30,11 @@ class InviteController extends Controller {
         if(!$invite->isEmpty())
         {
             $invite = $invite[0];
-            $minutes = $invite->created_at->diffInMinutes(Carbon::now());
+            $minutes = $invite->created_at->diffInHours(Carbon::now());
 
-            if( $minutes >= 5) {
+            if( $minutes >= 24) {
                 $invite->delete();
-                dd("Invite code is no longer valid");
+                return redirect(url("/"));
             }
             return view("register.invite")
                 ->with(compact("invite", $invite));
@@ -72,11 +72,11 @@ class InviteController extends Controller {
 
             }
             $invite = $invite[0];
-            $minutes = $invite->created_at->diffInMinutes(Carbon::now());
+            $minutes = $invite->created_at->diffInHours(Carbon::now());
 
-            if( $minutes >= 5) {
+            if( $minutes >= 24) {
                 $invite->delete();
-                dd("Invite code is no longer valid");
+                return redirect(url("/"));
             }
 
             if( $data['email'] != $invite->email)
