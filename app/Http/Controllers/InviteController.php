@@ -59,7 +59,7 @@ class InviteController extends Controller {
                 'email' => 'required|email|max:255|unique:users',
                 'password' => 'required|confirmed|min:6',
                 'phone_number' => 'required|max:20',
-               
+
             ]);
 
 
@@ -103,6 +103,8 @@ class InviteController extends Controller {
             $NewUser->save();
 
             $invite->delete();
+
+            Auth::login($NewUser);
             return redirect(url("/dashboard"));
         }
 
