@@ -59,10 +59,7 @@ class InviteController extends Controller {
                 'email' => 'required|email|max:255|unique:users',
                 'password' => 'required|confirmed|min:6',
                 'phone_number' => 'required|max:20',
-                'month' => 'required|integer|digits_between:1,12',
-                'day' => 'required|integer|digits_between:1,31',
-                'year' => 'required|integer|min:1935|max:2015',
-                'gender' => 'required|integer|digits_between:1,2',
+               
             ]);
 
 
