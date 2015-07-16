@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div id="formwrap">
-                        <form data-toggle="validator" role="form" method="POST" action="{{ url('/invite/' . $invite->code ) }}">
+                        <form data-toggle="validator" role="form" method="POST" action="{{ url('/invite/' . $invite->invite_code ) }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <h2>Account</h2>
                             <div class="row">
