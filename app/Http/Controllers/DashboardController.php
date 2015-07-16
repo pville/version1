@@ -122,7 +122,7 @@ class DashboardController extends Controller {
                             $index++;
                         }
                         else {
-                            $CompletedEvents->orWhere('id','=',$next->event_id);
+                            $CompletedEvents->orWhere('id','=' ,$next->event_id);
                         }
 
                     }

@@ -416,7 +416,7 @@ class EventController extends Controller {
         if(!is_null($org))
         {
             $event = Event::findBySlug($EventSlug);
-            $upcoming  =  Event::Where('organization_id', '=', $org->id)->orderBy('start_time')->take(4)->get();
+            $upcoming  =  Event::Where('organization_id', '=', $org->id)->where('status','=','pending')->orderBy('start_time')->take(4)->get();
 
             if(!is_null($event)){
 
