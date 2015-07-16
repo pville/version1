@@ -77,11 +77,11 @@ class DashboardController extends Controller {
                     foreach($Upcoming as $next) {
 
                         if($index == 0) {
-                            $UpcomingEvents = Event::Where('id', '=', $next->id);
+                            $UpcomingEvents = Event::Where('id', '=', $next->event_id);
                             $index++;
                         }
                         else {
-                            $UpcomingEvents->orWhere('id','=',$next->id);
+                            $UpcomingEvents->orWhere('id','=',$next->event_id);
                         }
 
                     }
@@ -118,11 +118,11 @@ class DashboardController extends Controller {
                     foreach($Completed as $next) {
 
                         if($index == 0) {
-                            $CompletedEvents = Event::Where('id', '=', $next->id);
+                            $CompletedEvents = Event::Where('id', '=', $next->event_id);
                             $index++;
                         }
                         else {
-                            $CompletedEvents->orWhere('id','=',$next->id);
+                            $CompletedEvents->orWhere('id','=',$next->event_id);
                         }
 
                     }
