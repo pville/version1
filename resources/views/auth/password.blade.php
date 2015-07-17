@@ -23,7 +23,11 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <ul>
-                                <li><input type="text" class="username" name="email" placeholder="E-Mail Address" value="{{ old('email') }}"/></li>
+                                @if(Auth::check())
+                                    <li><input type="text" class="username" name="email" placeholder="E-Mail Address" value="{{ Auth::user()->email }}"/></li>
+                                @else
+                                    <li><input type="text" class="username" name="email" placeholder="E-Mail Address" value="{{ old('email') }}"/></li>
+                                @endif
                                 <li><input type="submit" value="Submit" /></li>
                             </ul>
                         </form>

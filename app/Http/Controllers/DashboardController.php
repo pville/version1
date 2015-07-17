@@ -663,8 +663,8 @@ class DashboardController extends Controller {
 
     }
 
-    public function getSettings() {
+    public function getReset() {
 
-        return "Settings";
+        return View("auth.password");
     }
 }

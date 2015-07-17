@@ -14,6 +14,9 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('dashboard', ['middleware' => 'auth', 'uses' => 'DashboardController@index']);
+Route::get('dashboard/reset', ['middleware' => 'auth', 'uses' => 'DashboardController@getReset']);
+
+
 Route::get('dashboard/screening', ['middleware' => 'auth', 'uses' => 'DashboardController@getScreening']);
 Route::post('dashboard/screening', ['middleware' => 'auth', 'uses' => 'DashboardController@postVerifyUser']);
 
