@@ -30,7 +30,7 @@
                         </ul>
                         </form>
                         <div class="LgonBoxFotter">
-                            Not a member ? <a href="#">Sign up now!</a>
+                            Not a member ? <a href="/register">Sign up now!</a>
                         </div>
                     </div>
                 </div>
