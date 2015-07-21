@@ -141,7 +141,7 @@ class ScreenFormSeeder extends Seeder {
                         <div class="col-md-12 col-sm-12">
                             <div class="chkbox">
                                 <label class="checkbox" for="checkbox2">
-                                <input checked data-toggle="checkbox" id="checkbox2" type="checkbox" value="1" name="ofage">I am 18 years & Older</label>
+                                <input data-toggle="checkbox" id="checkbox2" type="checkbox" value="1" name="ofage">I am 18 years & Older</label>
                             </div>
 
                             <p class="smtxt">( *If you are under 18 years of
@@ -173,13 +173,13 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for="checkbox11">
-                                <input checked data-toggle="checkbox" id="checkbox11" type="checkbox" value="1" name="survivor_yes"><span class="wid">yes</span></label>
+                                <input data-toggle="checkbox" id="checkbox11" type="checkbox" value="1" name="survivor_yes"><span class="wid">yes</span></label>
                             </div>
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
                                 "checkbox12">
-                                <input checked data-toggle="checkbox" id="checkbox12" type="checkbox"  value="1" name="survivor_no"><span class="wid">No</span></label>
+                                <input data-toggle="checkbox" id="checkbox12" type="checkbox"  value="1" name="survivor_no"><span class="wid">No</span></label>
                             </div>
                         </div>
                     </div>
@@ -208,13 +208,13 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for="checkbox13">
-                                <input checked data-toggle="checkbox" id="checkbox13" type="checkbox" value="1" name="fulltime"><span class="wid">Full
+                                <input data-toggle="checkbox" id="checkbox13" type="checkbox" value="1" name="fulltime"><span class="wid">Full
                                 time</span></label>
                             </div>
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for=
-                                "checkbox14"><input checked data-toggle=
+                                "checkbox14"><input data-toggle=
                                 "checkbox" id="checkbox14" type="checkbox"
                                 value="1" name="parttime"><span class="wid">Part
                                 time</span></label>
@@ -222,7 +222,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for=
-                                "checkbox14"><input checked data-toggle=
+                                "checkbox14"><input data-toggle=
                                 "checkbox" id="checkbox14" type="checkbox"
                                 value="1" name="retired"><span class=
                                 "wid">Retired</span></label>
@@ -230,7 +230,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox15"><input checked data-toggle=
+                                "checkbox15"><input data-toggle=
                                 "checkbox" id="checkbox15" type="checkbox"
                                 value="1" name="unemployed"><span class=
                                 "wid">Unemployed</span></label>
@@ -286,21 +286,21 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for=
-                                "checkbox16"><input checked data-toggle=
+                                "checkbox16"><input data-toggle=
                                 "checkbox" id="checkbox16" type="checkbox"
                                 value="1" name="fair"><span class="wid">Fair</span></label>
                             </div>
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for=
-                                "checkbox17"><input checked data-toggle=
+                                "checkbox17"><input data-toggle=
                                 "checkbox" id="checkbox17" type="checkbox"
                                 value="1" name="good"><span class="wid">Good</span></label>
                             </div>
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox18"><input checked data-toggle=
+                                "checkbox18"><input data-toggle=
                                 "checkbox" id="checkbox18" type="checkbox"
                                 value="1" name="excellent"><span class=
                                 "wid">Excellent</span></label>
@@ -320,21 +320,21 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for=
-                                "checkbox19"><input checked data-toggle=
+                                "checkbox19"><input data-toggle=
                                 "checkbox" id="checkbox19" type="checkbox"
                                 value="1" name="fair_2"> <span class="wid">Fair</span></label>
                             </div>
 
                             <div class="mb15 chkbox">
                                 <label class="checkbox" for=
-                                "checkbox20"><input checked data-toggle=
+                                "checkbox20"><input data-toggle=
                                 "checkbox" id="checkbox20" type="checkbox"
                                 value="1" name="good_2"><span class="wid">Good</span></label>
                             </div>
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox21"><input checked data-toggle=
+                                "checkbox21"><input data-toggle=
                                 "checkbox" id="checkbox21" type="checkbox"
                                 value="1" name="excellent_2"><span class=
                                 "wid">Excellent</span></label>
@@ -363,7 +363,7 @@ class ScreenFormSeeder extends Seeder {
                         <div class="col-md-12 col-sm-12 chkboxwrap">
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox23"><input checked data-toggle=
+                                "checkbox23"><input data-toggle=
                                 "checkbox" id="checkbox23" type="checkbox"
                                 value="1" name="victimservices"><span class="wid">Victim
                                 Services</span></label>
@@ -371,7 +371,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox24"><input checked data-toggle=
+                                "checkbox24"><input data-toggle=
                                 "checkbox" id="checkbox24" type="checkbox"
                                 value="1" name="fundraising"><span class=
                                 "wid">Fundraising</span></label>
@@ -379,7 +379,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox25"><input checked data-toggle=
+                                "checkbox25"><input data-toggle=
                                 "checkbox" id="checkbox25" type="checkbox"
                                 value="1" name="administration"><span class=
                                 "wid">Administration</span></label>
@@ -387,7 +387,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox26"><input checked data-toggle=
+                                "checkbox26"><input data-toggle=
                                 "checkbox" id="checkbox26" type="checkbox"
                                 value="1" name="policy"><span class="wid">Public
                                 Policy</span></label>
@@ -395,7 +395,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox27"><input checked data-toggle=
+                                "checkbox27"><input data-toggle=
                                 "checkbox" id="checkbox27" type="checkbox"
                                 value="1" name="programs"><span class=
                                 "wid">Programs</span></label>
@@ -403,7 +403,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox28"><input checked data-toggle=
+                                "checkbox28"><input data-toggle=
                                 "checkbox" id="checkbox28" type="checkbox"
                                 value="1" name="marketing"> <span class=
                                 "wid">Marketing/Communications</span></label>
@@ -411,7 +411,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox29"><input checked data-toggle=
+                                "checkbox29"><input data-toggle=
                                 "checkbox" id="checkbox29" type="checkbox"
                                 value="1" name="fiscal"><span class="wid">Fiscal
                                 Management</span></label>
@@ -419,7 +419,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox30"><input checked data-toggle=
+                                "checkbox30"><input data-toggle=
                                 "checkbox" id="checkbox30" type="checkbox"
                                 value="1" name="leadership"><span class=
                                 "wid">Leadership</span></label>
@@ -427,7 +427,7 @@ class ScreenFormSeeder extends Seeder {
 
                             <div class="chkbox">
                                 <label class="checkbox" for=
-                                "checkbox31"><input checked data-toggle=
+                                "checkbox31"><input data-toggle=
                                 "checkbox" id="checkbox31" type="checkbox"
                                 value="1" name="other"><span class="wid">Other</span></label>
                             </div>
@@ -480,7 +480,8 @@ class ScreenFormSeeder extends Seeder {
                 </div>
             </div>
         </div>
-    </div>'));
+    </div>
+        '));
 
 
     }
