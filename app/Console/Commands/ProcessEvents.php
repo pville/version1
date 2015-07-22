@@ -79,12 +79,11 @@ class ProcessEvents extends Command
                 $Event->save();
 
                 $Users = Attendance::where('event_id', '=', $Event->id)->where('checked_in', '=', true)->get();
-
+                dd($Users);
                 foreach($Users as $User) {
-                    echo $Event->credits . "\n";
-                    echo $User->volunteer->current_credits . "\n";
+
                     $User->volunteer->current_credits = $User->volunteer->current_credits + $Event->credits;
-                    echo $User->volunteer->current_credits . "\n";
+
                     $User->volunteer->save();
                     $User->save();
 
