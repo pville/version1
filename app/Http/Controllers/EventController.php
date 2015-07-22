@@ -444,11 +444,11 @@ class EventController extends Controller {
 
                 $Users = Attendance::where('event_id', '=', $Event->id)->where('checked_in', '=', true)->get();
 
-                dd($Users);
+
                 foreach ($Users as $User) {
 
                     $User->volunteer->current_credits = $User->volunteer->current_credits + $Event->credits;
-
+                    
                     $User->volunteer->save();
                     $User->save();
 
