@@ -432,7 +432,30 @@ class EventController extends Controller {
         return redirect($this->redirectPath);
     }
 
+    public function test() {
 
+        $Events = Event::Where('status', '=', 'processing')->get();
+
+        if(!$Events->isEmpty() ) {
+
+            foreach ($Events as $Event) {
+                $Event->status = "completed";
+                $Event->save();
+
+                $Users = Attendance::where('event_id', '=', $Event->id)->where('checked_in', '=', true)->get();
+
+                dd($Users);
+                foreach ($Users as $User) {
+
+                    $User->volunteer->current_credits = $User->volunteer->current_credits + $Event->credits;
+
+                    $User->volunteer->save();
+                    $User->save();
+
+                }
+            }
+        }
+    }
     public function getCancel($OrganizationSlug, $EventSlug) {
 
         $org = Organization::findBySlug($OrganizationSlug);
