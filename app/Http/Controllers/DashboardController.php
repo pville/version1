@@ -93,7 +93,7 @@ class DashboardController extends Controller {
                 }
 
 
-                // Completed
+                // Fd
 
 
                 $Completed =  DB::table('event')
@@ -103,6 +103,7 @@ class DashboardController extends Controller {
                         $join->on('event.id', '=', 'attendance.event_id')
                             ->where('attendance.user_id', '=', $user->id)
                             ->where('attendance.checked_in', '=', true)
+                            ->where('event.status', '=', 'ended')
                             ->where('event.status', '=', 'completed');
                     })
                     ->orderBy('start_time','desc')
@@ -176,6 +177,7 @@ class DashboardController extends Controller {
                     ->get();
 
                 $CompletedEvents = Event::Where('organization_id', '=', $user->organization->id)
+                    ->where('status', '=', 'ended')
                     ->where('status', '=', 'completed')
                     ->orderBy('start_time','desc')
                     ->get();
