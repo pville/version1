@@ -447,10 +447,10 @@ class EventController extends Controller {
 
                 foreach ($Users as $User) {
 
-                    $User->volunteer->current_credits = $User->volunteer->current_credits + $Event->credits;
-                    
-                    $User->volunteer->save();
-                    $User->save();
+                    $User->user->volunteer->current_credits = $User->user->volunteer->current_credits + $Event->credits;
+
+
+                    $User->user->save();
 
                 }
             }
