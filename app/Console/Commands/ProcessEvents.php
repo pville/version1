@@ -83,6 +83,7 @@ class ProcessEvents extends Command
                 foreach($Users as $User) {
 
                     $User->volunteer->current_credits = $User->volunteer->current_credits + $Event->credits;
+                    $User->volunteer->save();
                     $User->save();
 
                 }
