@@ -449,7 +449,7 @@ class EventController extends Controller {
 
                     $User->user->volunteer->current_credits = $User->user->volunteer->current_credits + $Event->credits;
 
-
+                    $User->user->volunteer->save();
                     $User->user->save();
 
                 }
