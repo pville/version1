@@ -104,7 +104,7 @@ class DashboardController extends Controller {
                             ->where('attendance.user_id', '=', $user->id)
                             ->where('attendance.checked_in', '=', true)
                             ->where('event.status', '=', 'ended')
-                            ->where('event.status', '=', 'completed');
+                            ->orWhere('event.status', '=', 'completed');
                     })
                     ->orderBy('start_time','desc')
                     ->get();
@@ -178,7 +178,7 @@ class DashboardController extends Controller {
 
                 $CompletedEvents = Event::Where('organization_id', '=', $user->organization->id)
                     ->where('status', '=', 'ended')
-                    ->where('status', '=', 'completed')
+                    ->orWhere('status', '=', 'completed')
                     ->orderBy('start_time','desc')
                     ->get();
 

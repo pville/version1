@@ -143,7 +143,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 if(!$ent->isEmpty()) {
                     $ent = $ent[0];
 
-                    if ($ent->status == 1)
+                    if ($ent->status == "completed")
                     {
                         $credits += $ent->credits;
                     }
@@ -173,10 +173,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 if(!$ent->isEmpty()) {
                     $ent = $ent[0];
 
-                    if ($ent->status == 1)
-                    {
-                        $numEvents++;
-                    }
+                    $numEvents++;
                 }
 
             }
