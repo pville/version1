@@ -111,7 +111,7 @@ class DashboardController extends Controller {
                     ->orderBy('start_time','desc')
                     ->get();
 
-                dd(DB::getQueryLog());
+             //   dd(DB::getQueryLog());
 
                 $CompletedEvents = null;
 
