@@ -100,13 +100,17 @@ class DashboardController extends Controller {
                     ->join('attendance', function($join)
                     {
                         $user = Auth::user();
-                        $join->on('event.id', '=', 'attendance.event_id')
+                        $join->on('attendance.user_id', '=', $user->id)
+                            ->where('attendance.checked_in', '=', true)
+                            ->where('event.status', '=', 'ended')
+                            ->orWhere('event.status', '=', 'completed');
+                       /* $join->on('event.id', '=', 'attendance.event_id')
                             ->where('attendance.user_id', '=', $user->id)
                             ->where('attendance.checked_in', '=', true)
                             ->where(function($query) {
                                 $query->where('event.status', '=', 'ended')
                                  ->orWhere('event.status', '=', 'completed');
-                            });
+                            });*/
 
 
                     })
