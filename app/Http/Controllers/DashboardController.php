@@ -96,8 +96,8 @@ class DashboardController extends Controller {
                 // Fd
 
                 DB::enableQueryLog();
-                $Completed =  DB::table('event')
-                    ->join('attendance', function($join)
+                $Completed =  DB::table('attendance')
+                    ->join('event', function($join)
                     {
                         $user = Auth::user();
                        $join->on('event.id', '=', 'attendance.event_id')
