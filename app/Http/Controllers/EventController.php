@@ -472,7 +472,7 @@ class EventController extends Controller {
 
                     if($user->role == "organization" && $event->organization_id == $user->organization->id) {
 
-                        $event->status = 'canceled';
+                        $event->status = 'canceling';
                         $event->save();
 
                         return redirect(url(('/dashboard')));

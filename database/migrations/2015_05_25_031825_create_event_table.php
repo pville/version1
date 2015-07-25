@@ -39,7 +39,7 @@ class CreateEventTable extends Migration
             // when a event is over it is changed to ended
             // when the org is ready the set it to processing.
             // once it's done being processed it is set to completed.
-            $table->enum('status', array('started', 'pending', 'ended', 'processing', 'completed', 'canceled'))->default('pending');
+            $table->enum('status', array('started', 'pending', 'ended', 'processing', 'completed', 'canceling', 'canceled'))->default('pending');
             $table->timestamps();
         });
     }

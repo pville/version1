@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\Inspire',
         'App\Console\Commands\ProcessEvents',
+        'App\Console\Commands\ProcessCancel',
     ];
 
     /**
@@ -28,7 +29,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('process-events')->everyMinute();
 
-        $schedule->command('process-events')
-            ->everyFiveMinutes();
+        $schedule->command('process-cancel')
+            ->everyThirtyMinutes();
     }
 }
