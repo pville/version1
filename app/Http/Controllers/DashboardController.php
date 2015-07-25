@@ -100,8 +100,8 @@ class DashboardController extends Controller {
                     ->join('event', function($join)
                     {
                         $user = Auth::user();
-                       $join->on('event.id', '=', 'attendance.event_id')
-                            ->where('attendance.user_id', '=', $user->id)
+                       $join->on('attendance.user_id', '=', $user->id)
+                            ->where('event.id', '=', 'attendance.event_id')
                             ->where('attendance.checked_in', '=', true)
                            ->where('event.status', '=', 'ended')
                            ->orWhere('event.status', '=', 'completed');
@@ -111,7 +111,7 @@ class DashboardController extends Controller {
                     ->orderBy('start_time','desc')
                     ->get();
 
-                dd(DB::getQueryLog());
+                //dd(DB::getQueryLog());
 
                 $CompletedEvents = null;
 
