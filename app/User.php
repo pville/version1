@@ -155,7 +155,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if( $credits == 0 ) return 0;
 
-        return ($credits / $this->volunteer->target_credits) * 100;
+        return ($credits / $this->Credits()) * 100;
     }
 
     public function TotalEvents() {
