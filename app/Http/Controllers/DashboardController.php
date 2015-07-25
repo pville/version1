@@ -95,7 +95,7 @@ class DashboardController extends Controller {
 
                 // Fd
 
-
+                DB::enableQueryLog();
                 $Completed =  DB::table('event')
                     ->join('attendance', function($join)
                     {
