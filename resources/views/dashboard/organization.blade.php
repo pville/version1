@@ -21,7 +21,7 @@
                     <div class="boxradwrap">
                         <div class="orgProfile">
                             <div class="orgProfileImg"><img src="{{ asset('images/organization/' . $user->organization->id . '.jpg') }}" alt="" /></div>
-                            <a href="/dashboard/screening" class="addPhotobtn">Volunteer Screening</a>
+                            <a href="{{ url('/dashboard/screening') }}" class="addPhotobtn">Volunteer Screening</a>
 
                             <h2>{{ $user->organization->name }}</h2>
 
