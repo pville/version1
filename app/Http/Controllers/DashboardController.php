@@ -95,13 +95,13 @@ class DashboardController extends Controller {
 
                 // Fd
 
-                DB::enableQueryLog();
-                $Completed =  DB::table('attendance')
-                    ->join('event', function($join)
+
+                $Completed =  DB::table('event')
+                    ->join('attendance', function($join)
                     {
-                        $user = Auth::user();
-                       $join->on('user_id', '=', $user->id)
-                            ->where('event.id', '=', 'attendance.event_id')
+
+                       $join->on('event.id', '=', 'attendance.event_id')
+
                             ->where('attendance.checked_in', '=', true)
                            ->where('event.status', '=', 'ended')
                            ->orWhere('event.status', '=', 'completed');
@@ -111,24 +111,25 @@ class DashboardController extends Controller {
                     ->orderBy('start_time','desc')
                     ->get();
 
-                //dd(DB::getQueryLog());
+                dd(DB::getQueryLog());
 
                 $CompletedEvents = null;
 
                 if(count($Completed) > 0) {
 
                     $index = 0;
-                    foreach($Completed as $next) {
-
-                        if($index == 0) {
-                            $CompletedEvents = Event::Where('id', '=', $next->event_id);
-                            $index++;
-                        }
-                        else {
-                            $CompletedEvents->orWhere('id','=' ,$next->event_id);
-                        }
+                    $user = Auth::user();
+                    foreach ($Completed as $next) {
+                        if ($next->user_id == $user->id)
+                            if ($index == 0) {
+                                $CompletedEvents = Event::Where('id', '=', $next->event_id);
+                                $index++;
+                            } else {
+                                $CompletedEvents->orWhere('id', '=', $next->event_id);
+                            }
 
                     }
+                 }
                 }
 
                 if(!is_null($CompletedEvents)) {
