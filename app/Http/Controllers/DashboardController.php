@@ -120,7 +120,7 @@ class DashboardController extends Controller {
                     $index = 0;
                     $user = Auth::user();
                     foreach ($Completed as $next) {
-                        if ($next->user_id == $user->id)  {
+                        if ($next->user_id == $user->id && $next->checked_in == true)  {
                             if ($index == 0) {
                                 $CompletedEvents = Event::Where('id', '=', $next->event_id);
                                 $index++;
