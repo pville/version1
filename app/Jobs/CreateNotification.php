@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Mail;
+
 class CreateNotification extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
@@ -33,7 +34,7 @@ class CreateNotification extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $user = User::Where('id', '=', $this->userId)->take(1)->get();
+        $user = User::Where('id', '=', $this->userId)->get();
 
         if(!$user->IsEmpty() ) {
             $Notify = new Notification([

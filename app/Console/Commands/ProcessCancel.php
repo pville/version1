@@ -1,5 +1,6 @@
 <?php namespace App\Console\Commands;
 
+use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,9 +9,11 @@ use App\Event;
 use App\Attendance;
 use App\Notification;
 use Carbon\Carbon;
+use App\Jobs\CreateNotification;
 
 class ProcessCancel extends Command
 {
+    use DispatchesCommands;
     /**
      * The console command name.
      *

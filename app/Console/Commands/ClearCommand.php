@@ -1,5 +1,6 @@
 <?php
- 
+
+use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;

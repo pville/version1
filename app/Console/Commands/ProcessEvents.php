@@ -1,5 +1,6 @@
 <?php namespace App\Console\Commands;
 
+use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -11,6 +12,8 @@ use Carbon\Carbon;
 
 class ProcessEvents extends Command
 {
+    use DispatchesCommands;
+
     /**
      * The console command name.
      *
