@@ -3,9 +3,9 @@
 
 </head>
 <body>
-Hello {{ $user->first_name }},
+Hello {{ $data->user->first_name }},
 
-{{ $message }}
+{{ $data->message }}
 
 </body>
 </html>
