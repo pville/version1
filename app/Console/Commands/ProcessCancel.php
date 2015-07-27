@@ -47,11 +47,7 @@ class ProcessCancel extends Command
 
                 foreach($Users as $User) {
 
-                    $Notify = new Notification([
-                        "user_id" => $User->user_id,
-                        "message" => "Event " . $Event->name . " has been canceled."
-                    ]);
-                    $Notify->save();
+                    $this->dispatch(new CreateNotification($User->user_id,"Event " . $Event->name . " has been canceled."));
                 }
             }
         }
