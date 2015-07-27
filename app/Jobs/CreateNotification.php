@@ -6,10 +6,13 @@ use App\User;
 use App\Notification;
 use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Mail;
-class CreateNotification extends Job implements SelfHandling
+class CreateNotification extends Job implements SelfHandling, ShouldQueue
 {
-
+    use InteractsWithQueue, SerializesModels;
     protected $userId;
     protected $message;
     /**
