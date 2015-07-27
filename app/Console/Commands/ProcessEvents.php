@@ -6,7 +6,7 @@ use Symfony\Component\Console\Input\InputArgument;
 
 use App\Event;
 use App\Attendance;
-use App\Notification;
+use App\Jobs\CreateNotification;
 use Carbon\Carbon;
 
 class ProcessEvents extends Command
@@ -47,11 +47,8 @@ class ProcessEvents extends Command
 
                 foreach($Users as $User) {
 
-                    $Notify = new Notification([
-                       "user_id" => $User->user_id,
-                        "message" => "Event " . $Event->name . " has started."
-                    ]);
-                    $Notify->save();
+
+                    $this->dispatch(new CreateNotification($User->user_id,"Event " . $Event->name . " has started."));
                 }
             }
         }
@@ -87,11 +84,8 @@ class ProcessEvents extends Command
                     $User->user->volunteer->save();
                     $User->user->save();
 
-                    $Notify = new Notification([
-                        "user_id" => $User->user_id,
-                        "message" => "Event " . $Event->name . " has ended."
-                    ]);
-                    $Notify->save();
+
+                    $this->dispatch(new CreateNotification($User->user_id,"Event " . $Event->name . " has ended."));
                 }
             }
         }
