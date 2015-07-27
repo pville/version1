@@ -37,6 +37,7 @@ class CreateNotification extends Job implements SelfHandling, ShouldQueue
         $user = User::Where('id', '=', $this->userId)->get();
 
         if(!$user->IsEmpty() ) {
+            $user = $user[0];
             $Notify = new Notification([
                 "user_id" => $this->userId,
                 "message" => $this->message
