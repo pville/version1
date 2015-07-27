@@ -17,7 +17,7 @@ class CreateNotification extends Job implements SelfHandling
      *
      * @return void
      */
-    public function __construct($userId,$message)
+    public function __construct($userId, $message)
     {
         $this->userId = $userId;
         $this->message = $message;
@@ -30,19 +30,22 @@ class CreateNotification extends Job implements SelfHandling
      */
     public function handle()
     {
-        $user = User::findOrFail($this->userId);
+        $user = User::Where('id', '=', $this->userId)->take(1)->get();
 
-        $Notify = new Notification([
-            "user_id" => $this->userId,
-            "message" => $this->message
-        ]);
-        $Notify->save();
+        if(!$user->IsEmpty() ) {
+            $Notify = new Notification([
+                "user_id" => $this->userId,
+                "message" => $this->message
+            ]);
+            $Notify->save();
 
 
-        Mail::queue('emails.notification', ['user' => $user, 'message' => $this->message], function ($m) use ($user) {
-            $m->from("noreply@pleasantville.co","PleasantVille.co");
-            $m->to($user->email, $user->first_name)->subject('Notification from PleasantVille.co!');
-        });
+            Mail::queue('emails.notification', ['user' => $user, 'message' => $this->message], function ($m) use ($user) {
+                $m->from("noreply@pleasantville.co","PleasantVille.co");
+                $m->to($user->email, $user->first_name)->subject('Notification from PleasantVille.co!');
+            });
+        }
+
 
     }
 }
