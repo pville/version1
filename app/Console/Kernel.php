@@ -31,5 +31,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('process-cancel')
             ->everyThirtyMinutes();
+
+        $schedule->command('queue:work')->everyFiveMinutes();
     }
 }

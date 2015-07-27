@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Toast;
 use Mail;
+use App\Jobs\CreateNotification;
 
 class DashboardController extends Controller {
     /*
@@ -617,11 +618,11 @@ class DashboardController extends Controller {
                         $screen->status = $data["approval"];
                         $screen->save();
 
-                        $Notify = new Notification([
-                            "user_id" => $screen->user_id,
-                            "message" => "You have been " . $data["approval"] . " for organization " . $user->organization->name
-                        ]);
-                        $Notify->save();
+
+
+                        $this->dispatch(new CreateNotification($screen->user_id, "You have been " . $data["approval"]
+                            . " for organization " . $user->organization->name));
+
 
                         return redirect(url("/dashboard/screening"));
                     }
@@ -659,7 +660,7 @@ class DashboardController extends Controller {
 
         Toast::success('Invite sent to ' . $data["email"], 'Success!');
 
-        Mail::send('emails.invite', ['invite' => $invite], function ($m) use ($invite) {
+        Mail::queue('emails.invite', ['invite' => $invite], function ($m) use ($invite) {
             $m->from("noreply@pleasantville.co","PleasantVille.co");
             $m->to($invite->email, $invite->first_name)->subject('Invite for PleasantVille.co!');
         });

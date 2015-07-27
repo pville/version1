@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use GeoIP;
 use Toast;
 use HTML;
+use App\Jobs\CreateNotification;
 
 class EventController extends Controller {
 
@@ -534,12 +535,9 @@ class EventController extends Controller {
                             $join = new Attendance( array('event_id' => $event->id, 'user_id' => $user->id, "checked_in" => false));
                             $join->save();
 
-                            $Notify = new Notification([
-                                "user_id" => $user->id,
-                                "message" => "You Joined Event for " . $event->name
-                            ]);
-                            $Notify->save();
 
+
+                            $this->dispatch(new CreateNotification($user->id, "You Joined Event for " . $event->name));
                         }
 
 
@@ -661,11 +659,8 @@ class EventController extends Controller {
 
         foreach($Users as $User) {
 
-            $Notify = new Notification([
-                "user_id" => $User->user_id,
-                "message" => "Event " . $Event->name . " has been updated."
-            ]);
-            $Notify->save();
+
+            $this->dispatch(new CreateNotification($User->user_id,"Event " . $Event->name . " has been updated."));
         }
 
         return redirect(url('/' .$Event->organization->slug . '/events/'. $Event->slug));

@@ -87,6 +87,11 @@ class ProcessEvents extends Command
                     $User->user->volunteer->save();
                     $User->user->save();
 
+                    $Notify = new Notification([
+                        "user_id" => $User->user_id,
+                        "message" => "Event " . $Event->name . " has ended."
+                    ]);
+                    $Notify->save();
                 }
             }
         }
