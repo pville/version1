@@ -4,7 +4,7 @@
 </head>
 <body>
 
-Hello {{ $user->first_name }},
+Hello {{ $name }},
 
 {{ $body }}
 
