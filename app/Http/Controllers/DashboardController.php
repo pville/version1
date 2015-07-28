@@ -660,7 +660,7 @@ class DashboardController extends Controller {
 
         Toast::success('Invite sent to ' . $data["email"], 'Success!');
 
-        Mail::queue('emails.invite', ['invite' => $invite], function ($m) use ($invite) {
+        Mail::queue('emails.invite', ['first_name' => $invite->first_name, 'last_name' => $invite->last_name, 'hash' => $invite->invite_code], function ($m) use ($invite) {
             $m->from("noreply@pleasantville.co","PleasantVille.co");
             $m->to($invite->email, $invite->first_name)->subject('Invite for PleasantVille.co!');
         });
