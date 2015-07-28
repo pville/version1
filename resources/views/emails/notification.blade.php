@@ -3,9 +3,9 @@
 
 </head>
 <body>
-Hello {{ $user->first_name }},
+Hello <?php echo $user->first_name; ?>,
 
-{{ $message }}
+<?php echo $message; ?>
 
 </body>
 </html>
