@@ -4,9 +4,9 @@
 </head>
 <body>
 
-Hello {{ $user->first_name }}
+Hello,
 
-Rmpty Data.
+{{ $body }}
 
 </body>
 </html>
