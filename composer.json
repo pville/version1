@@ -10,7 +10,8 @@
 		"barryvdh/laravel-ide-helper": "^2.0@dev",
 		"cviebrock/eloquent-sluggable": ">=3.0.0-alpha",
 		"grimthorr/laravel-toast": "dev-master",
-        "torann/geoip": "0.2.*@dev"
+	  	"torann/geoip": "0.2.*@dev",
+	  	"predis/predis": "~1.1@dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
