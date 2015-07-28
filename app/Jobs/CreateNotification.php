@@ -44,8 +44,9 @@ class CreateNotification extends Job implements SelfHandling, ShouldQueue
             ]);
             $Notify->save();
 
+            $name = $user->first_name;
 
-            Mail::queue('emails.notification', ['name' => $user->first_name, 'body' => $this->body] , function ($message) use ($user) {
+            Mail::queue('emails.notification', ['name' => $name, 'body' => $this->body] , function ($message) use ($user) {
                 $message->from("noreply@pleasantville.co","PleasantVille.co");
                 $message->to($user->email, $user->first_name)->subject('Notification from PleasantVille.co!');
             });
