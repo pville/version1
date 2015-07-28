@@ -15,16 +15,16 @@ class CreateNotification extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     protected $userId;
-    protected $message;
+    protected $body;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($userId, $message)
+    public function __construct($userId, $body)
     {
         $this->userId = $userId;
-        $this->body = $message;
+        $this->body = $body;
     }
 
     /**
