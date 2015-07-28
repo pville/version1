@@ -6,7 +6,7 @@
 
 Hello {{ $user->first_name }}
 
-{{ $body }}
+Rmpty Data.
 
 </body>
 </html>
