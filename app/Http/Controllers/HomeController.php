@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Event;
+use App\User;
+use App\Notification;
+use Mail;
 use GeoIP;
 
 class HomeController extends Controller {
@@ -66,5 +69,24 @@ class HomeController extends Controller {
     public function getSettings() {
 
         return "Settings";
+    }
+
+    public function getTest() {
+
+
+        $user = User::Where('id', '=', 1)->get();
+
+        if(!$user->IsEmpty() ) {
+            $user = $user[0];
+            $body = "test";
+
+
+            Mail::send('emails.notification', ['user' => $user, 'body' => $body] , function ($message) use ($user) {
+                $message->from("noreply@pleasantville.co","PleasantVille.co");
+                $message->to($user->email, $user->first_name)->subject('Notification from PleasantVille.co!');
+            });
+        }
+
+        return url("/");
     }
 }

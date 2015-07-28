@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index');
 
+
+
 Route::get('dashboard', ['middleware' => 'auth', 'uses' => 'DashboardController@index']);
 Route::get('dashboard/reset', ['middleware' => 'auth', 'uses' => 'DashboardController@getReset']);
 
@@ -38,7 +40,7 @@ Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
 Route::post('logout', 'Auth\AuthController@postLogout');
 
-Route::get('/test',['uses' => 'EventController@test']);
+
 
 
 Route::get('/events',['uses' => 'EventController@getEvents']);
