@@ -40,7 +40,7 @@ class CreateNotification extends Job implements SelfHandling, ShouldQueue
             $user = $user[0];
             $Notify = new Notification([
                 "user_id" => $this->userId,
-                "message" => $this->message
+                "message" => $this->body
             ]);
             $Notify->save();
 
