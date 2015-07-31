@@ -31,6 +31,13 @@ Route::get('dashboard/filter', ['middleware' => 'auth', 'uses' => 'DashboardCont
 Route::post('dashboard/filter/organization', ['middleware' => 'auth', 'uses' => 'DashboardController@postFilterOrganization']);
 Route::post('dashboard/filter/events', ['middleware' => 'auth', 'uses' => 'DashboardController@postFilterEvents']);
 
+Route::get('dashboard/blacklist', ['middleware' => 'auth', 'uses' => 'DashboardController@getBlacklist']);
+
+Route::get('dashboard/blacklist/list', ['middleware' => 'auth', 'uses' => 'DashboardController@getBlacklistData']);
+Route::get('dashboard/blacklist/add/{id}', ['middleware' => 'auth', 'uses' => 'DashboardController@postAddBlacklist']);
+Route::get('dashboard/blacklist/delete/{id}', ['middleware' => 'auth', 'uses' => 'DashboardController@postDelBlacklist']);
+
+
 Route::post('dashboard/approval', ['middleware' => 'auth', 'uses' => 'DashboardController@postApproval']);
 
 

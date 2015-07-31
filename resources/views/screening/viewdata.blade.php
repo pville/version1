@@ -1,6 +1,5 @@
 @extends('app')
 @section('title')
-    Screening Form - Pleasantville.co
 @endsection
 @section('content')
     <section class="bannertxt" id="jointEvent">
@@ -14,8 +13,8 @@
         </div>
 
 
-            {!! $html !!}
-            <form data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/screening/verify/' . $form->id) }}">
+        {!! $html !!}
+        <form data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/screening/verify/' . $form->id) }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
@@ -27,28 +26,28 @@
                     </select>
                 </div>
             </div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12"><input type="submit" value="Submit" /></div>
-                </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12"><input type="submit" value="Submit" /></div>
+            </div>
         </form>
-            @section('script')
-                <script type="text/javascript">
-                    $(document).ready(function(){
-                        $.getJSON("{{ url('/screening/data/' .  $form->id) }}", function(data){
-                            var response = JSON.parse(data.data);
-                            $.each( response, function( key, val ) {
-                                var input = $("input[name=" + ''+ key + '' + "]");
-                                if(input.is(':checkbox') ) {
+        @section('script')
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $.getJSON("{{ url('/screening/data/' .  $form->id) }}", function(data){
+                        var response = JSON.parse(data.data);
+                        $.each( response, function( key, val ) {
+                            var input = $("input[name=" + ''+ key + '' + "]");
+                            if(input.is(':checkbox') ) {
 
-                                    if (val == "1")
-                                        input.prop("checked", true);
-                                }
-                                else
-                                    input.val(val);
-                            });
+                                if (val == "1")
+                                    input.prop("checked", true);
+                            }
+                            else
+                                input.val(val);
                         });
-
                     });
-                </script>
+
+                });
+            </script>
             @endsection
 @endsection

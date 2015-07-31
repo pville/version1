@@ -8,9 +8,11 @@ use App\Organization;
 use App\Group;
 use App\Notification;
 use App\Invite;
+use App\Blacklist;
 use App\Attendance;
 use Illuminate\Http\Request;
 use Redirect;
+use Response;
 use Hash;
 use Validator;
 use Carbon\Carbon;
@@ -246,6 +248,93 @@ class DashboardController extends Controller {
 
         }
 
+    }
+
+    public function postAddBlacklist($id) {
+
+        if(Auth::check()) {
+            $user = Auth::user();
+
+            $ban = new BlackList([
+                "group_id" => $user->group_id,
+                "organization_id" => $id
+            ]);
+            $ban->save();
+        }
+
+        //return redirect(url("/"));
+    }
+
+    public function postDelBlacklist($id) {
+
+        if(Auth::check()) {
+            $user = Auth::user();
+
+
+            $ban = Blacklist::Where("group_id", "=", $user->group_id)->where("organization_id", "=", $id)->take(1)->get();
+
+            if(!$ban->isEmpty()) {
+                $ban = $ban[0];
+                $ban->delete();
+            }
+        }
+
+        //return redirect(url("/"));
+    }
+
+    public function getBlacklistData() {
+
+        if(Auth::check()) {
+            $user = Auth::user();
+
+            if ($user->role == "group") {
+
+
+                $bans = Blacklist::Where("group_id", "=", $user->group_id)->select('organization_id')->get();
+
+                if (!$bans->isEmpty()) {
+
+                    $data = array();
+
+                    $index = 0;
+                    foreach($bans as $ban) {
+                        $data[$index] = $ban->organization_id;
+                        $index++;
+                    }
+
+
+                    return Response::json(array(
+                        'success' => true,
+                        'data' => json_encode($data)
+                    ));
+
+                } else {
+                    return Response::json(array(
+                        'success' => false
+
+                    ));
+                }
+            }
+        }
+    }
+    public function getBlacklist() {
+
+        if(Auth::check()) {
+            $user = Auth::user();
+
+
+            $bans = Blacklist::Where("group_id", "=", $user->group_id)->get();
+            $orgs = Organization::paginate(15);
+
+
+            return view("dashboard.settings.blacklist")
+                ->with(compact("bans", $bans))
+                ->with(compact("orgs", $orgs));
+
+
+        }
+
+        return redirect(url("/"));
     }
     public function postFilterEvents(Request $request) {
 
@@ -660,7 +749,8 @@ class DashboardController extends Controller {
 
         Toast::success('Invite sent to ' . $data["email"], 'Success!');
 
-        Mail::queue('emails.invite', ['first_name' => $invite->first_name, 'last_name' => $invite->last_name, 'hash' => $invite->invite_code], function ($m) use ($invite) {
+        Mail::queue('emails.invite', ['first_name' => $invite->first_name, 'last_name' => $invite->last_name,
+            'hash' => $invite->invite_code], function ($m) use ($invite) {
             $m->from("noreply@pleasantville.co","PleasantVille.co");
             $m->to($invite->email, $invite->first_name)->subject('Invite for PleasantVille.co!');
         });

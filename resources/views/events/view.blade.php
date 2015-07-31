@@ -85,6 +85,7 @@
                             @if($user->role == "organization" && $event->organization_id == $user->organization->id)
                                 @if($event->status == "ended")
                                     <a class="edit-event" href="{{ url(Request::url() . '/complete') }}" >Complete Event</a>
+                                    <a class="edit-event" href="{{ url( Request::url() . '/edit') }}">Edit Event</a>
                                 @elseif($event->status == "pending" || $event->status == "started")
                                     <a class="edit-event" href="{{ url( Request::url() . '/edit') }}">Edit Event</a>
                                     <a class="edit-event" href="{{ url(Request::url() . '/roster') }}" >Event Roster</a>

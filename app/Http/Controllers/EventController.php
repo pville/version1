@@ -8,6 +8,7 @@ use Input;
 use Validator;
 use App\Organization;
 use App\Attendance;
+use App\Blacklist;
 
 use App\Notification;
 use App\Volunteer;
@@ -217,7 +218,7 @@ class EventController extends Controller {
 
             if($user->IsMember()) {
 
-
+                /*
                 if($user->group->org_rules !== '') {
 
 
@@ -235,6 +236,12 @@ class EventController extends Controller {
 
                     foreach ($event_rules as $rule)
                         $Events->Where('category', '!=', $rule);
+                }*/
+
+                $filters = Blacklist::Where('group_id', '=', $user->group_id)->get();
+
+                foreach($filters as $filter) {
+                    $Events->Where('organization_id', '!=', $filter->organization_id);
                 }
 
 
