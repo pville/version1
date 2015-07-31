@@ -17,7 +17,7 @@
                                 <!--<div class="groupsearch">
                                     <input type="text"><input type="submit" value="Filter" />
                                 </div>-->
-                                <a class="uniEdit" href="{{ url('/dashboard/filter') }}">Blacklist</a>
+                                <a class="uniEdit" href="{{ url('/dashboard/blacklist') }}">Blacklist</a>
                             </div>
                         </div>
                         <div class="row">
