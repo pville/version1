@@ -178,11 +178,11 @@ class DashboardController extends Controller {
                     return redirect(url("/logout"));
 
                 $Notifications =  Notification::where('user_id','=', $user->id)->select('id','message','created_at')->get();
-                $UpcomingEvents =  Event::whereRaw("organization_id = " . $user->organization_id . " AND status = 'pending' OR status = 'started'")
+                $UpcomingEvents =  Event::whereRaw("organization_id = " . $user->organization_id . " AND (status = 'pending' OR status = 'started')")
                     ->orderBy('start_time','desc')
                     ->get();
 
-                $CompletedEvents = Event::whereRaw("organization_id = " . $user->organization_id . " AND status = 'ended' OR status = 'completed'")
+                $CompletedEvents = Event::whereRaw("organization_id = " . $user->organization_id . " AND ( status = 'ended' OR status = 'completed')")
                     ->orderBy('start_time','desc')
                     ->get();
 
