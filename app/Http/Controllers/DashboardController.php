@@ -74,7 +74,7 @@ class DashboardController extends Controller {
                     ->Where(function ($query) {
 
                         $query->where('event.status', '=', "pending")
-                            ->where('event.status', '=', 'started');
+                            ->orWhere('event.status', '=', 'started');
                     })
                     ->orderBy('event.start_time','desc')
                     ->get();
