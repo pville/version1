@@ -59,11 +59,10 @@ class DashboardController extends Controller {
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
                 $Upcoming =  DB::table('event')
-                    ->join('attendance', function($join)
+                    ->join('attendance', function($join) use ($user)
                     {
-                        $user = Auth::user();
-                        $join->on('event.id', '=', 'attendance.event_id')
-                            ->on('attendance.user_id', '=', $user->id);
+
+                        $join->on('attendance.user_id', '=', $user->id);
 
                     })
                     ->orderBy('start_time','desc')
