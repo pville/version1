@@ -94,7 +94,6 @@ class DashboardController extends Controller {
                     }
                 }
 
-                dd($UpcomingEvents);
 
 
                 // Fd
@@ -143,7 +142,7 @@ class DashboardController extends Controller {
 
                 }*/
 
-                $CompletedEvents =  DB::table('event')
+                $Completed =  DB::table('event')
                     ->join('attendance', function($join) use ($user)
                     {
 
@@ -163,6 +162,20 @@ class DashboardController extends Controller {
                     })
                     ->orderBy('event.start_time','desc')
                     ->get();
+
+
+                $CompletedEvents = array();
+
+                if(count($Completed) > 0) {
+
+                    $index = 0;
+                    foreach($Completed as $next) {
+
+                        $CompletedEvents[$index] = $next->event();
+                        $index++;
+
+                    }
+                }
 
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
