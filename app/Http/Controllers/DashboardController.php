@@ -59,8 +59,7 @@ class DashboardController extends Controller {
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
                 DB::enableQueryLog();
-                $Upcoming =  DB::table('event')
-                    ->join('attendance', function($join) use ($user)
+                $UpcomingEvents =  Event::join('attendance', function($join) use ($user)
                     {
 
                         $join->on('event.id', '=', 'attendance.event_id')
@@ -81,20 +80,7 @@ class DashboardController extends Controller {
 
                 //dd(DB::getQueryLog());
 
-                $UpcomingEvents = array();
-
-                if(count($Upcoming) > 0) {
-
-                    $index = 0;
-                    foreach($Upcoming as $next) {
-
-                        $UpcomingEvents[$index] = $next->event();
-                        $index++;
-
-                    }
-                }
-
-
+             
 
                 // Fd
 
@@ -142,7 +128,7 @@ class DashboardController extends Controller {
 
                 }*/
 
-                $Completed =  Event::join('attendance', function($join) use ($user)
+                $CompletedEvents =  Event::join('attendance', function($join) use ($user)
                     {
 
                         $join->on('event.id', '=', 'attendance.event_id')
@@ -162,20 +148,7 @@ class DashboardController extends Controller {
                     ->orderBy('event.start_time','desc')
                     ->get();
 
-                dd($Completed);
 
-                $CompletedEvents = array();
-
-                if(count($Completed) > 0) {
-
-                    $index = 0;
-                    foreach($Completed as $next) {
-
-                        $CompletedEvents[$index] = $next->event();
-                        $index++;
-
-                    }
-                }
 
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
