@@ -70,7 +70,7 @@ class DashboardController extends Controller {
 
 
                     })
-                    ->orderBy('start_time','desc')
+                    ->orderBy('event.start_time','desc')
                     ->get();
 
                 dd(DB::getQueryLog());
