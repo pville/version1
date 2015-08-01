@@ -91,19 +91,8 @@ class DashboardController extends Controller {
                 // Fd
 
 
-                $Completed =  DB::table('event')
-                    ->join('attendance', function($join)
-                    {
-
-                       $join->on('event.id', '=', 'attendance.event_id')
-
-                           ->where('attendance.checked_in', '=', true)
-                           ->whereRaw("event.status = 'ended' OR event.status = 'completed'");
-
-
-
-                    })
-                    ->orderBy('start_time','desc')
+                $Completed =  Attendance::where("user_id", "=", $user->id)->where('checked_in', '=', true)
+                    ->orderBy('created_at','desc')
                     ->get();
 
              //   dd(DB::getQueryLog());
@@ -133,7 +122,7 @@ class DashboardController extends Controller {
                 }
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
-                    ->with(compact('UpcomingEvents', $Upcoming))
+                    ->with(compact('UpcomingEvents', $UpcomingEvents))
                     ->with(compact('CompletedEvents', $CompletedEvents))
                     ->with(compact('Notifications', $Notifications));
             }
