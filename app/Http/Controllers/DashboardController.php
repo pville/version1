@@ -58,8 +58,18 @@ class DashboardController extends Controller {
 
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
-                $Upcoming =  Attendance::where("user_id", "=", $user->id)
-                    ->orderBy('created_at','desc')
+                $Upcoming =  DB::table('event')
+                    ->join('attendance', function($join)
+                    {
+                        $user = Auth::user();
+                        $join->on('event.id', '=', 'attendance.event_id')
+                            ->where('attendance.user_id', '=', $user->id)
+
+                            ->where("event.status = 'pending'")
+                            ->orWhere("event.status = 'started");
+
+                    })
+                    ->orderBy('start_time','desc')
                     ->get();
 
 
@@ -91,8 +101,19 @@ class DashboardController extends Controller {
                 // Fd
 
 
-                $Completed =  Attendance::where("user_id", "=", $user->id)->where('checked_in', '=', true)
-                    ->orderBy('created_at','desc')
+                $Completed =  DB::table('event')
+                    ->join('attendance', function($join)
+                    {
+
+                       $join->on('event.id', '=', 'attendance.event_id')
+
+                           ->where('attendance.checked_in', '=', true)
+                           ->whereRaw("event.status = 'ended' OR event.status = 'completed'");
+
+
+
+                    })
+                    ->orderBy('start_time','desc')
                     ->get();
 
              //   dd(DB::getQueryLog());
