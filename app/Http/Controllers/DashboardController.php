@@ -59,7 +59,7 @@ class DashboardController extends Controller {
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
                 DB::enableQueryLog();
-                $UpcomingEvents =  DB::table('event')
+                $Upcoming =  DB::table('event')
                     ->join('attendance', function($join) use ($user)
                     {
 
@@ -81,28 +81,20 @@ class DashboardController extends Controller {
 
                 //dd(DB::getQueryLog());
 
-                /*$UpcomingEvents = null;
+                $UpcomingEvents = array();
 
                 if(count($Upcoming) > 0) {
 
                     $index = 0;
                     foreach($Upcoming as $next) {
 
-                        if($index == 0) {
-                            $UpcomingEvents = Event::Where('id', '=', $next->event_id);
-                            $index++;
-                        }
-                        else {
-                            $UpcomingEvents->orWhere('id','=',$next->event_id);
-                        }
+                        $UpcomingEvents[$index] = $next->event();
+                        $index++;
 
                     }
                 }
 
-                if(!is_null($UpcomingEvents)) {
-                    $UpcomingEvents = $UpcomingEvents->get();
 
-                }*/
 
 
                 // Fd
