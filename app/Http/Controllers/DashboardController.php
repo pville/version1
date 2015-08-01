@@ -58,7 +58,7 @@ class DashboardController extends Controller {
 
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
-                $Upcoming =  Attendance::Wherre("user_id", "=", $user->id)
+                $Upcoming =  Attendance::where("user_id", "=", $user->id)
                     ->orderBy('created_at','desc')
                     ->get();
 
