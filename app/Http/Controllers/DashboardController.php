@@ -58,18 +58,12 @@ class DashboardController extends Controller {
 
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
-                $Upcoming =  DB::table('attendance')
-                    ->join('event', function($join) use ($user)
-                    {
-
-                        $join->on('attendance.user_id', '=', $user->id);
-
-                    })
-                    ->orderBy('start_time','desc')
+                $Upcoming =  Attendance::Wherre("user_id", "=", $user->id)
+                    ->orderBy('created_at','desc')
                     ->get();
 
 
-                /*
+
                 $UpcomingEvents = null;
 
                 if(count($Upcoming) > 0) {
@@ -91,7 +85,7 @@ class DashboardController extends Controller {
                 if(!is_null($UpcomingEvents)) {
                     $UpcomingEvents = $UpcomingEvents->get();
 
-                }*/
+                }
 
 
                 // Fd
