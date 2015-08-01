@@ -142,8 +142,7 @@ class DashboardController extends Controller {
 
                 }*/
 
-                $Completed =  DB::table('event')
-                    ->join('attendance', function($join) use ($user)
+                $Completed =  Event::join('attendance', function($join) use ($user)
                     {
 
                         $join->on('event.id', '=', 'attendance.event_id')
@@ -163,6 +162,7 @@ class DashboardController extends Controller {
                     ->orderBy('event.start_time','desc')
                     ->get();
 
+                dd($Completed);
 
                 $CompletedEvents = array();
 
