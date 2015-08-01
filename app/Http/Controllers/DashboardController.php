@@ -64,10 +64,8 @@ class DashboardController extends Controller {
                         $user = Auth::user();
                         $join->on('event.id', '=', 'attendance.event_id')
                             ->where('attendance.user_id', '=', $user->id)
-                            ->where(function ($query) {
-                                $query->where('event.status', '=', 'pending')
-                                    ->orWhere('event.status', '=', 'started');
-                            });
+                             ->where('event.status', '=', 'pending')
+                            ->orWhere('event.status', '=', 'started');
                             //->where('attendance.checked_in', '=', false)
 
 
@@ -76,7 +74,7 @@ class DashboardController extends Controller {
                     ->get();
 
 
-
+                /*
                 $UpcomingEvents = null;
 
                 if(count($Upcoming) > 0) {
@@ -98,7 +96,7 @@ class DashboardController extends Controller {
                 if(!is_null($UpcomingEvents)) {
                     $UpcomingEvents = $UpcomingEvents->get();
 
-                }
+                }*/
 
 
                 // Fd
@@ -146,7 +144,7 @@ class DashboardController extends Controller {
                 }
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
-                    ->with(compact('UpcomingEvents', $UpcomingEvents))
+                    ->with(compact('UpcomingEvents', $Upcoming))
                     ->with(compact('CompletedEvents', $CompletedEvents))
                     ->with(compact('Notifications', $Notifications));
             }
