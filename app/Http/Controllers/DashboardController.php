@@ -63,10 +63,13 @@ class DashboardController extends Controller {
                     {
                         $user = Auth::user();
                         $join->on('event.id', '=', 'attendance.event_id')
-                            ->on('attendance.user_id', '=', $user->id)
+                            ->where('attendance.user_id', '=', $user->id)
+                            ->where(function ($query) {
+                                $query->where('event.status', '=', 'pending')
+                                    ->orWhere('event.status', '=', 'started');
+                            });
                             //->where('attendance.checked_in', '=', false)
-                            ->where("event.status = 'pending'")
-                            ->orWhere("event.status = 'started");
+
 
                     })
                     ->orderBy('start_time','desc')
