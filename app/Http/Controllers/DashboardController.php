@@ -59,7 +59,7 @@ class DashboardController extends Controller {
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
                 DB::enableQueryLog();
-                $Upcoming =  DB::table('event')
+                $UpcomingEvents =  DB::table('event')
                     ->join('attendance', function($join) use ($user)
                     {
 
@@ -151,7 +151,7 @@ class DashboardController extends Controller {
 
                 }*/
 
-                $Completed =  DB::table('event')
+                $CompletedEvents =  DB::table('event')
                     ->join('attendance', function($join) use ($user)
                     {
 
@@ -171,11 +171,11 @@ class DashboardController extends Controller {
                     })
                     ->orderBy('event.start_time','desc')
                     ->get();
-               
+
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
-                    ->with(compact('UpcomingEvents', $Upcoming))
-                    ->with(compact('CompletedEvents', $Completed))
+                    ->with(compact('UpcomingEvents', $UpcomingEvents))
+                    ->with(compact('CompletedEvents', $CompletedEvents))
                     ->with(compact('Notifications', $Notifications));
             }
             else if ($user->role == "group") {
