@@ -63,7 +63,7 @@ class DashboardController extends Controller {
                     {
                         $user = Auth::user();
                         $join->on('event.id', '=', 'attendance.event_id')
-                            ->where('attendance.user_id', '=', $user->id)
+                            ->on('attendance.user_id', '=', $user->id)
                             //->where('attendance.checked_in', '=', false)
                             ->whereRaw("event.status = 'pending' OR event.status = 'started'");
 
@@ -178,14 +178,13 @@ class DashboardController extends Controller {
                     return redirect(url("/logout"));
 
                 $Notifications =  Notification::where('user_id','=', $user->id)->select('id','message','created_at')->get();
-                $UpcomingEvents =  Event::Where('organization_id', '=', $user->organization->id)
-                    ->where('status', '=', 'pending')
+                $UpcomingEvents =  Event::Where('organization_id', '=', $user->organization_id)
+                    ->whereRaw("status = 'pending' OR status = 'started'")
                     ->orderBy('start_time','desc')
                     ->get();
 
-                $CompletedEvents = Event::Where('organization_id', '=', $user->organization->id)
-                    ->where('status', '=', 'ended')
-                    ->orWhere('status', '=', 'completed')
+                $CompletedEvents = Event::Where('organization_id', '=', $user->organization_id)
+                    ->whereRaw("status = 'ended' OR status = 'completed'")
                     ->orderBy('start_time','desc')
                     ->get();
 
