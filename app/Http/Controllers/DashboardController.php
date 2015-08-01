@@ -79,7 +79,7 @@ class DashboardController extends Controller {
                     ->orderBy('event.start_time','desc')
                     ->get();
 
-                dd(DB::getQueryLog());
+                //dd(DB::getQueryLog());
 
                 $UpcomingEvents = null;
 
