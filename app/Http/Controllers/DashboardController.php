@@ -81,7 +81,7 @@ class DashboardController extends Controller {
 
                 //dd(DB::getQueryLog());
 
-                $UpcomingEvents = null;
+                /*$UpcomingEvents = null;
 
                 if(count($Upcoming) > 0) {
 
@@ -102,12 +102,12 @@ class DashboardController extends Controller {
                 if(!is_null($UpcomingEvents)) {
                     $UpcomingEvents = $UpcomingEvents->get();
 
-                }
+                }*/
 
 
                 // Fd
 
-
+                /*
                 $Completed =  DB::table('event')
                     ->join('attendance', function($join) use ($user)
                     {
@@ -149,11 +149,32 @@ class DashboardController extends Controller {
                 if(!is_null($CompletedEvents)) {
                     $CompletedEvents = $CompletedEvents->get();
 
-                }
+                }*/
+
+                $Completed =  DB::table('event')
+                    ->join('attendance', function($join) use ($user)
+                    {
+
+                        $join->on('event.id', '=', 'attendance.event_id')
+                            ->where('attendance.user_id', '=', $user->id)
+                            ->where('attendance.checked_in', '=', true);
+
+
+
+
+
+                    })
+                    ->Where(function ($query) {
+
+                        $query->where('event.status', '=', "ended")
+                            ->orWhere('event.status', '=', 'completed');
+                    })
+                    ->orderBy('event.start_time','desc')
+                    ->get();
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
-                    ->with(compact('UpcomingEvents', $UpcomingEvents))
-                    ->with(compact('CompletedEvents', $CompletedEvents))
+                    ->with(compact('UpcomingEvents', $Upcoming))
+                    ->with(compact('CompletedEvents', $Completed))
                     ->with(compact('Notifications', $Notifications));
             }
             else if ($user->role == "group") {
