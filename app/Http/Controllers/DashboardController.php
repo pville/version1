@@ -58,6 +58,7 @@ class DashboardController extends Controller {
 
             if($user->role == "volunteer") {
                 // DB::table("event")->leftJoin('attendance', 'event.id', '=', 'attendance.event_id');
+                DB::enableQueryLog();
                 $Upcoming =  DB::table('event')
                     ->join('attendance', function($join) use ($user)
                     {
