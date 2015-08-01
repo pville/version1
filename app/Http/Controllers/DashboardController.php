@@ -64,9 +64,11 @@ class DashboardController extends Controller {
 
                         $join->on('event.id', '=', 'attendance.event_id')
                             ->where('attendance.user_id', '=', $user->id)
+                            ->where(function ($query) {
+                                $query->where('event.status', '=', "pending")
+                                    ->orWhere('event.status', '=', 'started');
+                            });
 
-                            ->where("event.status", "=", "pending")
-                            ->orWhere("event.status", "=", "started");
 
                     })
                     ->orderBy('start_time','desc')
@@ -110,7 +112,7 @@ class DashboardController extends Controller {
                            ->where('attendance.checked_in', '=', true)
                            ->where("event.status", "=", "ended")
                            ->orWhere("event.status", "=", "completed");
-                      
+
 
 
 
