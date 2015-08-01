@@ -65,15 +65,18 @@ class DashboardController extends Controller {
 
                         $join->on('event.id', '=', 'attendance.event_id')
                             ->where('attendance.user_id', '=', $user->id)
-                            ->where('event.status', '=', "pending")
-                            ->orWhere('event.status', '=', 'started');
+                            ->orWhere(function ($query) {
+                                $query->where('event.status', '=', "pending")
+                                    ->orWhere('event.status', '=', 'started');
+                            });
+
 
 
                     })
                     ->orderBy('event.start_time','desc')
                     ->get();
 
-                //dd(DB::getQueryLog());
+                dd(DB::getQueryLog());
 
                 $UpcomingEvents = null;
 
