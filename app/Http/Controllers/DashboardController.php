@@ -171,7 +171,7 @@ class DashboardController extends Controller {
                     })
                     ->orderBy('event.start_time','desc')
                     ->get();
-                dd(DB::getQueryLog());
+               
                 return view('dashboard.volunteer')
                     ->with(compact('user', $user))
                     ->with(compact('UpcomingEvents', $Upcoming))
