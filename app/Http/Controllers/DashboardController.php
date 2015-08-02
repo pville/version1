@@ -82,51 +82,6 @@ class DashboardController extends Controller {
 
 
 
-                // Fd
-
-                /*
-                $Completed =  DB::table('event')
-                    ->join('attendance', function($join) use ($user)
-                    {
-
-                       $join->on('event.id', '=', 'attendance.event_id')
-                           ->where('attendance.user_id', '=', $user->id)
-                           ->where('attendance.checked_in', '=', true)
-                           ->where("event.status", "=", "ended")
-                           ->orWhere("event.status", "=", "completed");
-
-
-
-
-                    })
-                    ->orderBy('start_time','desc')
-                    ->get();
-
-             //   dd(DB::getQueryLog());
-
-                $CompletedEvents = null;
-
-                if(count($Completed) > 0) {
-
-                    $index = 0;
-                    $user = Auth::user();
-                    foreach ($Completed as $next) {
-                        if ($next->user_id == $user->id && $next->checked_in == true)  {
-                            if ($index == 0) {
-                                $CompletedEvents = Event::Where('id', '=', $next->event_id);
-                                $index++;
-                            } else {
-                                $CompletedEvents->orWhere('id', '=', $next->event_id);
-                            }
-
-                        }
-                    }
-                }
-
-                if(!is_null($CompletedEvents)) {
-                    $CompletedEvents = $CompletedEvents->get();
-
-                }*/
 
                 $CompletedEvents =  Event::join('attendance', function($join) use ($user)
                     {
