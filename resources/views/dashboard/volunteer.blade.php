@@ -109,7 +109,7 @@
 
                                                     <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
-                                                            <img src="{{ asset('images/events/' . $NextEvent->id. '.jpg') }}" alt="" />
+                                                            <img src="{{ asset('images/events/' . $NextEvent->event_id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
                                                                 <h3>{{ $NextEvent->name }}</h3>
                                                                 <p>{{ $NextEvent->description }} </p>
@@ -148,7 +148,7 @@
 
                                                     <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
-                                                            <img src="{{ asset('images/events/' . $CNextEvent->id. '.jpg') }}" alt="" />
+                                                            <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
                                                                 <h3>{{ $CNextEvent->name }}</h3>
                                                                 <p>{{ $CNextEvent->description }} </p>

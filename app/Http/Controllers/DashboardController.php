@@ -80,7 +80,7 @@ class DashboardController extends Controller {
 
                 //dd(DB::getQueryLog());
 
-             
+
 
                 // Fd
 
