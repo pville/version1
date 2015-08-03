@@ -144,45 +144,25 @@
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
                                             @if( $CompletedEvents )
+                                                @foreach($CompletedEvents as $CNextEvent)
 
-                                                <div class="item active">
-                                                    <div class="col-md-6 col-sm-6">
-                                                        <img src="{{ asset('images/events/' . $CompletedEvents[0]->event_id. '.jpg') }}" alt="" />
-                                                        <div class="portfoliotxt">
-                                                            <h3>{{ $CompletedEvents[0]->name }}</h3>
-                                                            <p>{{ $CompletedEvents[0]->description }} </p>
-                                                            <ul>
-                                                                <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CompletedEvents[0]->getEventType() }}</li>
-                                                                <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CompletedEvents[0]->getAttending() }} persons going</li>
-                                                                <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CompletedEvents[0]->address  }}, {{ $CompletedEvents[0]->city }}, {{ $CompletedEvents[0]->state }}</li>
-                                                                <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CompletedEvents[0]->FriendlyDate($CompletedEvents[0]->start_time) }}</li>
-                                                                <li><a href="{{ url( $CompletedEvents[0]->organization->slug . '/events/' . $CompletedEvents[0]->slug) }}">Read More</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                @for ($i = 1; $i < count($CompletedEvents); $i++)
-
-
-
-                                                    <div class="item">
+                                                    <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
-                                                            <img src="{{ asset('images/events/' . $CompletedEvents[$i]->event_id. '.jpg') }}" alt="" />
+                                                            <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
-                                                                <h3>{{ $CompletedEvents[$i]->name }}</h3>
-                                                                <p>{{ $CompletedEvents[$i]->description }} </p>
+                                                                <h3>{{ $CNextEvent->name }}</h3>
+                                                                <p>{{ $CNextEvent->description }} </p>
                                                                 <ul>
-                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CompletedEvents[$i]->getEventType() }}</li>
-                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CompletedEvents[$i]->getAttending() }} persons going</li>
-                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CompletedEvents[$i]->address  }}, {{ $CompletedEvents[$i]->city }}, {{  $CompletedEvents[$i]->state }}</li>
-                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CompletedEvents[$i]->FriendlyDate($CompletedEvents[$i]->start_time) }}</li>
-                                                                    <li><a href="{{ url( $CompletedEvents[$i]->organization->slug . '/events/' . $CompletedEvents[$i]->slug) }}">Read More</a></li>
+                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
+                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
+                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
+                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
+                                                                    <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endfor
+                                                @endforeach
                                             @endif
                                         </div>
 
