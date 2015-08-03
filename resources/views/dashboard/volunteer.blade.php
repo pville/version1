@@ -175,7 +175,7 @@
                                                                 <ul>
                                                                     <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CompletedEvents[$i]->getEventType() }}</li>
                                                                     <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CompletedEvents[$i]->getAttending() }} persons going</li>
-                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CompletedEvents[$i]->address  }}, {{ $CompletedEvents[$i]->city }}, $CompletedEvents[$i] $CNextEvent->state }}</li>
+                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CompletedEvents[$i]->address  }}, {{ $CompletedEvents[$i]->city }}, {{  $CompletedEvents[$i]->state }}</li>
                                                                     <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CompletedEvents[$i]->FriendlyDate($CompletedEvents[$i]->start_time) }}</li>
                                                                     <li><a href="{{ url( $CompletedEvents[$i]->organization->slug . '/events/' . $CompletedEvents[$i]->slug) }}">Read More</a></li>
                                                                 </ul>
