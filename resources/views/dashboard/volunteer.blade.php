@@ -107,7 +107,7 @@
                                             @if($UpcomingEvents)
                                                 @foreach($UpcomingEvents as $NextEvent)
 
-                                                    <div class="item">
+                                                    <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
                                                             <img src="{{ asset('images/events/' . $NextEvent->event_id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
@@ -146,7 +146,7 @@
                                             @if( $CompletedEvents )
                                                 @foreach($CompletedEvents as $CNextEvent)
 
-                                                    <div class="item">
+                                                    <div class="item active">
                                                         <div class="col-md-6 col-sm-6">
                                                             <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
                                                             <div class="portfoliotxt">
