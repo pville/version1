@@ -144,28 +144,32 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="completed">
-                                    <div data-slick='{"arrows": true, "infinite": ture, "slidesToShow": 2, "slidesToScroll": 3, "rows": 1}'>
-                                        @if( $CompletedEvents )
-                                            @foreach($CompletedEvents as $CNextEvent)
+                                    <div class="slider multiple-items slick-initialized slick-slider" role="toolbar">
+                                        <button type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button" style="display: block;">Previous</button>
+                                        <div aria-live="polite" class="slick-list draggable">
+                                            <div class="slick-track" style="opacity: 1; width: 2805px; transform: translate3d(-1683px, 0px, 0px);" role="listbox">
+                                            @if( $CompletedEvents )
+                                                @foreach($CompletedEvents as $CNextEvent)
 
-
-                                                    <div class="col-md-6 col-sm-6">
-                                                        <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
-                                                        <div class="portfoliotxt">
-                                                            <h3>{{ $CNextEvent->name }}</h3>
-                                                            <p>{{ $CNextEvent->description }} </p>
-                                                            <ul>
-                                                                <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
-                                                                <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
-                                                                <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
-                                                                <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
-                                                                <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                            @endforeach
-                                        @endif
+                                                        <div class="slick-slide"  role="option" aria-describedby="slick-slide10">
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
+                                                                <div class="portfoliotxt">
+                                                                    <h3>{{ $CNextEvent->name }}</h3>
+                                                                    <p>{{ $CNextEvent->description }} </p>
+                                                                    <ul>
+                                                                        <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
+                                                                        <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
+                                                                        <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
+                                                                        <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
+                                                                        <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                @endforeach
+                                            @endif
+                                            </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
