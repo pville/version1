@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="completed">
-                                    <div data-slick='{"arrows": true, "infinite": ture, "slidesToShow": 3, "slidesToScroll": 3, "rows": 1}'>
+                                    <div data-slick='{"arrows": true, "infinite": ture, "slidesToShow": 2, "slidesToScroll": 2, "rows": 1}'>
                                         @if( $CompletedEvents )
                                             @foreach($CompletedEvents as $CNextEvent)
 
