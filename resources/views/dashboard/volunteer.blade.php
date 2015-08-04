@@ -1,4 +1,8 @@
 @extends('app')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}"/>
+@endsection
 @section('title')
     Dashboard - Pleasantville.co
 @endsection
@@ -140,41 +144,28 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="completed">
-                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            @if( $CompletedEvents )
-                                                @foreach($CompletedEvents as $CNextEvent)
+                                    <div data-slick='{"arrows": true, "infinite": ture, "slidesToShow": 3, "slidesToScroll": 3}'>
+                                        @if( $CompletedEvents )
+                                            @foreach($CompletedEvents as $CNextEvent)
 
-                                                    <div class="item active">
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
-                                                            <div class="portfoliotxt">
-                                                                <h3>{{ $CNextEvent->name }}</h3>
-                                                                <p>{{ $CNextEvent->description }} </p>
-                                                                <ul>
-                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
-                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
-                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
-                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
-                                                                    <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
-                                                                </ul>
-                                                            </div>
+
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <img src="{{ asset('images/events/' . $CNextEvent->event_id. '.jpg') }}" alt="" />
+                                                        <div class="portfoliotxt">
+                                                            <h3>{{ $CNextEvent->name }}</h3>
+                                                            <p>{{ $CNextEvent->description }} </p>
+                                                            <ul>
+                                                                <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
+                                                                <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
+                                                                <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
+                                                                <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
+                                                                <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                @endforeach
-                                            @endif
-                                        </div>
 
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -190,8 +181,17 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('slick/slick.min.js') }}"></script>
 
     <script type="text/javascript">
+
+        $('.multiple-items').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+
+
         jQuery(".Notifi ul").mCustomScrollbar({
             setHeight:340,
             theme:"minimal-dark"
