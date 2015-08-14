@@ -1,4 +1,9 @@
 @extends('app')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}"/>
+
+@endsection
 @section('title')
     Dashboard - Pleasantville.co
 @endsection
@@ -87,82 +92,60 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content">
+
+
                                 <div role="tabpanel" class="tab-pane active" id="upcoming">
-                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            @if($UpcomingEvents)
-                                                @foreach($UpcomingEvents as $NextEvent)
 
-                                                    <div class="item active">
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <img src="{{ asset('images/events/' . $NextEvent->id. '.jpg') }}" alt="" />
-                                                            <div class="portfoliotxt">
-                                                                <h3>{{ $NextEvent->name }}</h3>
-                                                                <p>{{ $NextEvent->description }} </p>
-                                                                <ul>
-                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $NextEvent->getEventType() }}</li>
-                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $NextEvent->getAttending() }} persons going</li>
-                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $NextEvent->address  }}, {{ $NextEvent->city }}, {{ $NextEvent->state }}</li>
-                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $NextEvent->FriendlyDate($NextEvent->start_time) }}</li>
-                                                                    <li><a href="{{ url( $NextEvent->organization->slug . '/events/' . $NextEvent->slug) }}">Read More</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                    @if( $UpcomingEvents )
+                                        <div class="UpcomingEvents-items">
+                                            @foreach($UpcomingEvents as $CNextEvent)
+
+
+                                                <div class="col-md-6 col-sm-6">
+                                                    <img src="{{ asset('images/events/' . $CNextEvent->id. '.jpg') }}" alt="" />
+                                                    <div class="portfoliotxt">
+                                                        <h3>{{ $CNextEvent->name }}</h3>
+                                                        <p>{{ $CNextEvent->description }} </p>
+                                                        <ul>
+                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
+                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
+                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
+                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
+                                                            <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
+                                                        </ul>
                                                     </div>
-                                                @endforeach
-                                            @endif
+                                                </div>
 
+                                            @endforeach
                                         </div>
+                                    @endif
 
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="completed">
-                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                            @if( $CompletedEvents )
-                                                @foreach($CompletedEvents as $CNextEvent)
 
-                                                    <div class="item active">
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <img src="{{ asset('images/events/' . $CNextEvent->id. '.jpg') }}" alt="" />
-                                                            <div class="portfoliotxt">
-                                                                <h3>{{ $CNextEvent->name }}</h3>
-                                                                <p>{{ $CNextEvent->description }} </p>
-                                                                <ul>
-                                                                    <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
-                                                                    <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
-                                                                    <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
-                                                                    <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
-                                                                    <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                    @if( $CompletedEvents )
+                                        <div class="multiple-items">
+                                            @foreach($CompletedEvents as $CNextEvent)
+
+
+                                                <div class="col-md-6 col-sm-6">
+                                                    <img src="{{ asset('images/events/' . $CNextEvent->id. '.jpg') }}" alt="" />
+                                                    <div class="portfoliotxt">
+                                                        <h3>{{ $CNextEvent->name }}</h3>
+                                                        <p>{{ $CNextEvent->description }} </p>
+                                                        <ul>
+                                                            <li class="sm"><img src="{{ asset('images/tag_icon.jpg') }}" alt="" />{{ $CNextEvent->getEventType() }}</li>
+                                                            <li class="sm"><img src="{{ asset('images/user_icon.jpg') }}" /> {{ $CNextEvent->getAttending() }} persons going</li>
+                                                            <li><img src="{{ asset('images/location_icon.jpg') }}" />{{ $CNextEvent->address  }}, {{ $CNextEvent->city }}, {{ $CNextEvent->state }}</li>
+                                                            <li><img src="{{ asset('images/calc_cion.jpg') }}" />{{ $CNextEvent->FriendlyDate($CNextEvent->start_time) }}</li>
+                                                            <li><a href="{{ url( $CNextEvent->organization->slug . '/events/' . $CNextEvent->slug) }}">Read More</a></li>
+                                                        </ul>
                                                     </div>
-                                                @endforeach
-                                            @endif
-                                        </div>
+                                                </div>
 
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -174,4 +157,30 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script src="{{ asset('slick/slick.min.js') }}"></script>
+
+    <script type="text/javascript">
+
+
+        $('.UpcomingEvents-items').slick({
+            infinite: true,
+            slidesToShow: 2,
+            slidesToScroll: 2
+        });
+
+        $('.multiple-items').slick({
+            infinite: true,
+            slidesToShow: 2,
+            slidesToScroll: 2
+        });
+
+
+        jQuery(".Notifi ul").mCustomScrollbar({
+            setHeight:340,
+            theme:"minimal-dark"
+        });
+    </script>
 @endsection
