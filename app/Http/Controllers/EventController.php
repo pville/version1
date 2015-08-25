@@ -661,7 +661,19 @@ class EventController extends Controller {
         $Event->resluggify();
         $Event->save();
 
+        if($data['image']) {
+            $imageName = $Event->id . '.jpg';
+            $imagePath = base_path() . '/public/images/events/' . $imageName;
 
+            if (Storage::exists($imagePath)) {
+                Storage::delete($imagePath);
+            }
+
+            $request->file('image')->move(
+                base_path() . '/public/images/events/', $imageName
+            );
+
+        }
         $Users = Attendance::where('event_id', '=', $Event->id)->get();
 
         foreach($Users as $User) {

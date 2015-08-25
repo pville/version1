@@ -107,7 +107,7 @@ class AuthController extends Controller {
 		});
 
 		
-		return view('register.group',compact('group_types',$group_types));
+		return view('register.group')->with(compact('group_types',$group_types));
 	}
 
 	public function postGroup(Request $request)

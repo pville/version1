@@ -124,7 +124,7 @@
                                 <div role="tabpanel" class="tab-pane" id="completed">
 
                                     @if( $CompletedEvents )
-                                        <div class="multiple-items">
+                                        <div class="CompletedEvents-items" data-slick='{"infinite": true, "slidesToShow": 2, "slidesToScroll": 2}'>
                                             @foreach($CompletedEvents as $CNextEvent)
 
 
@@ -160,22 +160,29 @@
 @endsection
 
 @section('script')
+
     <script src="{{ asset('slick/slick.min.js') }}"></script>
 
     <script type="text/javascript">
 
+        $(document).ready(function(){
+                $('.UpcomingEvents-items').slick({
+                    infinite: true,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                });
 
-        $('.UpcomingEvents-items').slick({
-            infinite: true,
-            slidesToShow: 2,
-            slidesToScroll: 2
+            $('.CompletedEvents-items').slick({
+                infinite: true,
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                autoplay: true,
+                autoplaySpeed: 2000,
+            });
         });
 
-        $('.multiple-items').slick({
-            infinite: true,
-            slidesToShow: 2,
-            slidesToScroll: 2
-        });
 
 
         jQuery(".Notifi ul").mCustomScrollbar({

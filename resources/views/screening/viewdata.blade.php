@@ -26,9 +26,9 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
+           <!-- <div class="row">
                 <div class="col-md-12 col-sm-12"><input type="submit" value="Submit" /></div>
-            </div>
+            </div>-->
         </form>
         @section('script')
             <script type="text/javascript">

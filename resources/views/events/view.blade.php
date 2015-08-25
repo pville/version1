@@ -68,6 +68,8 @@
                                         @endif
                                     @endif
                                 @endif
+                             @else
+                                <a href="{{ url('/login' ) }}">Join</a>
                              @endif
                         </div>
                         <span class="divder"></span>
@@ -119,7 +121,7 @@
                             <li><img src="{{ asset('images/icons/events/' . $event->category . '.jpg') }}"></li>
                             <li>{{ $event->credits }}</li>
                         </ul>
-                        <p>{{ $event->description }}</p>
+                        <p>{!! nl2br(e($event->description)) !!}}</p>
                     </div>
                 </div>
             </div>
