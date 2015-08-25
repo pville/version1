@@ -106,7 +106,7 @@ class AuthController extends Controller {
 		    return DB::table('group_types')->select('id', 'type')->get();
 		});
 
-		
+		dd($group_types);
 		return view('register.group')->with(compact('group_types',$group_types));
 	}
 
