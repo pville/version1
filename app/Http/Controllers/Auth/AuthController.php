@@ -101,10 +101,12 @@ class AuthController extends Controller {
 
 
 		// use a cache to reduce mysql queries
-		$group_types = Cache::remember('group_types', $minutes, function()
+		/*$group_types = Cache::remember('group_types', $minutes, function()
 		{
 		    return DB::table('group_types')->select('id', 'type')->get();
-		});
+		});*/
+
+		$group_types = DB::table('group_types')->select('id', 'type')->get();
 
 		dd($group_types);
 		return view('register.group')->with(compact('group_types',$group_types));
