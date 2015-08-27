@@ -661,7 +661,7 @@ class EventController extends Controller {
         $Event->resluggify();
         $Event->save();
 
-        if($data['image']) {
+        if(array_key_exists ('image', $data)) {
             $imageName = $Event->id . '.jpg';
             $imagePath = base_path() . '/public/images/events/' . $imageName;
 

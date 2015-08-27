@@ -86,6 +86,18 @@ class Event extends \Eloquent implements SluggableInterface {
         return $dt->format("h:i A");
     }
 
+    public function getFullStartTime(){
+        $timezone = $this->getTimeZoneFromState($this->state);
+
+        $localTime = new Carbon( $this->start_time, config('app.timezone'));
+
+
+        $dt = Carbon::createFromTimestamp($localTime->timestamp, $timezone);
+
+
+        return $dt->format("m/d/Y H:i A");
+    }
+
     public function getEndTime(){
         $timezone = $this->getTimeZoneFromState($this->state);
         $localTime = new Carbon( $this->end_time, config('app.timezone'));
@@ -93,6 +105,15 @@ class Event extends \Eloquent implements SluggableInterface {
         $dt = Carbon::createFromTimestamp($localTime->timestamp, $timezone);
 
         return $dt->format("h:i A");
+    }
+
+    public function getFullEndTime(){
+        $timezone = $this->getTimeZoneFromState($this->state);
+        $localTime = new Carbon( $this->end_time, config('app.timezone'));
+
+        $dt = Carbon::createFromTimestamp($localTime->timestamp, $timezone);
+
+        return $dt->format("m/d/Y H:i A");
     }
 
     public function ConvertTimeToUTC($time, $timezone){

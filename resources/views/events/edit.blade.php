@@ -136,7 +136,7 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <div class='input-group date' id='startdate'>
-                                            <input type='text' placeholder="Start Date" class="mb15 form-control" name="start" id="start" value="{{ $event->start_time }}" required/>
+                                            <input type='text' placeholder="Start Date" class="mb15 form-control" name="start" id="start" value="{{ $event->getFullStartTime() }}" required/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -152,7 +152,7 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <div class='input-group date' id='enddate'>
-                                            <input type='text' placeholder="End Date" class="mb15 form-control" name="end" id="end" value="{{ $event->end_time }}" required/>
+                                            <input type='text' placeholder="End Date" class="mb15 form-control" name="end" id="end" value="{{ $event->getFullEndTime() }}" required/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
