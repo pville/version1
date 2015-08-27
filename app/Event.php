@@ -95,7 +95,7 @@ class Event extends \Eloquent implements SluggableInterface {
         $dt = Carbon::createFromTimestamp($localTime->timestamp, $timezone);
 
 
-        return $dt->format("m/d/Y H:i A");
+        return $dt->format("m/d/Y h:i A");
     }
 
     public function getEndTime(){
@@ -112,8 +112,9 @@ class Event extends \Eloquent implements SluggableInterface {
         $localTime = new Carbon( $this->end_time, config('app.timezone'));
 
         $dt = Carbon::createFromTimestamp($localTime->timestamp, $timezone);
+        $current_time = $dt->format("m/d/Y h:i A");
 
-        return $dt->format("m/d/Y H:i A");
+        return $current_time;
     }
 
     public function ConvertTimeToUTC($time, $timezone){

@@ -602,8 +602,8 @@ class EventController extends Controller {
             'desc' => 'required|max:1000',
             'email' => 'required|email|max:255',
             'phone' => 'required|max:20',
-            'start' => 'required|date_format:m/d/Y H:i A',
-            'end' => 'required|date_format:m/d/Y H:i A',
+            'start' => 'required|date_format:m/d/Y h:i A',
+            'end' => 'required|date_format:m/d/Y h:i A',
             'event_type' => 'required|exists:event_category,id',
             'state' => 'required|exists:states,abbreviation',
             'city' => 'required|string|max:50',
@@ -763,7 +763,7 @@ class EventController extends Controller {
     }
 
     public function ConvertTimeToUTC($time, $timezone){
-        $localTime = Carbon::createFromFormat('m/d/Y H:i A', $time, $timezone);
+        $localTime = Carbon::createFromFormat('m/d/Y h:i A', $time, $timezone);
         return Carbon::createFromTimestamp($localTime->timestamp, config('app.timezone'));
     }
 

@@ -226,8 +226,7 @@
                 $('#startdate').datetimepicker();
                 $('#enddate').datetimepicker();
 
-                $('#start').val("{{ $event->start_time->format('m/d/Y H:i A') }}");
-                $('#end').val("{{ $event->end_time->format('m/d/Y H:i A') }}");
+              
 
 
             });
