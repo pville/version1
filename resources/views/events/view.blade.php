@@ -82,7 +82,7 @@
                                     @endif
                                 @endif
                              @else
-                                <a href="{{ url('/login' ) }}">Join</a>
+                                <a href="{{ url('/register/volunteer' ) }}">Join</a>
                              @endif
                         </div>
                         <span class="divder"></span>
