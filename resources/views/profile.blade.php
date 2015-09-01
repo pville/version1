@@ -29,7 +29,7 @@
                 <div class="col-md-8 col-sm-8">
                     <div class="boxradwrap mission-box" style="padding:15px;">
                         <h1>Our Mission</h1>
-                        <p> {{ $org->description }}</p>
+                        <p>{!! nl2br(e($event->description)) !!}</p>
                      </div>
                 </div>
 
