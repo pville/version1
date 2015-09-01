@@ -442,7 +442,7 @@ class DashboardController extends Controller {
                 return redirect($this->redirectPath());
             }
 
-            $this->getUpdate($type, $request->all());
+            $this->getUpdate($type, $request);
 
             return redirect(url('/dashboard'));
         }
@@ -458,11 +458,11 @@ class DashboardController extends Controller {
 
     }
 
-    public function getUpdate($type, array $data)
+    public function getUpdate($type,  Request $request)
     {
         if($type == "Volunteer") return false;
-        else if($type == "group") return $this->GroupUpdate($data);
-        else if($type == "organization") return $this->OrgUpdate($data);
+        else if($type == "group") return $this->GroupUpdate($request->all());
+        else if($type == "organization") return $this->OrgUpdate($request);
     }
 
     public function GroupValidator(array $data) {
@@ -524,8 +524,9 @@ class DashboardController extends Controller {
         return $Group;
     }
 
-    public function OrgUpdate(array $data) {
+    public function OrgUpdate(Request $request) {
 
+        $data = $request->all();
         $user = Auth::user();
 
 
@@ -540,6 +541,21 @@ class DashboardController extends Controller {
         $Org->description = $data['org_desc'];
         $Org->email = $data['org_email'];
         $Org->url = $data['url'];
+
+
+        if(array_key_exists ('image', $data)) {
+            $imageName = $Org->id . '.jpg';
+            $imagePath = base_path() . '/public/images/organization/' . $imageName;
+
+            if (Storage::exists($imagePath)) {
+                Storage::delete($imagePath);
+            }
+
+            $request->file('image')->move(
+                base_path() . '/public/images/organization/', $imageName
+            );
+
+        }
 
         $Org->resluggify();
         $Org->save();
