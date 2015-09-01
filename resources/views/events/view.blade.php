@@ -16,6 +16,19 @@
     @section('style')
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
+
+
+        <style>
+            .profile > p{
+                color: #fff;
+                font-size: 11px;
+                line-height: 18px;
+                margin-bottom: 0;
+                text-align: center;
+            }
+        </style>
+
+
     @endsection
 <section class="title-bg">
     <div class="container">
@@ -121,7 +134,7 @@
                             <li><img src="{{ asset('images/icons/events/' . $event->category . '.jpg') }}"></li>
                             <li>{{ $event->credits }}</li>
                         </ul>
-                        <p>{!! nl2br(e($event->description)) !!}}</p>
+                        <p>{!! nl2br(e($event->description)) !!}</p>
                     </div>
                 </div>
             </div>
@@ -136,7 +149,7 @@
                             <p>{{$user->first_name}} {{$user->last_name}}</p>
 
                             @if($user->IsMember())
-                                <p>Member of {{$user->group->name}}</p>
+                                <p style="margin-bottom:20px;">Member of {{$user->group->name}}</p>
                             @endif
                             <a href="{{ url('/dashboard') }}">My Dashboard</a>
                         </div>
