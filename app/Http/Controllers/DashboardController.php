@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Toast;
 use Mail;
 use App\Jobs\CreateNotification;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller {
     /*
