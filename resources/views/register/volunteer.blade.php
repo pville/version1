@@ -214,8 +214,8 @@
                      
                        
                         <div class="row">
-                        	<div class="col-md-12 col-sm-12"><h4 class="text-center">Target Credits</h4></div>
-                            <div class="col-md-12 col-sm-12"><input type="text" id="credits" name="credits" placeholder="Credits" value="{{ old('credits') }}" required/></div>
+                        	<div class="col-md-12 col-sm-12"><h4 class="text-center">Target Hours</h4></div>
+                            <div class="col-md-12 col-sm-12"><input type="text" id="credits" name="credits" placeholder="Hours" value="{{ old('credits') }}" required/></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-sm-12"><input type="submit" value="Create Account" /></div>

@@ -172,7 +172,7 @@
                                     </div>
                             <div class="col-md-8 col-sm-8">
                                 <div class="select-style">
-                                    {!! Form::select('credits', ['Select Credit Amount', 1,2,3,4,5,6,7,8,9,10], ['class' => 'form-control select select-primary']) !!} </div></div>
+                                    {!! Form::select('credits', ['Select Hours Amount', 1,2,3,4,5,6,7,8,9,10], ['class' => 'form-control select select-primary']) !!} </div></div>
                                 </div>
                         <div class="row">
                             <input id="ageHidden"  type="hidden" value="0" name="age">

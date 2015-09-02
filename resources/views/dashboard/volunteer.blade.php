@@ -51,7 +51,7 @@
                                 </li>
                                 <li><img src="{{ asset('images/target_icon.jpg') }} " alt="" />
                                     <div>
-                                        Target Credits <span>{{ $user->Credits() }}</span>
+                                        Target Hours <span>{{ $user->Credits() }}</span>
                                     </div>
                                 </li>
                                 <li><img src="{{ asset('images/event_calc_icon.jpg') }} " alt="" />

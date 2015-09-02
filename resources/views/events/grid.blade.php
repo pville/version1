@@ -19,10 +19,10 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <ul class="dropdown-menu container" role="menu" aria-labelledby="dropdownMenu1">
                             <li>
-                                <label>Amount of Credits</label>
+                                <label>Amount of Hours</label>
                                 <div class="select-style">
                                     <select data-toggle="select" id="credits" name="credits">
-                                        <option>Credit</option>
+                                        <option>Hours</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>

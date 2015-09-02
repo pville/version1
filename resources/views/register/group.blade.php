@@ -146,7 +146,7 @@
                         <div class="col-md-6 col-sm-6"><input type="text" placeholder="Phone" name="group_phone_number" id="group_phone_number" required /> </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12"><input type="text" placeholder="Target Credits" name="group_credits" value="{{ old('group_credits') }}" required/> </div>
+                        <div class="col-md-12 col-sm-12"><input type="text" placeholder="Target Hours" name="group_credits" value="{{ old('group_credits') }}" required/> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12"><input type="submit" value="Create Account" /></div>

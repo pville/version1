@@ -173,7 +173,7 @@
                                 <div class="col-md-8 col-sm-8">
                                     <div class="select-style">
                                         <select data-toggle="select" name="credits" id="credits" value="{{ $event->credits }}">
-                                            <option value="0">Select Credit Amount</option>
+                                            <option value="0">Select Hours Amount</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
