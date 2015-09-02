@@ -130,8 +130,8 @@
                     <div class="col-xs-12 col-sm-8 family">
                         <img src="{{ asset('images/events/'. $event->id . '.jpg') }}" height="219" width="326" alt="logo">
                         <ul>
-                            <li><img src="{{ asset('images/icons/organization/' . $event->org_category . '.jpg') }}"></li>
-                            <li><img src="{{ asset('images/icons/events/' . $event->category . '.jpg') }}"></li>
+                            <li><img src="{{ asset('images/icons/organization/' . $event->org_category . '.png') }}"></li>
+                            <li><img src="{{ asset('images/icons/events/' . $event->category . '.png') }}"></li>
                             <li>{{ $event->credits }}</li>
                         </ul>
                         <p>{!! nl2br(e($event->description)) !!}</p>
