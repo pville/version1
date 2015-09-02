@@ -170,7 +170,7 @@
                 <div class="col-md-4 col-sm-4" data-appear-top-offset="-100" data-animated="fadeIn">
                     <img src="{{ asset('images/volunteer.jpg') }}" alt="" />
                     <h2>Volunteer</h2>
-                    <p>Search through all of the community service opportunities in area and sign up with the click of a button.</p>
+                    <p>Search through all of the community service opportunities in your area and sign up with the click of a button.</p>
                 </div>
                 <div class="col-md-4 col-sm-4" data-appear-top-offset="-200" data-animated="fadeIn">
                     <img src="{{ asset('images/event3.jpg') }}" alt="" />
