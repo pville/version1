@@ -15,17 +15,10 @@
 
         {!! $html !!}
         <form data-toggle="validator" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/screening/verify/' . $form->id) }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <select class="form-control" id="screen" name="screen"/>
-                    <option value="accepted">Acepted</option>
-                    <option value="denied">Denied</option>
-                    </select>
-                </div>
-            </div>
+
            <!-- <div class="row">
                 <div class="col-md-12 col-sm-12"><input type="submit" value="Submit" /></div>
             </div>-->
