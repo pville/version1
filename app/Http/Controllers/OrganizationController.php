@@ -35,7 +35,6 @@ class OrganizationController extends Controller {
         {
             $UpcomingEvents =  Event::Where('organization_id', '=', $org->id)
                 ->where('status', '=', 'pending')
-                ->where('status', '=', 'started')
                 ->orderBy('start_time','desc')
                 ->get();
 
