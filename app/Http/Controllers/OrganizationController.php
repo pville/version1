@@ -33,8 +33,12 @@ class OrganizationController extends Controller {
 
         if(!is_null($org))
         {
-            $UpcomingEvents =  Event::Where('organization_id', '=', $org->id)
+            /*$UpcomingEvents =  Event::Where('organization_id', '=', $org->id)
                 ->where('status', '=', 'pending')
+                ->orderBy('start_time','desc')
+                ->get();*/
+
+            $UpcomingEvents =  Event::whereRaw("organization_id = " . $org->id . " AND (status = 'pending' OR status = 'started')")
                 ->orderBy('start_time','desc')
                 ->get();
 
