@@ -132,7 +132,7 @@
                         <ul>
                             <li><img src="{{ asset('images/icons/organization/' . $event->org_category . '.png') }}"></li>
                             <li><img src="{{ asset('images/icons/events/' . $event->category . '.png') }}"></li>
-                            <li>{{ $event->credits }}</li>
+                            <li class=“hours”>{{ $event->credits }}</li>
                         </ul>
                         <p>{!! nl2br(e($event->description)) !!}</p>
                     </div>
@@ -180,7 +180,7 @@
                                         <span>
                                             <img src="{{ asset('images/events/' . $nextEvent->id. '.jpg')  }} " width="53" >
                                         </span>
-                                        <p><a href="{{ url('/' . $event->organization->slug . '/events/' . $nextEvent->slug) }} ">{{ $nextEvent->name }}</a><span>{{ $nextEvent->start_time }}</span></p>
+                                        <p><a href="{{ url('/' . $event->organization->slug . '/events/' . $nextEvent->slug) }} ">{{ $nextEvent->name }}</a><span>{{ $nextEvent->getFullStartTime() }}</span></p>
                                      </li>
                                     @endforeach
                                 </ul>
