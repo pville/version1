@@ -126,6 +126,15 @@ class Event extends \Eloquent implements SluggableInterface {
 
         return Carbon::createFromTimestamp($time->timestamp, $timezone);
     }
+
+    public function getHours() {
+
+        if($this->credits == 1)
+            return $this->credits . " Hour";
+        else
+            return $this->credits . " Hours";
+
+    }
     public function getTimeZoneFromState($state){
 
         $TimeZones = array(

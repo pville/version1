@@ -132,7 +132,7 @@
                         <ul>
                             <li><img src="{{ asset('images/icons/organization/' . $event->org_category . '.png') }}"></li>
                             <li><img src="{{ asset('images/icons/events/' . $event->category . '.png') }}"></li>
-                            <li class="hours">{{ $event->credits }}</li>
+                            <li class="hours">{{ $event->getHours() }}</li>
                         </ul>
                         <p>{!! nl2br(e($event->description)) !!}</p>
                     </div>
