@@ -276,7 +276,7 @@
                         <input class="w-input" type="text" placeholder="Enter your name" name="cf_name">
                         <input class="w-input" placeholder="Enter your email address" type="text" name="cf_email" required>
                         <input class="w-input" placeholder="Your number" type="text" name="cf_phone" required>
-                    </form>
+
                 </div>
                 <div class="w-form w-col col-md-6 col-sm-6">
                     <textarea class="w-input message" placeholder="Enter your Message Here" name="cf_message"></textarea></div>
