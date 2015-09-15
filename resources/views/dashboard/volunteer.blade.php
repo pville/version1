@@ -134,7 +134,7 @@
                                     @endif
 
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="completed">
+                                <div role="tabpanel" class="tab-pane" id="completed" onclick="$('.CompletedEvents-items').slick('setPosition')">
 
                                     @if( $CompletedEvents )
                                         <div class="CompletedEvents-items">
@@ -192,7 +192,7 @@
 
         $('.UpcomingEvents-items').slick("refresh");
         $('.CompletedEvents-items').slick("refresh");
-        
+
         jQuery(".Notifi ul").mCustomScrollbar({
             setHeight:340,
             theme:"minimal-dark"
