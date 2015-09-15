@@ -161,7 +161,7 @@
 
 @section('script')
 
-    <script src="{{ asset('slick/slick.min.js') }}"></script>
+   
 
     <script type="text/javascript">
 
