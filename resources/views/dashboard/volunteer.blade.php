@@ -190,7 +190,9 @@
             slidesToScroll: 2
         });
 
-
+        $('.UpcomingEvents-items').slick("refresh");
+        $('.CompletedEvents-items').slick("refresh");
+        
         jQuery(".Notifi ul").mCustomScrollbar({
             setHeight:340,
             theme:"minimal-dark"
