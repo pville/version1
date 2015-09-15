@@ -142,6 +142,7 @@
         <script src="{{ asset('js/flat-ui.min.js') }}"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="{{ asset('slick/slick.min.js') }}"></script>
         <script src="{{ asset('js/Moment.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>

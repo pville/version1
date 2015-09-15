@@ -137,7 +137,7 @@
                                 <div role="tabpanel" class="tab-pane" id="completed">
 
                                     @if( $CompletedEvents )
-                                        <div class="multiple-items">
+                                        <div class="CompletedEvents-items">
                                             @foreach($CompletedEvents as $CNextEvent)
 
 
@@ -173,7 +173,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('slick/slick.min.js') }}"></script>
+
 
     <script type="text/javascript">
 
@@ -184,7 +184,7 @@
             slidesToScroll: 2
         });
 
-        $('.multiple-items').slick({
+        $('.CompletedEvents-items').slick({
             infinite: true,
             slidesToShow: 2,
             slidesToScroll: 2
