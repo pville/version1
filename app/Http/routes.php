@@ -47,7 +47,7 @@ Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
 Route::post('logout', 'Auth\AuthController@postLogout');
 
-
+Route::post('contact', 'ContactController@postIndex');
 
 
 Route::get('/events',['uses' => 'EventController@getEvents']);
