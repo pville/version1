@@ -190,8 +190,18 @@
             slidesToScroll: 2
         });
 
-        $('.UpcomingEvents-items').slick("refresh");
-        $('.CompletedEvents-items').slick("refresh");
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href");
+            if ((target == '#upcoming')) {
+                $('.UpcomingEvents-items').slick('refresh');
+
+            }
+
+            if ((target == '#completed')) {
+                $('.CompletedEvents-items').slick('refresh');
+
+            }
+        });
 
         jQuery(".Notifi ul").mCustomScrollbar({
             setHeight:340,
