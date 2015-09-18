@@ -45,7 +45,7 @@ class ContactController extends Controller {
         Mail::queue('emails.contact', ['cf_name' => $data['cf_name'], 'cf_email' => $data['cf_email'],
             'cf_phone' => $data['cf_phone'], 'cf_message' => $data['cf_message']], function ($m)  {
             $m->from("noreply@pleasantville.co","PleasantVille.co");
-            $m->to("hello@pleasantville.co", "PleasantVille.co")->subject('PleasantVille.co - Contact Form!');
+            $m->to("info@pleasantville.co", "PleasantVille.co")->subject('PleasantVille.co - Contact Form!');
         });
 
         Toast::success('Message has been sent!');
