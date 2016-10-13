@@ -67,7 +67,7 @@ class Registrar implements RegistrarContract {
 			'month' => 'required|integer|digits_between:1,12',
 			'day' => 'required|integer|digits_between:1,31',
 			'year' => 'required|integer|min:1935|max:2015',
-			'gender' => 'required|integer|digits_between:1,2',
+			'gender' => 'required|integer|digits_between:1,3',
 			'group_id' => 'required|integer|exists:groups,id',
 			'credits' => 'required|integer',
 		]);

@@ -163,7 +163,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="select-style">
                                         <select class="form-control select select-primary" data-toggle="select" id="gender" name="gender" value="{{ old('gender') }}" required/>
-                                            <option>Select Gender</option>
+                                            <option value="3">Select Gender</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
                                         </select>
